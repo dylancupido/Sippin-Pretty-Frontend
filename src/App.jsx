@@ -1,4 +1,5 @@
 import { useState } from 'react'
+<<<<<<< Updated upstream
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -30,6 +31,16 @@ function App() {
       </p>
     </>
   )
+=======
+import Calculator from './Components/TillPage';
+
+
+
+function App() {
+  return (
+    <Calculator />
+  );
+>>>>>>> Stashed changes
 }
 
 export default App
