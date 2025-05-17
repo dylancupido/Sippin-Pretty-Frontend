@@ -1,0 +1,118 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Navbar Container */
+  .navbar {
+  background-color: #fff1f561;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  color: #8E7AB5;
+  box-shadow: 0 4px 10px rgba(215, 182, 236, 0.3);
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  }
+  
+ 
+  
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 40px;
+    object-fit: contain;
+  }
+  
+  .nav-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #8E7AB5;
+    margin-top: 0.2rem;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #8E7AB5;
+    text-transform: uppercase;
+    text-shadow: 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, text-shadow 0.3s ease;
+
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+    display: inline-block;
+  }
+  
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: -90px;
+  }
+  
+  .nav-cart a,
+  .nav-user i {
+    font-size: 1.4rem;
+    color: #8E7AB5;
+    padding: 0.4rem;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+  
+
+  .nav-user {
+  position: relative;
+  cursor: pointer;
+  color: #8E7AB5;
+  font-size: 1.4rem;
+  }
+  
+  .user-dropdown {
+  position: absolute;
+  top: 140%;
+  right: 0;
+  background-color: #FFF1F5;
+  border: 1px solid #e6cce5;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(215, 182, 236, 0.3);
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+  display: none;  /* hidden by default */
+  flex-direction: column;
+  min-width: 120px;
+}
+
+/* Show dropdown on hover */
+.nav-user:hover .user-dropdown {
+  display: flex;  /* show when hovering nav-user */
+}
+
+.nav-links a:hover,
+.user-dropdown a:hover {
+  color: #6B42A1;
+  transform: translateY(-4px) scale(1.05);
+  text-shadow: 0 3px 6px rgba(107, 66, 161, 0.4);
+}
+  
+  
+  
