@@ -1,37 +1,69 @@
 import React from 'react';
 import './Navbar.css';
-import {dropdown} from 'react-d'
+import Dropdown from 'react-bootstrap/Dropdown';
 import logo from '../../assets/logo.png';
+import accountIcon from '../../assets/account.png';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
+ // Adjust path as needed
 
-const Navbar = () => {
+
+const Navbar = ({
+  loggedIn = false,
+  showRegisterModal = () => {},
+  showLoginModal = () => {}
+}) => {
   return (
-    <nav className="navbar">
+    <nav className="navbar" role="navigation" aria-label="Main Navigation">
+      {/* Left side: Logo */}
       <div className="navbar-left">
-        <div className="logo-container">
+        <a href="#" className="logo-container" aria-label="Homepage">
           <img src={logo} alt="Sippin' Pretty Logo" className="logo" />
-          <div className="nav-logo">Sippin'pretty</div>
-        </div>
+          <span className="nav-logo">Sippin'pretty</span>
+        </a>
       </div>
 
-      <ul className="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Menu</a></li>
-        <li><a href="#">Order</a></li>
-        <li><a href="#">About Us</a></li>
-      </ul> 
+      {/* Center: Navigation links */}
+      <ul className="nav-links" role="menubar">
+        <li role="none"><a role="menuitem" href="#">Home</a></li>
+        <li role="none"><a role="menuitem" href="#">Menu</a></li>
+        <li role="none"><a role="menuitem" href="#">Order</a></li>
+        <li role="none"><a role="menuitem" href="#">About Us</a></li>
+      </ul>
 
+      {/* Right side: Cart & Account */}
       <div className="nav-actions">
-        <div className="nav-cart">
-          <a href="#"><i className="fas fa-shopping-cart"></i></a>
-        </div>
-        <div className="nav-user">
-          <i className="fas fa-user-circle"></i>
-          <div className="user-dropdown">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
-          </div>
+        <a href="#" className="nav-cart" aria-label="Shopping Cart">
+          <i className="fas fa-shopping-cart"></i>
+        </a>
+
+        <div className="nav-account">
+          <Dropdown align="end">
+            <Dropdown.Toggle
+              className="account-button"
+              id="dropdown-account"
+              as="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <img
+                src={accountIcon}
+                alt="Account Icon"
+                className="account-icon"
+              />
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {loggedIn ? (
+                <Dropdown.Item disabled>Logged in</Dropdown.Item>
+              ) : (
+                <>
+                  <Dropdown.Item onClick={showRegisterModal}>Register</Dropdown.Item>
+                  <Dropdown.Item onClick={showLoginModal}>Login</Dropdown.Item>
+                </>
+              )}
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </div>
     </nav>
