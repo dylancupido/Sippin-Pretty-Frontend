@@ -1,5 +1,5 @@
 import React from 'react'
-import './Styles/Register.css'
+import '../Styles/Register.css'
 
 const RegisterPage = () => {
   return (
@@ -7,4 +7,4 @@ const RegisterPage = () => {
   )
 }
 
-export default RegisterPage
+export default RegisterPage;
