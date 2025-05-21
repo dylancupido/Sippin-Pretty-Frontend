@@ -39,13 +39,6 @@ export const HotBeverages= [
     price: "R17",
     imageUrl: "assets/hotbev1.webp",
   },
- 
- 
- 
- 
- 
- 
-  
   
 ];
 
@@ -57,6 +50,30 @@ export const ColdBeverages = [
     description: "cold",
     price: "R12",
     imageUrl: "assets/coldbev1.png",
+  },
+  {
+    id: 2,
+    name: "Matcha",
+    group: "Cold Beverages",
+    description: "cold",
+    price: "R12",
+    imageUrl: "assets/coldbev2.webp",
+  },
+  {
+    id: 3,
+    name: "Lemonade",
+    group: "Cold Beverages",
+    description: "cold",
+    price: "R12",
+    imageUrl: "assets/coldbev3.png",
+  },
+  {
+    id: 4,
+    name: "Lemonade",
+    group: "Cold Beverages",
+    description: "cold",
+    price: "R12",
+    imageUrl: "assets/coldbev3.png",
   },
 ];
 

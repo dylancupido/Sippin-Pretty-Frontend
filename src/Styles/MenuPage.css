@@ -12,11 +12,28 @@
 .section-title {
   text-align: center;
   font-size: 2rem;
-  margin-bottom: 20px;
   font-family: 'Franklin Gothic', sans-serif;
   color: #333;
   background-color: #d4c2b4;
   margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.section-title h1 {
+  width: 500px;
+  padding: 20px;
+  border: 2px solid #cc4068b0; 
+  border-radius: 10px;       
+  background-color: #f0f8ff;  
+  color: #333;               
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+ 
 }
 .custom-card {
   background-color: #fff1f561;
