@@ -5,16 +5,17 @@
   justify-content: center;
   gap: 20px;
   padding: 40px;
-  background-color: #d4c2b4;
+  /* background-color: #d4c2b4; */
   
 }
+
 
 .section-title {
   text-align: center;
   font-size: 2rem;
   font-family: 'Franklin Gothic', sans-serif;
   color: #333;
-  background-color: #d4c2b4;
+  /* background-color: #d4c2b4; */
   margin: 0 auto;
   padding-top: 20px;
   padding-bottom: 20px;

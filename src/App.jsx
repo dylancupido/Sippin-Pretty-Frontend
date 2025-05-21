@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar/Navbar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CoffeeMug from './components/CoffeeMug/CoffeeMug'; // cute steaming mug
 import './App.css';
 import backgroundImg from './assets/background.png';
+import Menu from './Components/MenuPage';
+import HomePage from './Components/HomePage';
 
 
 function App() {
@@ -15,6 +18,7 @@ function App() {
   const showLoginModal = () => setShowLogin(true);
   const hideLoginModal = () => setShowLogin(false);
 
+
   return (
      <div className="app-container">
     {/* Top Navigation Bar */}
@@ -24,15 +28,20 @@ function App() {
       showLoginModal={showLoginModal}
     />
 
-    {/* Centered Cute Coffee Mug */}
- 
-      <CoffeeMug />
-    
-
-    {/* Main Content */}
-    <div className="left-heading">
-      <h1>Slay the day,<br />one sip at a time</h1>
-    </div>
+     <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <CoffeeMug />
+                <div className="left-heading">
+                  <h1>Slay the day,<br />one sip at a time</h1>
+                </div>
+              </>
+            }
+          />
+          <Route path="/menu" element={<Menu />} />
+        </Routes>
 
     {/* Register Modal */}
     {showRegister && (
