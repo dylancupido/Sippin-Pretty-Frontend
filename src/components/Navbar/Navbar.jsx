@@ -4,6 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import logo from '../../assets/logo.png';
 import accountIcon from '../../assets/account.png';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Link } from 'react-router-dom';
 
  // Adjust path as needed
 
@@ -25,8 +26,8 @@ const Navbar = ({
 
       {/* Center: Navigation links */}
       <ul className="nav-links" role="menubar">
-        <li role="none"><a role="menuitem" href="#">Home</a></li>
-        <li role="none"><a role="menuitem" href="#">Menu</a></li>
+        <li role="none"><a role="menuitem" href="/">Home</a></li>
+        <li role="none"><a role="menuitem" href="/menu">Menu</a></li>
         <li role="none"><a role="menuitem" href="#">Order</a></li>
         <li role="none"><a role="menuitem" href="#">About Us</a></li>
       </ul>
