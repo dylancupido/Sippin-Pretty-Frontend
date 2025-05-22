@@ -1,11 +1,12 @@
-import './Styles/Till.css';
+import '../Styles/Till.css';
+import React, { useState } from 'react';
 
 
-function Calculator() {
+export function Calculator() {
   const [input, setInput] = useState("");
   const [result, setResult] = useState("");
-
-  const handleClick = (value) => {
+  let handleClick;
+  handleClick = (value) => {
     if (value === "=") {
       try {
         // Evaluate the expression using Function (safer than eval)
@@ -31,7 +32,7 @@ function Calculator() {
         ];
     
   return (
-    <div ClassName = "top-left-container"> 
+    <div ClassName = "calculator">
         <div>Input: {input}</div>
         <div>Result: {result}</div>
     <div > 
@@ -49,4 +50,39 @@ function Calculator() {
   );
 }
 
-export default Calculator;
+export function PaymentOptions() {
+  const options =[
+      "Cash","card"
+  ];
+  return (
+    <div className={"payment"}>
+      {options.map((btn, index) => (
+          <React.Fragment key = {index}>
+            <button key={btn}>
+              {btn}
+            </button>
+            {(index + 1) && <br />}
+          </React.Fragment>
+      ))}
+    </div>
+  );
+};
+
+export function Menu() {
+  const MenuItems =[
+      "Black Coffee", "Chai", "Latte"
+      , "Espresso", "Cappuccino", "Mocha"
+  ];
+  return (
+    <div className={"menu"}>
+      {MenuItems.map((btn, index) => (
+          <React.Fragment key = {index}>
+            <button key={btn}>
+              {btn}
+            </button>
+            {(index + 1) % 3 === 0&& <br />}
+          </React.Fragment>
+      ))}
+    </div>
+  )
+}
