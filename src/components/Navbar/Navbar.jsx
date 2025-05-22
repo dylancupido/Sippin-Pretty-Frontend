@@ -28,7 +28,7 @@ const Navbar = ({
       <ul className="nav-links" role="menubar">
         <li role="none"><a role="menuitem" href="/">Home</a></li>
         <li role="none"><a role="menuitem" href="/menu">Menu</a></li>
-        <li role="none"><a role="menuitem" href="#">Order</a></li>
+        <li role="none"><a role="menuitem" href="/till">Till</a></li>
         <li role="none"><a role="menuitem" href="#">About Us</a></li>
       </ul>
 
