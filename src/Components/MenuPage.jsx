@@ -12,7 +12,7 @@ const Menu = ({ onAddToCart }) => {
   return (
     <>
       <div className="section-title">
-        <h1>Hot Beverages</h1>
+        <h1>Hot Beveragestest</h1>
       </div>
       <div className="card-container">
         {HotBeverages.map((item, index) => (
