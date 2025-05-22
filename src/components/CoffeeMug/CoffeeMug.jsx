@@ -1,7 +1,7 @@
-// src/components/CoffeeMug/CoffeeMug.jsx
+
 import React from 'react';
 import './CoffeeMug.css';
-import coffeeMug from '../../assets/Coffee mug.png'; // adjust if the path is different
+import coffeeMug from '../../assets/Coffee mug.png'; 
 
 const CoffeeMug = () => {
   return (
