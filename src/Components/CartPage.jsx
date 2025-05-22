@@ -1,5 +1,5 @@
 import React from "react";
-import "../Styles/CartPage.css"; // Corrected the CSS file import
+import "../Styles/CartPage.css";
 
 const CartPage = ({ cart }) => {
   return (
@@ -13,14 +13,14 @@ const CartPage = ({ cart }) => {
             <div key={index} className="cart-item">
               <img
                 src={item.imageUrl}
-                alt={item.name}
+                alt={item.productName}
                 className="cart-item-image"
               />
               <div className="cart-item-details">
-                <h3>{item.name}</h3>
+                <h3>{item.productName}</h3>
                 <p>{item.description}</p>
               </div>
-              <div className="cart-item-price">{item.price}</div>
+              <div className="cart-item-price">R{item.price}</div>
             </div>
           ))}
         </div>
