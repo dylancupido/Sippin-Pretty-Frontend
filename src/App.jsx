@@ -8,8 +8,7 @@ function App() {
 
   return (
     <div>
-      <LoginForm/>
-    <h1>hello</h1>
+      <RegisterPage/>
     </div>
   )
 }
