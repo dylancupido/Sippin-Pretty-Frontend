@@ -1,42 +1,109 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap');
+
+/* Full Page Background */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+ background: linear-gradient(to right, #eea1b488, #fd79a179);
+
+
+  background-attachment: fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+/* Optional texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url('https://www.transparenttextures.com/patterns/cream-dust.png');
+  opacity: 0.2;
+  z-index: -1;
+}
+
+/* Layout Container */
+.app-container {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Cute Mug Animation */
+.coffee-mug {
+  margin-top: 3rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+/* Heading */
+.left-heading h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.8rem;
+  color: #5e412f;
   text-align: center;
+  margin-top: 2rem;
+  text-shadow: 2px 2px #fff8dc;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Modal Styling */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.modal-content {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  text-align: center;
+  animation: pop-in 0.3s ease-out;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.modal-content h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #6d4c41;
 }
 
-.card {
-  padding: 2em;
+.modal-content button {
+  margin-top: 1.5rem;
+  padding: 10px 20px;
+  background-color: #f8bbd0;
+  border: none;
+  border-radius: 8px;
+  color: #4e342e;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.read-the-docs {
-  color: #888;
+.modal-content button:hover {
+  background-color: #f48fb1;
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
