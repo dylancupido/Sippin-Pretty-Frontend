@@ -6,6 +6,7 @@ import {
   SweetTreats,
 } from "./MenuItems";
 import "../Styles/MenuPage.css";
+import { Link } from "react-router-dom";
 
 const Menu = ({ onAddToCart }) => {
   return (

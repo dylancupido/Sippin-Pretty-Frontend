@@ -34,9 +34,8 @@ const Navbar = ({
 
       {/* Right side: Cart & Account */}
       <div className="nav-actions">
-        <a href="#" className="nav-cart" aria-label="Shopping Cart">
-          <i className="fas fa-shopping-cart"></i>
-        </a>
+        <Link to="/cart" className="nav-cart" aria-label="Shopping Cart"><i className="fas fa-shopping-cart"></i></Link>
+        
 
         <div className="nav-account">
           <Dropdown align="end">

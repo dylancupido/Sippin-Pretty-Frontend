@@ -6,16 +6,21 @@ import "./App.css";
 import backgroundImg from "./assets/background.png";
 import Menu from "./Components/MenuPage";
 import HomePage from "./Components/HomePage";
+import CartPage from "./Components/CartPage";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [cart,setCart] = useState([]);
 
   const showRegisterModal = () => setShowRegister(true);
   const hideRegisterModal = () => setShowRegister(false);
   const showLoginModal = () => setShowLogin(true);
   const hideLoginModal = () => setShowLogin(false);
+  const handleAddToCart = (item) => {
+    setCart((prevCart)=> [...prevCart,item]);
+  };
 
   return (
     <div className="app-container">
@@ -28,7 +33,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/menu" element={<Menu />} />
+        <Route path="/menu" element={<Menu onAddToCart={handleAddToCart}/>} />
+        <Route path="/cart" element={<CartPage cart={cart} />} />
       </Routes>
 
       {/* Register Modal */}
