@@ -32,11 +32,10 @@ export function Calculator() {
         ];
     
   return (
-    <div ClassName = "calculator">
+    <div className={"card-container"}>
         <div>Input: {input}</div>
         <div>Result: {result}</div>
-    <div > 
-        
+    <div className={"calculator"}>
         {buttons.map((btn, index) => (
             <React.Fragment key = {index}>
           <button key={btn} onClick={() => handleClick(btn)}>
@@ -46,11 +45,17 @@ export function Calculator() {
           </React.Fragment>
         ))}
       </div>
+      <div>
+        <PaymentOptions />
+      </div>
+      <div>
+        <Menu />
+      </div>
 </div>
   );
 }
 
-export function PaymentOptions() {
+function PaymentOptions() {
   const options =[
       "Cash","card"
   ];
@@ -68,7 +73,7 @@ export function PaymentOptions() {
   );
 };
 
-export function Menu() {
+function Menu() {
   const MenuItems =[
       "Black Coffee", "Chai", "Latte"
       , "Espresso", "Cappuccino", "Mocha"

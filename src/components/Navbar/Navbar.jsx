@@ -29,7 +29,7 @@ const Navbar = ({
         <li role="none"><a role="menuitem" href="/">Home</a></li>
         <li role="none"><a role="menuitem" href="/menu">Menu</a></li>
         <li role="none"><a role="menuitem" href="/till">Till</a></li>
-        <li role="none"><a role="menuitem" href="#">About Us</a></li>
+        <li role="none"><a role="menuitem" href="/aboutus">About Us</a></li>
       </ul>
 
       {/* Right side: Cart & Account */}

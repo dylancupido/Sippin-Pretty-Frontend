@@ -7,6 +7,7 @@ import backgroundImg from "./assets/background.png";
 import Menu from "./Components/MenuPage";
 import HomePage from "./Components/HomePage";
 import { Calculator } from "./Components/TillPage";
+import { AboutUs } from "./Components/About Us";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -31,6 +32,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/till" element={<Calculator />} />
+          <Route path="/aboutus" element={<AboutUs />} />
       </Routes>
 
       {/* Register Modal */}
