@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
+import "../Styles/Register.css";
 import axios from "axios";
 
 const CusRegisterForm = () => {
