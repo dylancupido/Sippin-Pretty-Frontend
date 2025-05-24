@@ -1,3 +1,12 @@
+/* Center the container row horizontally on the page */
+.page-center {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px; /* Top/bottom space and mobile-friendly horizontal padding */
+    background-color: #ffffff;
+}
+
+/* Heading style */
 .heading {
     position: relative;
     font-family: 'Pacifico', cursive;
@@ -5,6 +14,7 @@
     text-align: center;
 }
 
+/* Paragraph style */
 .paragraph {
     position: relative;
     font-family: 'Pacifico', cursive;
@@ -12,44 +22,52 @@
     text-align: center;
 }
 
-.founders {
-    position: relative;
-    text-align: center;
-    border: 1px white;
-}
-.space {
-    background-color: #fff1f561;
-    width: 280px;
-    max-height: 400px;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex; flex-direction: column;
-    transition: transform 0.2s ease;
-    text-align: center;
-}
-.space:hover {
-    transform: scale(1.03);
-}
-
-.circle-image {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%; /* THIS makes it a circle */
-    object-fit: cover;   /* Ensures the image covers the circle nicely */
-    border: 3px solid #cc4068b0; /* Optional: cute border */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: nice shadow */
-}
-
+/* Wrapper for the circular image */
 .circle-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
-.card-container {
+
+/* Circular image style */
+.circle-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #cc4068b0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Horizontal flex layout for containers */
+.container-wrapper {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 40px;
+    gap: 16px;
+    flex-wrap: nowrap;
+}
+
+/* Individual container box */
+.container {
+    position: relative;
+    width: 150px;
+    height: 300px;
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Text at the bottom of each container */
+.container-text {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
 }
