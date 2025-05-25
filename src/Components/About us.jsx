@@ -30,6 +30,7 @@ export function AboutUs() {
                         </div>
                     </div>
                 </div>
+                <br/>
                 <div>
                     <div className={"container-wrapper"}>
                         <div className={"container"}>
@@ -42,6 +43,7 @@ export function AboutUs() {
                         </div>
                     </div>
                 </div>
+                <br/>
                 <div>
                     <div className={"container-wrapper"}>
                         <div className={"container"}>
@@ -54,6 +56,7 @@ export function AboutUs() {
                         </div>
                     </div>
                 </div>
+                <br/>
                 <div>
                     <div className={"container-wrapper"}>
                         <div className={"container"}>

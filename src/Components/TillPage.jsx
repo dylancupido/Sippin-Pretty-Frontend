@@ -1,15 +1,13 @@
 import '../Styles/Till.css';
 import React, { useState } from 'react';
 
-
 export function Calculator() {
   const [input, setInput] = useState("");
   const [result, setResult] = useState("");
-  let handleClick;
-  handleClick = (value) => {
+
+  const handleClick = (value) => {
     if (value === "=") {
       try {
-        // Evaluate the expression using Function (safer than eval)
         const evalResult = Function('"use strict";return (' + input + ')')();
         setResult(evalResult);
       } catch {
@@ -26,68 +24,56 @@ export function Calculator() {
   const buttons = [
     "1", "2", "3",
     "4", "5", "6",
-    "7", "8","9",
+    "7", "8", "9",
     "+", "0", "-",
-    "/", "="
-        ];
-    
+    "/", "=", "C"
+  ];
+
   return (
-    <div className={"card-container"}>
-        <div>Input: {input}</div>
-        <div>Result: {result}</div>
-    <div className={"calculator"}>
-        {buttons.map((btn, index) => (
-            <React.Fragment key = {index}>
-          <button key={btn} onClick={() => handleClick(btn)}>
-            {btn}
-          </button>
-          {(index + 1) % 3 === 0 && <br />}
-          </React.Fragment>
-        ))}
-      </div>
-      <div>
-        <PaymentOptions />
-      </div>
-      <div>
+      <div className="app-container">
+        <div className="calculator-container">
+          <div className="cmd-display">
+            {result ? result : input || '0'}
+          </div>
+          <div className="calculator">
+            <div className="button-grid">
+              {buttons.map((btn, index) => (
+                  <button key={index} onClick={() => handleClick(btn)}>
+                    {btn}
+                  </button>
+              ))}
+            </div>
+          </div>
+          <PaymentOptions />
+        </div>
         <Menu />
       </div>
-</div>
   );
 }
 
 function PaymentOptions() {
-  const options =[
-      "Cash","card"
-  ];
   return (
-    <div className={"payment"}>
-      {options.map((btn, index) => (
-          <React.Fragment key = {index}>
-            <button key={btn}>
-              {btn}
-            </button>
-            {(index + 1) && <br />}
-          </React.Fragment>
-      ))}
-    </div>
+      <div className="payment-options">
+        <button className="payment">Cash</button>
+        <button className="payment">Card</button>
+      </div>
   );
-};
+}
 
 function Menu() {
-  const MenuItems =[
-      "Black Coffee", "Chai", "Latte"
-      , "Espresso", "Cappuccino", "Mocha"
+  const MenuItems = [
+    "Black Coffee", "Chai", "Latte",
+    "Espresso", "Cappuccino", "Mocha"
   ];
+
   return (
-    <div className={"menu"}>
-      {MenuItems.map((btn, index) => (
-          <React.Fragment key = {index}>
-            <button key={btn}>
-              {btn}
-            </button>
-            {(index + 1) % 3 === 0&& <br />}
-          </React.Fragment>
-      ))}
-    </div>
-  )
+      <div className="menu">
+        <h3>Menu</h3>
+        <div className="menu-grid">
+          {MenuItems.map((item, index) => (
+              <button className="menu-button" key={index}>{item}</button>
+          ))}
+        </div>
+      </div>
+  );
 }
