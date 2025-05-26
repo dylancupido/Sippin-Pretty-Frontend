@@ -6,7 +6,7 @@ const Menu = ({ onAddToCart }) => {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:44320/api/MenuItems") 
+    fetch("http://localhost:5010/api/MenuItemsAPI") 
       .then((res) => res.json())
       .then((data) => setMenuItems(data))
       .catch((err) => console.error("Failed to fetch menu:", err));
