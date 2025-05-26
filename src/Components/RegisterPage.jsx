@@ -4,30 +4,29 @@ import "../Styles/Register.css";
 import axios from "axios";
 
 const CusRegisterForm = () => {
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
+  const [username, setId] = useState('');
   const [password, setPassword] = useState('');
-  const [phonenumbers, setPhonenumbers] = useState('');
+  const [phonenumber, setPhonenumber] = useState('');
+  const role = 'Customer';
 
-  const handleFirstnameChange = (e) => setFirstname(e.target.value);
-  const handleLastnameChange = (e) => setLastname(e.target.value);
-  const handleUsernameChange = (e) => setUsername(e.target.value);
+  const handleIdChange = (e) => setId(e.target.value);
+  const handleNameChange = (e) => setName(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
-  const handlePhonenumbersChange = (e) => setPhonenumbers(e.target.value);
+  const handlePhonenumberChange = (e) => setPhonenumber(e.target.value);
 
   const handleOnClick = (event) => {
     event.preventDefault();
 
     const data = {
-      Username: username,
-      Firstname: firstname,
-      Lastname: lastname,
-      PhoneNumbers: phonenumbers,
+      Id: username,
+      Name: name,
+      PhoneNumber: phonenumber,
       Password: password,
+      Role: role
     };
 
-    const url = 'https://localhost:44379/Sippin/Registration';
+    const url = 'https://localhost:7015/api/Users';
 
     axios.post(url, data)
       .then((response) => {
@@ -37,7 +36,7 @@ const CusRegisterForm = () => {
           case 'Registration Successfull':
             alert('Registration successful!');
             break;
-          case 'Erorr':
+          case 'Error':
             alert('User already exists. Try a different username.');
             break;
           default:
@@ -46,8 +45,14 @@ const CusRegisterForm = () => {
       })
       .catch((error) => {
         console.error('Registration error:', error);
-        alert(' An error occurred during registration.');
-      });
+        if (error.response) {
+          alert(`Error: ${error.response.data}`);
+        } else if (error.request) {
+          alert('No response from server. Is your backend running?');
+        } else {
+          alert('Error setting up request: ' + error.message);
+        }
+      }); 
   };
 
   return (
@@ -56,19 +61,10 @@ const CusRegisterForm = () => {
         <h1>Create Account</h1>
         <div className="Inputbox">
           <input
-            value={firstname}
+            value={name}
             type="text"
-            placeholder="First Name*"
-            onChange={handleFirstnameChange}
-            required
-          />
-        </div>
-        <div className="Inputbox">
-          <input
-            value={lastname}
-            type="text"
-            placeholder="Last Name*"
-            onChange={handleLastnameChange}
+            placeholder="Full Name*"
+            onChange={handleNameChange}
             required
           />
         </div>
@@ -77,7 +73,7 @@ const CusRegisterForm = () => {
             value={username}
             type="text"
             placeholder="Email Address*"
-            onChange={handleUsernameChange}
+            onChange={handleIdChange}
             required
           />
         </div>
@@ -92,10 +88,10 @@ const CusRegisterForm = () => {
         </div>
         <div className="Inputbox">
           <input
-            value={phonenumbers}
+            value={phonenumber}
             type="text"
             placeholder="Mobile Number*"
-            onChange={handlePhonenumbersChange}
+            onChange={handlePhonenumberChange}
             required
           />
         </div>
@@ -104,4 +100,5 @@ const CusRegisterForm = () => {
     </div>
   );
 };
+
 export default CusRegisterForm;
