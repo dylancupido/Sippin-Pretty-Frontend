@@ -1,0 +1,219 @@
+/* BookingPage.css */
+
+/* Main Container */
+.booking-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Header Styles */
+.booking-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.booking-header h1 {
+  font-family: 'Pacifico', cursive;
+  color: #5e412f;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.booking-header p {
+  color: #5e412f;
+  font-weight: 300;
+  font-size: 1.1rem;
+}
+
+/* Form Styles */
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #5e412f;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px 15px;
+  border: 1px solid #e0c8cf;
+  border-radius: 8px;
+  background: #fff;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #f48fb1;
+  box-shadow: 0 0 0 3px rgba(244, 143, 177, 0.2);
+}
+
+/* Form Layout */
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* Section Selection Styles */
+.section-group {
+  margin-top: 1rem;
+}
+
+.section-options {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.section-option {
+  flex: 1;
+  position: relative;
+}
+
+.section-option input {
+  position: absolute;
+  opacity: 0;
+}
+
+.section-option .option-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  border: 2px solid #e0c8cf;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.section-option .icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+  color: #5e412f;
+}
+
+.section-option input:checked + .option-content {
+  border-color: #f48fb1;
+  background-color: #fce4ec;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Button Styles */
+.submit-btn {
+  background: #f8bbd0;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 24px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #5e412f;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.submit-btn:hover {
+  background: #f48fb1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 143, 177, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .booking-container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .section-options {
+    flex-direction: column;
+  }
+  
+  .booking-header h1 {
+    font-size: 2.2rem;
+  }
+}
+/* Booking Fee Message */
+.fee-message {
+  font-size: 0.95rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  border-left: 6px solid;
+}
+
+.fee-message.free {
+  background-color: #e8f5e9;
+  color: #388e3c;
+  border-color: #66bb6a;
+}
+
+.fee-message.paid {
+  background-color: #fff3e0;
+  color: #ef6c00;
+  border-color: #ffa726;
+}
+
+.fee-message.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border-color: #ef5350;
+}
+
+
+@media (max-width: 480px) {
+  .booking-header h1 {
+    font-size: 2rem;
+  }
+  
+  .booking-header p {
+    font-size: 1rem;
+  }
+  
+  .submit-btn {
+    padding: 14px 20px;
+    font-size: 1rem;
+  }
+  
+  .section-option .option-content {
+    padding: 1.2rem 0.8rem;
+  }
+}

@@ -6,7 +6,8 @@ body, html, #root {
   padding: 0;
   height: 100%;
   font-family: 'Poppins', sans-serif;
- background: linear-gradient(to right, #eea1b488, #fd79a179);
+ background: linear-gradient(to right, rgba(202, 153, 160, 0.75), rgba(231, 187, 195, 0.65));
+
 
 
   background-attachment: fixed;
