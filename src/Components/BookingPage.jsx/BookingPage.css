@@ -148,6 +148,84 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(244, 143, 177, 0.3);
 }
+/* Add these styles to your BookingPage.css */
+
+.tables-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.table-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.table-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.table-card.selected {
+  border: 2px solid #f8bbd0;
+  background-color: rgba(248, 187, 208, 0.1);
+}
+
+.table-card.unavailable {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.unavailable-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #ff6b6b;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.price-summary {
+  background: rgba(248, 187, 208, 0.1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.price-summary h3 {
+  margin-top: 0;
+  color: #5e412f;
+}
+
+.price-summary .note {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0;
+}
+
+.no-tables-message {
+  background: #fff8f8;
+  padding: 1rem;
+  border-radius: 8px;
+  color: #d32f2f;
+  margin: 1rem 0;
+}
+.cancellation-note {
+  color: #a94442;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {

@@ -2,6 +2,7 @@ import React from "react";
 import coffeeMug from "../assets/coffee mug.png"; 
 import "./HomePage.css";
 import { useNavigate } from "react-router-dom";
+import PromotionSlider from './Promos/PromotionSlider';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const HomePage = () => {
           />
         </div>
       </div>
+         <PromotionSlider />
     </div>
   );
 };
