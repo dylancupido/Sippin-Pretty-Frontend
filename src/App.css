@@ -2,11 +2,12 @@
 
 /* Full Page Background */
 body, html, #root {
-  margin: 0;
+    margin-top:0;
   padding: 0;
   height: 100%;
   font-family: 'Poppins', sans-serif;
- background: linear-gradient(to right, #eea1b488, #fd79a179);
+ background: linear-gradient(to right, rgba(202, 153, 160, 0.75), rgba(231, 187, 195, 0.65));
+
 
 
   background-attachment: fixed;
@@ -49,12 +50,13 @@ body::before {
 
 /* Heading */
 .left-heading h1 {
-  font-family: 'Pacifico', cursive;
-  font-size: 2.8rem;
-  color: #5e412f;
-  text-align: center;
-  margin-top: 2rem;
-  text-shadow: 2px 2px #fff8dc;
+  .left-heading h1 {
+  text-shadow:
+    1px 1px #fff8dc,
+    0 0 10px #d4af37, /* gold glow */
+    0 0 20px #d4af37;
+}
+
 }
 
 /* Modal Styling */
@@ -88,22 +90,36 @@ body::before {
 }
 
 .modal-content button {
-  margin-top: 1.5rem;
-  padding: 10px 20px;
-  background-color: #f8bbd0;
-  border: none;
-  border-radius: 8px;
-  color: #4e342e;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.modal-content button {
+  background: linear-gradient(to right, #f8bbd0, #f9c9d4);
+  box-shadow: 0 4px 10px rgba(249, 168, 212, 0.3);
+  transition: all 0.3s ease;
 }
 
 .modal-content button:hover {
-  background-color: #f48fb1;
+  background: linear-gradient(to right, #f48fb1, #f9a8d4);
+  box-shadow: 0 6px 15px rgba(249, 168, 212, 0.6);
 }
+
+}
+
+
+.sparkle {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, #fff, transparent);
+  animation: shimmer 2s infinite;
+}
+
 
 @keyframes pop-in {
   0% { transform: scale(0.8); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
+}
+@media (max-width: 480px) {
+  .left-heading h1 {
+    font-size: 2rem;
+  }
 }

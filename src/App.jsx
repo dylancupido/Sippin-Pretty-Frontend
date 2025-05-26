@@ -7,6 +7,12 @@ import backgroundImg from "./assets/background.png";
 import Menu from "./Components/MenuPage";
 import HomePage from "./Components/HomePage";
 import CartPage from "./Components/CartPage";
+import BookingPage from "./Components/BookingPage.jsx/BookingPage";
+import ConfirmationPage from "./Components/ConfirmationPage/ConfirmationPage";
+
+
+
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -35,6 +41,9 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/menu" element={<Menu onAddToCart={handleAddToCart}/>} />
         <Route path="/cart" element={<CartPage cart={cart} />} />
+        <Route path="/booking" element={<BookingPage />} />
+        <Route path="/confirmation" element={<ConfirmationPage />} />
+
       </Routes>
 
       {/* Register Modal */}
