@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./PromotionSlider.css";
 
 // Import your promotion images
@@ -9,6 +9,8 @@ import Promo4 from "../../assets/images/Promo4.png";
 
 const PromotionSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   // Promotion data with your actual images
   const promotions = [
@@ -34,13 +36,13 @@ const PromotionSlider = () => {
       image: Promo3,
       cta: "Sign Up",
     },
-     {
+    {
       id: 4,
-      title: "Loyalty Rewards",
+      title: "Seasonal Treats",
       description:
-        "Join our loyalty program and get a free drink after 10 purchases",
+        "Discover our limited-time seasonal menu items",
       image: Promo4,
-      cta: "Sign Up",
+      cta: "Explore",
     },
   ];
 
@@ -57,11 +59,35 @@ const PromotionSlider = () => {
     setCurrentSlide(index);
   };
 
+  // Handle touch events for swipe functionality
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = useCallback(() => {
+    if (touchStart - touchEnd > 50) {
+      // Swipe left
+      setCurrentSlide((prev) => (prev + 1) % promotions.length);
+    }
+
+    if (touchStart - touchEnd < -50) {
+      // Swipe right
+      setCurrentSlide((prev) => (prev === 0 ? promotions.length - 1 : prev - 1));
+    }
+  }, [touchStart, touchEnd, promotions.length]);
+
   return (
     <div className="promotion-slider">
       <div
         className="slider-container"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         {promotions.map((promo) => (
           <div key={promo.id} className="slide">
@@ -70,7 +96,8 @@ const PromotionSlider = () => {
                 src={promo.image}
                 alt={promo.title}
                 className={`promo-image promo-image-${promo.id}`}
-              />{" "}
+                loading="lazy"
+              />
             </div>
             <div className="slide-content">
               <h3>{promo.title}</h3>

@@ -7,6 +7,7 @@ import HomePage from "./Components/HomePage";
 import Menu from "./Components/MenuPage";
 import CartPage from "./Components/CartPage";
 import BookingPage from "./Components/BookingPage.jsx/BookingPage";
+import PaymentPage from "./Components/PaymentPage/PaymentPage";
 import ConfirmationPage from "./Components/ConfirmationPage/ConfirmationPage";
 import MenuAdmin from "./Components/MenuPageAdmin";
 
@@ -38,6 +39,7 @@ function App() {
         />
         <Route path="/cart" element={<CartPage cart={cart} />} />
         <Route path="/booking" element={<BookingPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
         <Route path="/confirmation" element={<ConfirmationPage />} />
       </Routes>
 

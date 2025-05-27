@@ -1,63 +1,85 @@
 .home-page {
-  padding: 2rem;
+  padding: 1rem;
   max-width: 1500px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .content-container {
- margin-top: 110px;
+  margin-top: 90px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column-reverse;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .left-content {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  width: 100%;
 }
 
 .right-content {
-  flex: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  z-index: 1; /* Lower z-index than navbar */
 }
 
 h1 {
   font-family: 'Pacifico', cursive;
   color: #5e412f;
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
 .tagline {
   font-family: 'Poppins', sans-serif;
   color: #5e412f;
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+  font-size: 1.3rem; /* Increased from 1.1rem */
+  line-height: 1.6;
+  margin-bottom: 1.8rem;
+  max-width: 600px;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  
+
+  padding: 1rem;
+  border-radius: 8px;
+  backdrop-filter: blur(2px);
 }
 
-.coffee-image {
+.coffee-image, .rotating-mug {
   max-width: 100%;
   height: auto;
-  max-height: 500px;
-  animation: float 4s ease-in-out infinite;
+  max-height: 250px;
+  animation: spin 8s linear infinite;
+  transform-origin: center center;
+  filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.15));
+  will-change: transform;
+  position: relative;
+  z-index: 1; /* Lower z-index than navbar */
 }
 
 .cta-button {
   background: #f8bbd0;
   border: none;
   border-radius: 8px;
-  padding: 14px 28px;
+  padding: 12px 24px;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   color: #5e412f;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 1.1rem;
+  font-size: 1rem;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 300px;
 }
 
 .cta-button:hover {
@@ -66,33 +88,107 @@ h1 {
   box-shadow: 0 6px 12px rgba(244, 143, 177, 0.3);
 }
 
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0); }
+/* Simple spin animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Steam effect for the mug */
+.rotating-mug::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 60px;
+  height: 80px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  filter: blur(15px);
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: steam 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes steam {
+  0%, 100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0) scale(0.8);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateX(-50%) translateY(-20px) scale(1);
+  }
+}
+
+/* Tablet and larger */
+@media (min-width: 768px) {
+  .home-page {
+    padding: 1.5rem;
+  }
+  
   .content-container {
-    flex-direction: column-reverse;
-    gap: 2rem;
+    margin-top: 110px;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    gap: 3rem;
+    margin-bottom: 3rem;
   }
   
   .left-content {
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    flex: 1;
   }
   
   .right-content {
-    justify-content: center;
+    flex: 1;
+    justify-content: flex-end;
   }
   
   h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
   
-  .coffee-image {
-    max-height: 300px;
+  .tagline {
+    font-size: 1.4rem; /* Increased from 1.2rem */
+    padding: 1.2rem;
+  }
+  
+  .coffee-image, .rotating-mug {
+    max-height: 400px;
+  }
+  
+  .cta-button {
+    width: auto;
+    padding: 14px 28px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .content-container {
+    margin-top: 70px;
+    gap: 1.5rem;
+  }
+  
+  h1 {
+    font-size: 1.7rem;
+  }
+  
+  .tagline {
+    font-size: 1.2rem; /* Increased from 1rem */
+    padding: 0.8rem;
+    line-height: 1.5;
+  }
+  
+  .coffee-image, .rotating-mug {
+    max-height: 200px;
   }
 }

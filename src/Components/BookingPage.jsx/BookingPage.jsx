@@ -11,9 +11,9 @@ const BookingPage = () => {
     { id: 2, name: "Table 2", capacity: 4, price: 180, available: true },
     { id: 3, name: "Table 3", capacity: 6, price: 250, available: true },
     { id: 4, name: "Booth 1", capacity: 4, price: 200, available: true },
-    { id: 5, name: "Booth 2", capacity: 6, price: 280, available: true },
-    { id: 6, name: "Window 1", capacity: 2, price: 150, available: true },
-    { id: 7, name: "Window 2", capacity: 4, price: 220, available: true },
+    { id: 5, name: "Booth 2", capacity: 6, price: 250, available: true },
+    { id: 6, name: "Window 1", capacity: 2, price: 100, available: true },
+    { id: 7, name: "Window 2", capacity: 4, price: 180, available: true },
   ];
 
   const [formData, setFormData] = useState({
@@ -33,8 +33,8 @@ const BookingPage = () => {
   const today = new Date().toISOString().split('T')[0];
 
   const generateTimeSlots = () => {
-    const startHour = 12;
-    const endHour = 20;
+    const startHour = 9;
+    const endHour = 16;
     const slots = [];
 
     for (let hour = startHour; hour <= endHour; hour++) {
@@ -105,7 +105,7 @@ const BookingPage = () => {
         totalPrice
       };
       console.log('Booking submitted:', bookingDetails);
-      navigate('/confirmation', { state: bookingDetails });
+       navigate('/payment', { state: bookingDetails }); 
     }
   };
 
