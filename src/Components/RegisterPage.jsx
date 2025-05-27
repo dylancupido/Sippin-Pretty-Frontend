@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
-<<<<<<< HEAD
 import "../Styles/Register.css";
-=======
-import '../Styles/Register.css'
->>>>>>> dcbf916319fdcdbb48d62db2932679b49aa143a5
 import axios from "axios";
 
 const CusRegisterForm = () => {
@@ -62,24 +58,14 @@ const CusRegisterForm = () => {
   return (
     <div className="Wrapper">
       <form>
-<<<<<<< HEAD
-        <h1>Create Account</h1>
+        <h1>Sign up</h1>
+        <p>Sign up to continue</p>
         <div className="Inputbox">
           <input
             value={name}
             type="text"
             placeholder="Full Name*"
             onChange={handleNameChange}
-=======
-        <h1>Sign up</h1>
-        <p>sign up to continue</p>
-        <div className="Inputbox">
-          <input
-            value={lastname}
-            type="text"
-            placeholder="Name*"
-            onChange={handleLastnameChange}
->>>>>>> dcbf916319fdcdbb48d62db2932679b49aa143a5
             required
           />
         </div>
@@ -112,9 +98,10 @@ const CusRegisterForm = () => {
         </div>
         <button onClick={handleOnClick}>Sign up</button>
       </form>
-      <p className="login-prompt">Already have an account? <a href="/login">Log in</a></p>
-    </div> 
-    
+      <p className="login-prompt">
+        Already have an account? <a href="/login">Log in</a>
+      </p>
+    </div>
   );
 };
 
