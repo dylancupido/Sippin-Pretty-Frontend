@@ -2,16 +2,17 @@
 
 .booking-section {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 3rem 2rem;
+  padding: 2rem 1rem;
   background: linear-gradient(to right, rgba(248, 187, 208, 0.1), rgba(255, 255, 255, 0.8));
   border-radius: 15px;
-  margin: 2rem auto;
+  margin: 1.5rem auto;
   max-width: 1200px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   position: relative;
   overflow: hidden;
+  text-align: center;
 }
 
 /* Optional decorative elements */
@@ -29,16 +30,16 @@
 .left-side {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  max-width: 50%;
-  padding-right: 2rem;
+  gap: 1.5rem;
+  max-width: 100%;
   position: relative;
   z-index: 1;
+  align-items: center;
 }
 
 .tagline h2 {
   font-family: 'Pacifico', cursive;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   color: #5e412f;
   margin-bottom: 0.5rem;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
@@ -67,17 +68,20 @@
 
 .action-buttons {
   display: flex;
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: 1rem;
   animation: fadeInUp 0.8s ease-out 0.4s both;
+  width: 100%;
 }
 
 .shop-button, .book-button {
-  padding: 0.8rem 2rem;
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.9rem;
   border: none;
   border-radius: 25px;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -128,11 +132,11 @@
 }
 
 .search-bar input {
+  width: 100%;
+  max-width: 100%;
   padding: 0.8rem 1.5rem;
   border: 1px solid #e0c8cf;
   border-radius: 25px;
-  width: 100%;
-  max-width: 300px;
   font-family: 'Poppins', sans-serif;
   transition: all 0.3s ease;
 }
@@ -144,56 +148,35 @@
 }
 
 .right-side {
-  max-width: 50%;
+  margin-top: 2rem;
+  max-width: 100%;
   display: flex;
   justify-content: center;
   perspective: 1000px;
   position: relative;
-  z-index: 1;
+  z-index: 1; /* Lower z-index than navbar */
 }
 
 .coffee-mug {
   max-width: 100%;
   height: auto;
-  max-height: 400px;
-  animation: floatRotate 8s ease-in-out infinite;
-  transform-origin: center 70%;
-  transform-style: preserve-3d;
+  max-height: 200px;
+  animation: spin 8s linear infinite;
+  transform-origin: center center;
   filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.15));
   will-change: transform;
-  backface-visibility: hidden;
   transition: all 0.5s ease;
+  position: relative;
+  z-index: 1; /* Lower z-index than navbar */
 }
 
-/* Enhanced floating rotation animation */
-@keyframes floatRotate {
-  0%, 100% {
-    transform: 
-      translateY(0) 
-      rotate(-5deg) 
-      scale(1)
-      rotateY(0deg);
+/* Simple spin animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  25% {
-    transform: 
-      translateY(-10px) 
-      rotate(2deg) 
-      scale(1.02)
-      rotateY(5deg);
-  }
-  50% {
-    transform: 
-      translateY(-15px) 
-      rotate(10deg) 
-      scale(1.03)
-      rotateY(0deg);
-  }
-  75% {
-    transform: 
-      translateY(-10px) 
-      rotate(2deg) 
-      scale(1.02)
-      rotateY(-5deg);
+  100% {
+    transform: rotate(360deg);
   }
 }
 
@@ -224,62 +207,46 @@
   }
 }
 
-/* Responsive Design */
-@media (max-width: 992px) {
+/* Tablet and larger */
+@media (min-width: 768px) {
   .booking-section {
-    flex-direction: column;
-    gap: 3rem;
-    padding: 2rem;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3rem 2rem;
+    text-align: left;
   }
   
-  .left-side, .right-side {
-    max-width: 100%;
-    padding-right: 0;
-    text-align: center;
-    align-items: center;
+  .left-side {
+    max-width: 50%;
+    padding-right: 2rem;
+    align-items: flex-start;
   }
   
-  .action-buttons {
-    justify-content: center;
-  }
-  
-  .search-bar input {
-    margin: 0 auto;
-  }
-  
-  .coffee-mug {
-    max-height: 300px;
-  }
-  
-  .coffee-mug::before {
-    top: -30px;
-    width: 50px;
-    height: 60px;
-  }
-}
-
-@media (max-width: 576px) {
   .tagline h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
   
   .action-buttons {
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
+    flex-direction: row;
+    width: auto;
   }
   
   .shop-button, .book-button {
-    width: 100%;
+    width: auto;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+  
+  .search-bar input {
+    max-width: 300px;
+  }
+  
+  .right-side {
+    margin-top: 0;
+    max-width: 50%;
   }
   
   .coffee-mug {
-    max-height: 250px;
-  }
-  
-  .coffee-mug::before {
-    top: -20px;
-    width: 40px;
-    height: 50px;
+    max-height: 400px;
   }
 }

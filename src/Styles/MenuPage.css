@@ -1,21 +1,14 @@
 .card-container {
   display: flex;
-
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
-  padding: 40px;
-  /* background-color: #d4c2b4; */
-  
+  gap: 15px;
+  padding: 20px;
 }
-
 
 .section-title {
   text-align: center;
-  font-size: 2rem;
-  font-family: 'Franklin Gothic', sans-serif;
-  color: #333;
-  /* background-color: #d4c2b4; */
+  font-size: 1.5rem;
   margin: 0 auto;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -25,27 +18,29 @@
 }
 
 .section-title h1 {
-  width: 500px;
-  padding: 20px;
+  width: 100%;
+  max-width: 300px;
+  padding: 15px;
   border: 2px solid #cc4068b0; 
   border-radius: 10px;       
   background-color: #f0f8ff;  
   color: #333;               
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
- 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.3rem;
 }
+
 .custom-card {
   background-color: #fff1f561;
-  width: 280px;
-  max-height: 400px;
+  width: 100%;
+  max-width: 280px;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease;
-  padding: 20px;
+  padding: 15px;
 }
 
 .custom-card:hover {
@@ -54,8 +49,8 @@
 }
 
 .card-image {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
 }
 .card-image-allign {
   display: flex;
@@ -100,4 +95,49 @@
 
 .buy-now-btn:hover {
   background-color: #8e7ab5;
+}
+
+/* Tablet and larger */
+@media (min-width: 768px) {
+  .card-container {
+    gap: 20px;
+    padding: 40px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section-title h1 {
+    max-width: 500px;
+    padding: 20px;
+    font-size: inherit;
+  }
+  
+  .card-image {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 360px) {
+  .card-container {
+    padding: 10px;
+  }
+  
+  .section-title h1 {
+    max-width: 250px;
+    padding: 10px;
+    font-size: 1.1rem;
+  }
+  
+  .custom-card {
+    padding: 10px;
+  }
+  
+  .card-image {
+    width: 120px;
+    height: 120px;
+  }
 }
