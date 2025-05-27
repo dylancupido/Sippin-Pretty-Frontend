@@ -23,7 +23,7 @@ const Menu = ({ onAddToCart }) => {
     <>
       {categories.map((category) => (
         <div key={category}>
-          <div className="section-title"><h1>{category}</h1></div>
+          <div className="-section-title"><h1>{category}</h1></div>
           <div className="card-container">
             {filterByGroup(category).map((item) => (
               <div key={item.productID} className="custom-card">

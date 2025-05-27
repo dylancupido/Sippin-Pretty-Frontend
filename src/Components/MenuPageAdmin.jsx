@@ -129,12 +129,7 @@ const MenuAdmin = ({ onAddToCart }) => {
                   <p className="card-description">{item.description}</p>
                   <p className="card-price">R{item.price}</p>
                   <div className="card-actions">
-                    <button
-                      className="buy-now-btn"
-                      onClick={() => onAddToCart(item)}
-                    >
-                      Buy Now
-                    </button>
+                   
                     <button
                       className="edit-btn"
                       onClick={() => openEditModal(item)}

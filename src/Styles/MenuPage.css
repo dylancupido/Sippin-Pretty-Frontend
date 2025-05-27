@@ -6,29 +6,22 @@
   padding: 20px;
 }
 
-.section-title {
+.-section-title {
   text-align: center;
   font-size: 1.5rem;
   margin: 0 auto;
-  padding-top: 20px;
+  padding-top: 40px;
   padding-bottom: 20px;
   display: flex;
   justify-content: center; 
   align-items: center; 
 }
 
-.section-title h1 {
-  width: 100%;
-  max-width: 300px;
-  padding: 15px;
-  border: 2px solid #cc4068b0; 
-  border-radius: 10px;       
-  background-color: #f0f8ff;  
-  color: #333;               
-  text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 1.3rem;
+.-section-title h1 {
+    font-family: 'Pacifico', cursive;
+  color: #5e412f;
+  font-size: 3rem;
+  margin-bottom: 1rem;
 }
 
 .custom-card {
