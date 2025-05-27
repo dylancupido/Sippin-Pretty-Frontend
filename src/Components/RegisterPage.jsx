@@ -99,7 +99,7 @@ const CusRegisterForm = () => {
         <button onClick={handleOnClick}>Sign up</button>
       </form>
       <p className="login-prompt">
-        Already have an account? <a href="/login">Log in</a>
+        Already have an account? <a href="">Log in</a>
       </p>
     </div>
   );
