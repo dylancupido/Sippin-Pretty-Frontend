@@ -18,6 +18,9 @@ export function AboutUs() {
             <GoogleMaps/>
             <br/>
             <div>
+                <h1 className={"heading"}>Meet the team</h1>
+            </div>
+            <div>
                 <div>
                     <div className={"container-wrapper"}>
                         <div className={"container"}>

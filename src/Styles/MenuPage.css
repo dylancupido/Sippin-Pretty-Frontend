@@ -12,9 +12,8 @@
 .section-title {
   text-align: center;
   font-size: 2rem;
-  font-family: 'Franklin Gothic', sans-serif;
-  color: #333;
-  background-color: #d4c2b4;
+  font-family: 'Pacifico', cursive;
+  background: linear-gradient(to right, rgba(231, 187, 195, 0.65), rgba(231, 187, 195, 0.65));
   margin: 0 auto;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -27,8 +26,8 @@
   width: 500px;
   padding: 20px;
   border: 2px solid #cc4068b0; 
-  border-radius: 10px;       
-  background-color: #f0f8ff;  
+  border-radius: 10px;
+  background: linear-gradient(to right, rgba(68, 41, 63, 0.85), rgba(108, 70, 85, 0.75));
   color: #333;               
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

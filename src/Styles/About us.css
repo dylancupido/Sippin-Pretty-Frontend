@@ -17,7 +17,8 @@
 /* Paragraph style */
 .paragraph {
     position: relative;
-    font-family: 'Pacifico', cursive;
+    font-family: 'Poppins', sans-serif;
+    color: #5e412f;
     font-size: 1.8rem;
     text-align: center;
 }
@@ -52,7 +53,7 @@
     position: relative;
     width: 100px;
     height: 250px;
-    background-color: #f0f0f0;
+    background: linear-gradient(to right, rgba(68, 41, 63, 0.85), rgba(108, 70, 85, 0.75));
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     overflow: hidden;
@@ -68,6 +69,5 @@
     left: 12px;
     right: 12px;
     font-size: 16px;
-    color: #333;
     text-align: center;
 }
