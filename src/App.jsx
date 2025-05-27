@@ -34,8 +34,12 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
-          path="/menu"
+          path="/menuadmin"
           element={<MenuAdmin onAddToCart={handleAddToCart} />}
+        />
+          <Route
+          path="/menu"
+          element={<Menu onAddToCart={handleAddToCart} />}
         />
         <Route path="/cart" element={<CartPage cart={cart} />} />
         <Route path="/booking" element={<BookingPage />} />
