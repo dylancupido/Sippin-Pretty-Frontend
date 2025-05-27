@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import './Styles/Register.css';
-import RegisterPage from './Components/RegisterPage';
+import RegisterStuff from './Components/RegisterStuff';
 
 function App() {
   return (
     <div>
-      <RegisterPage />
+      
     </div>
   );
 }

@@ -23,7 +23,7 @@ code {
 
 
 .Wrapper{
-    width: 430px;
+    width: 500px;
     color: white;  
     border-radius: 10px;
     padding: 30px 40px; 
@@ -98,6 +98,28 @@ code {
     outline: none;
     border: none;
     background-color: rgba(68, 41, 63, 0.85);
-    
+}
+/* Style the react-datepicker to match your input fields */
+.react-datepicker-wrapper {
+  width: 100%;
+}
 
+.react-datepicker__input-container input {
+  width: 100%;
+  height: 50px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  border-bottom: 1px solid gray;
+  outline: none;
+}
+
+.react-datepicker__input-container input:hover {
+  background-color: rgb(178, 40, 233);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 }
