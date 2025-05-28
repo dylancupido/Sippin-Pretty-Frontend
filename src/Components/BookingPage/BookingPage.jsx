@@ -2,19 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './BookingPage.css';
 
+const initialTables = [
+  { id: 1, name: "Table 1", type: "individual", capacity: 2 },
+  { id: 2, name: "Table 2", type: "individual", capacity: 2 },
+  { id: 3, name: "Table 3", type: "individual", capacity: 4 },
+  { id: 7, name: "Booth 1 - Table 1", type: "booth1", capacity: 4 },
+  { id: 8, name: "Booth 1 - Table 2", type: "booth1", capacity: 4 },
+  { id: 9, name: "Booth 2 - Table 1", type: "booth2", capacity: 4 },
+  { id: 10, name: "Booth 2 - Table 2", type: "booth2", capacity: 4 },
+  { id: 11, name: "Booth 3 - Table 1", type: "booth3", capacity: 6 },
+  { id: 12, name: "Booth 3 - Table 2", type: "booth3", capacity: 6 },
+  { id: 13, name: "Booth 4 - Table 1", type: "booth4", capacity: 8 },
+  { id: 14, name: "Booth 4 - Table 2", type: "booth4", capacity: 8 },
+];
+
+// Mock existing bookings to simulate reserved tables for specific date/time
+const mockBookings = [
+  { tableId: 2, date: '2025-05-30', time: '12:00' },
+  { tableId: 5, date: '2025-05-30', time: '12:00' },
+  { tableId: 8, date: '2025-05-30', time: '14:30' },
+  { tableId: 13, date: '2025-05-31', time: '15:00' },
+];
+
 const BookingPage = () => {
   const navigate = useNavigate();
-
-  // Sample table data with capacity and base price
-  const tables = [
-    { id: 1, name: "Table 1", capacity: 2, price: 100, available: true },
-    { id: 2, name: "Table 2", capacity: 4, price: 180, available: true },
-    { id: 3, name: "Table 3", capacity: 6, price: 250, available: true },
-    { id: 4, name: "Booth 1", capacity: 4, price: 200, available: true },
-    { id: 5, name: "Booth 2", capacity: 6, price: 250, available: true },
-    { id: 6, name: "Window 1", capacity: 2, price: 100, available: true },
-    { id: 7, name: "Window 2", capacity: 4, price: 180, available: true },
-  ];
 
   const [formData, setFormData] = useState({
     name: '',
@@ -38,8 +49,8 @@ const BookingPage = () => {
     const slots = [];
 
     for (let hour = startHour; hour <= endHour; hour++) {
-      for (let minute of [0, 30]) {
-        if (hour === endHour && minute > 0) continue; // Skip 20:30
+      for (let minute of [0, ]) {
+        if (hour === endHour && minute > 0) continue; // Skip last half hour slot if not valid
         const h = hour.toString().padStart(2, '0');
         const m = minute.toString().padStart(2, '0');
         slots.push(`${h}:${m}`);
@@ -49,31 +60,49 @@ const BookingPage = () => {
     return slots;
   };
 
-  const checkAvailability = (guests, time) => {
-    const suitableTables = tables
-      .filter(table => table.capacity >= guests)
-      .map(table => ({
-        ...table,
-        available: Math.random() > 0.3,
-        finalPrice: time && parseInt(time.split(':')[0]) >= 17 ?
-          Math.round(table.price * 1.2) : table.price
-      }));
-    return suitableTables;
+  const checkAvailability = (guests, date, time) => {
+    if (!date || !time) return [];
+
+    // Filter tables by capacity
+    const suitableTables = initialTables.filter(table => table.capacity >= guests);
+
+    // Exclude tables already booked at that date and time
+    const availableTables = suitableTables.filter(table => {
+      return !mockBookings.some(
+        booking => booking.tableId === table.id && booking.date === date && booking.time === time
+      );
+    });
+
+    // Price calculation: base R50, +20% if after 17:00 (not used here but you can adjust)
+    const hour = parseInt(time.split(':')[0], 10);
+    const basePrice = 50;
+
+    return availableTables.map(table => ({
+      ...table,
+      available: true,
+      finalPrice: hour >= 17 ? Math.round(basePrice * 1.2) : basePrice,
+    }));
   };
 
   useEffect(() => {
-    if (formData.time && formData.guests) {
-      const tables = checkAvailability(formData.guests, formData.time);
+    if (formData.date && formData.time && formData.guests) {
+      const tables = checkAvailability(formData.guests, formData.date, formData.time);
       setAvailableTables(tables);
       setSelectedTable(null);
       setTotalPrice(0);
+    } else {
+      setAvailableTables([]);
+      setSelectedTable(null);
+      setTotalPrice(0);
     }
-  }, [formData.time, formData.guests]);
+  }, [formData.date, formData.time, formData.guests]);
 
   useEffect(() => {
     if (selectedTable) {
       const table = availableTables.find(t => t.id === selectedTable);
       setTotalPrice(table ? table.finalPrice : 0);
+    } else {
+      setTotalPrice(0);
     }
   }, [selectedTable, availableTables]);
 
@@ -105,7 +134,8 @@ const BookingPage = () => {
         totalPrice
       };
       console.log('Booking submitted:', bookingDetails);
-       navigate('/payment', { state: bookingDetails }); 
+      // Here you can add the booking to mockBookings or API call
+      navigate('/confirmation', { state: bookingDetails });
     }
   };
 
@@ -122,7 +152,7 @@ const BookingPage = () => {
     <div className="booking-container">
       <div className="booking-header">
         <h1>Reserve Your Table</h1>
-        <p>Choose from available tables based on your party size</p>
+        <p>Book your table now and enjoy your coffee break with us!</p>
       </div>
 
       <form onSubmit={handleSubmit} className="booking-form" noValidate>
@@ -205,60 +235,42 @@ const BookingPage = () => {
 
         <div className="form-group">
           <label htmlFor="guests">Number of Guests</label>
-          <select
+          <input
+            type="number"
             id="guests"
             name="guests"
+            min="1"
+            max="12"
             value={formData.guests}
             onChange={handleChange}
             required
-          >
-            {[1, 2, 3, 4, 5, 6, 7, 8].map(num => (
-              <option key={num} value={num}>
-                {num} {num === 1 ? 'person' : 'people'}
-              </option>
-            ))}
-          </select>
+          />
         </div>
 
-        {formData.time && availableTables.length > 0 && (
-          <div className="form-group">
-            <label>Available Tables ({formData.guests} people)</label>
-            <div className="tables-grid">
+        <div className="available-tables">
+          <h2>Available Tables</h2>
+          {availableTables.length === 0 ? (
+            <p>No tables available for selected date, time and guests.</p>
+          ) : (
+            <ul>
               {availableTables.map(table => (
-                <div 
-                  key={table.id}
-                  className={`table-card ${selectedTable === table.id ? 'selected' : ''} ${!table.available ? 'unavailable' : ''}`}
-                  onClick={() => table.available && setSelectedTable(table.id)}
-                >
-                  <h3>{table.name}</h3>
-                  <p>Capacity: {table.capacity} people</p>
-                  <p>Price: R{table.finalPrice}</p>
-                  {!table.available && <span className="unavailable-badge">Booked</span>}
-                </div>
+                <li key={table.id}>
+                  <label>
+                    <input
+                      type="radio"
+                      name="table"
+                      value={table.id}
+                      checked={selectedTable === table.id}
+                      onChange={() => setSelectedTable(table.id)}
+                    />
+                    {table.name} - Capacity: {table.capacity} - Price: R{table.finalPrice}
+                  </label>
+                </li>
               ))}
-            </div>
-            {errors.table && <div className="error-message">{errors.table}</div>}
-          </div>
-        )}
-
-        {formData.time && availableTables.length === 0 && (
-          <div className="no-tables-message">
-            No available tables for {formData.guests} people at {formData.time}. 
-            Please try a different time or party size.
-          </div>
-        )}
-
-        {totalPrice > 0 && (
-          <div className="price-summary">
-            <h3>Booking Summary</h3>
-            <p>Table: {availableTables.find(t => t.id === selectedTable)?.name || 'Not selected'}</p>
-            <p>Total Price: <strong>R{totalPrice}</strong></p>
-            <p className="note">Note: This includes a R50 reservation deposit</p>
-            <p className="cancellation-note">
-              Cancellations made within 2 hours of the booking time will incur a fee of R50.
-            </p>
-          </div>
-        )}
+            </ul>
+          )}
+          {errors.table && <div className="error-message">{errors.table}</div>}
+        </div>
 
         <div className="form-group">
           <label htmlFor="specialRequests">Special Requests</label>
@@ -267,18 +279,17 @@ const BookingPage = () => {
             name="specialRequests"
             value={formData.specialRequests}
             onChange={handleChange}
-            rows="3"
-            maxLength={300}
-            placeholder="e.g. Birthday setup, allergies..."
-          />
+            maxLength={200}
+          ></textarea>
         </div>
 
-        <button
-          type="submit"
-          className="submit-btn"
-          disabled={isSubmitDisabled()}
-        >
-          Confirm Booking (R{totalPrice || '0'})
+        <div className="total-price">
+          <h3>Total Price: R{totalPrice}</h3>
+          <small>(R50 refundable deposit included)</small>
+        </div>
+
+        <button type="submit" disabled={isSubmitDisabled()}>
+          Reserve Table
         </button>
       </form>
     </div>

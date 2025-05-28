@@ -100,7 +100,7 @@ body::before {
 .modal-content button {
 .modal-content button {
   background: linear-gradient(to right, #f8bbd0, #f9c9d4);
-  box-shadow: 0 4px 10px rgba(249, 168, 212, 0.3);
+  box-shadow: 0 4px 10px rgba(223, 149, 190, 0.712);
   transition: all 0.3s ease;
 }
 

@@ -6,7 +6,7 @@ import "./App.css";
 import HomePage from "./Components/HomePage";
 import Menu from "./Components/MenuPage";
 import CartPage from "./Components/CartPage";
-import BookingPage from "./Components/BookingPage.jsx/BookingPage";
+import BookingPage from "./Components/BookingPage/BookingPage";
 import PaymentPage from "./Components/PaymentPage/PaymentPage";
 import ConfirmationPage from "./Components/ConfirmationPage/ConfirmationPage";
 import MenuAdmin from "./Components/MenuPageAdmin";
