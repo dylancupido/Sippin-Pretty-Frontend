@@ -26,7 +26,7 @@ const CusRegisterForm = () => {
       Role: role
     };
 
-    const url = 'https://localhost:7015/api/Users';
+    const url = 'https://localhost:7015/api/Users/RegisterCus';
 
     axios.post(url, data)
       .then((response) => {
