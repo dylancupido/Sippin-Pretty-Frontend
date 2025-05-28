@@ -2,22 +2,22 @@ import React, { useState } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
 import "../Styles/Register.css";
 import axios from "axios";
-
+ 
 const CusRegisterForm = () => {
   const [name, setName] = useState('');
   const [username, setId] = useState('');
   const [password, setPassword] = useState('');
   const [phonenumber, setPhonenumber] = useState('');
   const role = 'Customer';
-
+ 
   const handleIdChange = (e) => setId(e.target.value);
   const handleNameChange = (e) => setName(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handlePhonenumberChange = (e) => setPhonenumber(e.target.value);
-
+ 
   const handleOnClick = (event) => {
     event.preventDefault();
-
+ 
     const data = {
       Id: username,
       Name: name,
@@ -25,13 +25,13 @@ const CusRegisterForm = () => {
       Password: password,
       Role: role
     };
-
-    const url = 'https://localhost:7015/api/Users/RegisterCus';
-
+ 
+    const url = 'http://localhost:5010/api/Users/RegisterCus';
+ 
     axios.post(url, data)
       .then((response) => {
         const message = response.data;
-
+ 
         switch (message) {
           case 'Registration Successfull':
             alert('Registration successful!');
@@ -52,13 +52,59 @@ const CusRegisterForm = () => {
         } else {
           alert('Error setting up request: ' + error.message);
         }
-      }); 
+      });
   };
-
-const RegisterPage = () => {
+ 
   return (
-    <div>RegisteredPage</div>
-  )
-}
-
-export default RegisterPage
+    <div className="Wrapper">
+      <form>
+        <h1>Sign up</h1>
+        <p>Sign up to continue</p>
+        <div className="Inputbox">
+          <input
+            value={name}
+            type="text"
+            placeholder="Full Name*"
+            onChange={handleNameChange}
+            required
+          />
+        </div>
+        <div className="Inputbox">
+          <input
+            value={username}
+            type="text"
+            placeholder="Email Address*"
+            onChange={handleIdChange}
+            required
+          />
+        </div>
+        <div className="Inputbox">
+          <input
+            value={password}
+            type="password"
+            placeholder="Password*"
+            onChange={handlePasswordChange}
+            required
+          />
+        </div>
+        <div className="Inputbox">
+          <input
+            value={phonenumber}
+            type="text"
+            placeholder="Mobile Number*"
+            onChange={handlePhonenumberChange}
+            required
+          />
+        </div>
+        <button onClick={handleOnClick}>Sign up</button>
+      </form>
+      <p className="login-prompt">
+        Already have an account? <a href="">Log in</a>
+      </p>
+    </div>
+  );
+};
+ 
+export default CusRegisterForm;
+ 
+ 

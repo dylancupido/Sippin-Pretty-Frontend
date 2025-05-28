@@ -10,6 +10,9 @@ import BookingPage from "./Components/BookingPage.jsx/BookingPage";
 import PaymentPage from "./Components/PaymentPage/PaymentPage";
 import ConfirmationPage from "./Components/ConfirmationPage/ConfirmationPage";
 import MenuAdmin from "./Components/MenuPageAdmin";
+import RegisterPage from "./Components/RegisterPage";
+import CusRegisterForm from "./Components/RegisterPage";
+import StaffRegisterForm from "./Components/RegisterStaff";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -45,6 +48,8 @@ function App() {
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/confirmation" element={<ConfirmationPage />} />
+        <Route path="/cusRegister" element={<CusRegisterForm />} />
+        <Route path="/staffRegister" element={<StaffRegisterForm />} />
       </Routes>
 
       {showRegister && (
