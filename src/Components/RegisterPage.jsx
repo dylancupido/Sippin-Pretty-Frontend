@@ -1,5 +1,59 @@
-import React from 'react'
-import './Styles/Register.css'
+import React, { useState } from "react";
+import { FaUser, FaLock } from "react-icons/fa";
+import "../Styles/Register.css";
+import axios from "axios";
+
+const CusRegisterForm = () => {
+  const [name, setName] = useState('');
+  const [username, setId] = useState('');
+  const [password, setPassword] = useState('');
+  const [phonenumber, setPhonenumber] = useState('');
+  const role = 'Customer';
+
+  const handleIdChange = (e) => setId(e.target.value);
+  const handleNameChange = (e) => setName(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handlePhonenumberChange = (e) => setPhonenumber(e.target.value);
+
+  const handleOnClick = (event) => {
+    event.preventDefault();
+
+    const data = {
+      Id: username,
+      Name: name,
+      PhoneNumber: phonenumber,
+      Password: password,
+      Role: role
+    };
+
+    const url = 'https://localhost:7015/api/Users/RegisterCus';
+
+    axios.post(url, data)
+      .then((response) => {
+        const message = response.data;
+
+        switch (message) {
+          case 'Registration Successfull':
+            alert('Registration successful!');
+            break;
+          case 'Error':
+            alert('User already exists. Try a different username.');
+            break;
+          default:
+            alert('Server response: ' + message);
+        }
+      })
+      .catch((error) => {
+        console.error('Registration error:', error);
+        if (error.response) {
+          alert(`Error: ${error.response.data}`);
+        } else if (error.request) {
+          alert('No response from server. Is your backend running?');
+        } else {
+          alert('Error setting up request: ' + error.message);
+        }
+      }); 
+  };
 
 const RegisterPage = () => {
   return (
