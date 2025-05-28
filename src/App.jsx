@@ -13,6 +13,7 @@ import MenuAdmin from "./Components/MenuPageAdmin";
 import CusRegisterForm from "./Components/RegisterPage";
 import StaffRegisterForm from "./Components/RegisterStaff";
 import LoginForm from "./Components/LoginPage";
+import OrdersPage from "./Components/OrdersPage";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -38,6 +39,7 @@ function App() {
         <Route path="/cusRegister" element={<CusRegisterForm />} />
         <Route path="/staffRegister" element={<StaffRegisterForm />} />
         <Route path="/login" element={<LoginForm setLoggedIn={setLoggedIn}/>} />
+        <Route path="/Orders" element={<OrdersPage />} />
       </Routes>
     </div>
   );
