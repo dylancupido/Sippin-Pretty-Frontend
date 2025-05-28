@@ -45,8 +45,13 @@ const Navbar = ({ loggedIn = false }) => {
           </a>
         </li>
         <li role="none">
-          <a role="menuitem" href="#" onClick={() => setMenuOpen(false)}>
-            About Us
+          <a role="menuitem" href="/Orders" onClick={() => setMenuOpen(false)}>
+            Orders
+          </a>
+        </li>
+        <li role="none">
+          <a role="menuitem" href="/Orders" onClick={() => setMenuOpen(false)}>
+            Users
           </a>
         </li>
       </ul>
