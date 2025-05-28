@@ -1,0 +1,11 @@
+.brand-logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    color: #ffb6c1; /* pastel pink */
+    letter-spacing: 1px;
+  }
+  
+  .brand-logo span {
+    color: #c084fc; /* lavender or soft purple */
+  }
+  
