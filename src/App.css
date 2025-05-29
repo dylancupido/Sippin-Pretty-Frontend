@@ -145,3 +145,24 @@ body, html, #root, .app-container {
     padding: 0.5rem;
   }
 }
+
+/* Very small phones */
+@media (max-width: 320px) {
+  .app-container {
+    padding: 0.3rem;
+  }
+  
+  .modal-content {
+    padding: 1rem;
+    width: 95%;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .modal-content button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
