@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../Navbar/Navbar.css";
-import logo from "../../assets/logo.png"; // Make sure this path is correct
+import logo from "../../assets/logo.png";
 
 const StaffNavbar = ({ onLogout }) => {
   const [menuOpen, setMenuOpen] = useState(false);

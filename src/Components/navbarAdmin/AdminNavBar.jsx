@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../Navbar/Navbar.css";
+import logo from "../../assets/logo.png"; // Import the logo
 
 function AdminNavBar({ onLogout }) {
   return (
@@ -8,14 +9,13 @@ function AdminNavBar({ onLogout }) {
       <div className="navbar-left">
         <Link to="/" className="logo-container">
           <div className="logo-stack">
-            <img src="/logo192.png" alt="Logo" className="logo" />
+            <img src={logo} alt="Sippin' Pretty Logo" className="logo" />
             <span className="nav-logo">Admin Panel</span>
           </div>
         </Link>
       </div>
 
       <ul className="nav-links">
-        {/* Removed the Dashboard link */}
         <li><Link to="/menuadmin">Manage Menu</Link></li>
         <li><Link to="/admin/orders">Orders</Link></li>
         <li><Link to="/admin/users">Users</Link></li>
