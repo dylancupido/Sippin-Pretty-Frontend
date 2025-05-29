@@ -19,14 +19,14 @@ const PromotionSlider = () => {
       title: "Summer Special",
       description: "Try our new Iced Lavender Latte with 15% off all week!",
       image: Promo1,
-      cta: "Order Now",
+      catchPhrase: "Limited Time Only!",
     },
     {
       id: 2,
       title: "Happy Hour",
       description: "2-for-1 drinks every weekday from 2-4pm",
       image: Promo2,
-      cta: "View Menu",
+      catchPhrase: "Double the Delight!",
     },
     {
       id: 3,
@@ -34,7 +34,7 @@ const PromotionSlider = () => {
       description:
         "Join our loyalty program and get a free drink after 10 purchases",
       image: Promo3,
-      cta: "Sign Up",
+      catchPhrase: "Sip & Save!",
     },
     {
       id: 4,
@@ -42,7 +42,7 @@ const PromotionSlider = () => {
       description:
         "Discover our limited-time seasonal menu items",
       image: Promo4,
-      cta: "Explore",
+      catchPhrase: "Taste the Season!",
     },
   ];
 
@@ -95,14 +95,16 @@ const PromotionSlider = () => {
               <img
                 src={promo.image}
                 alt={promo.title}
-                className={`promo-image promo-image-${promo.id}`}
+                className="promo-image"
                 loading="lazy"
               />
             </div>
             <div className="slide-content">
               <h3>{promo.title}</h3>
-              <p>{promo.description}</p>
-              <button className="cta-button">{promo.cta}</button>
+              <p>{promo.description.length > 60 
+                  ? promo.description.substring(0, 60) + '...' 
+                  : promo.description}</p>
+              <p className="catch-phrase">{promo.catchPhrase}</p>
             </div>
           </div>
         ))}
