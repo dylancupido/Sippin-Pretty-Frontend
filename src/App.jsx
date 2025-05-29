@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from "./Components/Navbar/Navbar";
@@ -35,6 +35,10 @@ function App() {
   const [userRole, setUserRole] = useState("user");
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+
+  useEffect(() => {
+    console.log("Current user role:", userRole);
+  }, [userRole]);
 
   const handleLogin = (role) => {
     setLoggedIn(true);
