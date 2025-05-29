@@ -14,9 +14,10 @@ const initialTables = [
   { id: 12, name: "Booth 3 - Table 2", type: "booth3", capacity: 6 },
   { id: 13, name: "Booth 4 - Table 1", type: "booth4", capacity: 8 },
   { id: 14, name: "Booth 4 - Table 2", type: "booth4", capacity: 8 },
+  { id: 15, name: "Large Group Table 1", type: "large", capacity: 10 },
+  { id: 16, name: "Large Group Table 2", type: "large", capacity: 12 },
 ];
 
-// Mock existing bookings to simulate reserved tables for specific date/time
 const mockBookings = [
   { tableId: 2, date: '2025-05-30', time: '12:00' },
   { tableId: 5, date: '2025-05-30', time: '12:00' },
@@ -49,12 +50,8 @@ const BookingPage = () => {
     const slots = [];
 
     for (let hour = startHour; hour <= endHour; hour++) {
-      for (let minute of [0, ]) {
-        if (hour === endHour && minute > 0) continue; // Skip last half hour slot if not valid
-        const h = hour.toString().padStart(2, '0');
-        const m = minute.toString().padStart(2, '0');
-        slots.push(`${h}:${m}`);
-      }
+      const h = hour.toString().padStart(2, '0');
+      slots.push(`${h}:00`);
     }
 
     return slots;
@@ -63,30 +60,24 @@ const BookingPage = () => {
   const checkAvailability = (guests, date, time) => {
     if (!date || !time) return [];
 
-    // Filter tables by capacity
     const suitableTables = initialTables.filter(table => table.capacity >= guests);
 
-    // Exclude tables already booked at that date and time
     const availableTables = suitableTables.filter(table => {
       return !mockBookings.some(
         booking => booking.tableId === table.id && booking.date === date && booking.time === time
       );
     });
 
-    // Price calculation: base R50, +20% if after 17:00 (not used here but you can adjust)
-    const hour = parseInt(time.split(':')[0], 10);
-    const basePrice = 50;
-
     return availableTables.map(table => ({
       ...table,
-      available: true,
-      finalPrice: hour >= 17 ? Math.round(basePrice * 1.2) : basePrice,
+      available: true
     }));
   };
 
   useEffect(() => {
-    if (formData.date && formData.time && formData.guests) {
-      const tables = checkAvailability(formData.guests, formData.date, formData.time);
+    const { guests, date, time } = formData;
+    if (date && time && guests >= 5 && guests <= 10) {
+      const tables = checkAvailability(guests, date, time);
       setAvailableTables(tables);
       setSelectedTable(null);
       setTotalPrice(0);
@@ -99,12 +90,13 @@ const BookingPage = () => {
 
   useEffect(() => {
     if (selectedTable) {
-      const table = availableTables.find(t => t.id === selectedTable);
-      setTotalPrice(table ? table.finalPrice : 0);
+      const guestCount = parseInt(formData.guests, 10);
+      const dynamicPrice = 50 + guestCount * 25;
+      setTotalPrice(dynamicPrice);
     } else {
       setTotalPrice(0);
     }
-  }, [selectedTable, availableTables]);
+  }, [selectedTable, formData.guests]);
 
   const validate = () => {
     const newErrors = {};
@@ -114,7 +106,6 @@ const BookingPage = () => {
     if (!formData.date) newErrors.date = 'Date is required.';
     if (!formData.time) newErrors.time = 'Time is required.';
     if (!selectedTable) newErrors.table = 'Please select a table.';
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -134,8 +125,8 @@ const BookingPage = () => {
         totalPrice
       };
       console.log('Booking submitted:', bookingDetails);
-      // Here you can add the booking to mockBookings or API call
-      navigate('/confirmation', { state: bookingDetails });
+    navigate('/payment', { state: bookingDetails });
+
     }
   };
 
@@ -155,143 +146,101 @@ const BookingPage = () => {
         <p>Book your table now and enjoy your coffee break with us!</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="booking-form" noValidate>
-        <div className="form-group">
-          <label htmlFor="name">Full Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            maxLength={50}
-            required
-          />
-          {errors.name && <div className="error-message">{errors.name}</div>}
-        </div>
+      <div className="form-group">
+        <label htmlFor="guests">Number of Guests</label>
+        <input
+          type="number"
+          id="guests"
+          name="guests"
+          min="1"
+          max="20"
+          value={formData.guests}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          {errors.email && <div className="error-message">{errors.email}</div>}
+      {formData.guests < 5 ? (
+        <div className="walkin-notice">
+          <h2>No Reservation Needed</h2>
+          <p>Walk-ins are welcome for groups of 1 to 4 guests.</p>
         </div>
-
-        <div className="form-group">
-          <label htmlFor="phone">Phone Number</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            pattern="\d{10}"
-            placeholder="e.g. 0812345678"
-            required
-          />
-          {errors.phone && <div className="error-message">{errors.phone}</div>}
+      ) : formData.guests > 10 ? (
+        <div className="group-too-large">
+          <h2>Group Too Large</h2>
+          <p>Please contact us directly to arrange seating for groups over 10.</p>
         </div>
-
-        <div className="form-row">
+      ) : (
+        <form onSubmit={handleSubmit} className="booking-form" noValidate>
           <div className="form-group">
-            <label htmlFor="date">Date</label>
-            <input
-              type="date"
-              id="date"
-              name="date"
-              min={today}
-              value={formData.date}
-              onChange={handleChange}
-              required
-            />
-            {errors.date && <div className="error-message">{errors.date}</div>}
+            <label htmlFor="name">Full Name</label>
+            <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
+            {errors.name && <div className="error-message">{errors.name}</div>}
           </div>
 
           <div className="form-group">
-            <label htmlFor="time">Time</label>
-            <select
-              id="time"
-              name="time"
-              value={formData.time}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select a time</option>
-              {generateTimeSlots().map((slot) => (
-                <option key={slot} value={slot}>
-                  {slot}
-                </option>
-              ))}
-            </select>
-            {errors.time && <div className="error-message">{errors.time}</div>}
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+            {errors.email && <div className="error-message">{errors.email}</div>}
           </div>
-        </div>
 
-        <div className="form-group">
-          <label htmlFor="guests">Number of Guests</label>
-          <input
-            type="number"
-            id="guests"
-            name="guests"
-            min="1"
-            max="12"
-            value={formData.guests}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label htmlFor="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} pattern="\d{10}" placeholder="e.g. 0812345678" required />
+            {errors.phone && <div className="error-message">{errors.phone}</div>}
+          </div>
 
-        <div className="available-tables">
-          <h2>Available Tables</h2>
-          {availableTables.length === 0 ? (
-            <p>No tables available for selected date, time and guests.</p>
-          ) : (
-            <ul>
-              {availableTables.map(table => (
-                <li key={table.id}>
-                  <label>
-                    <input
-                      type="radio"
-                      name="table"
-                      value={table.id}
-                      checked={selectedTable === table.id}
-                      onChange={() => setSelectedTable(table.id)}
-                    />
-                    {table.name} - Capacity: {table.capacity} - Price: R{table.finalPrice}
-                  </label>
-                </li>
-              ))}
-            </ul>
-          )}
-          {errors.table && <div className="error-message">{errors.table}</div>}
-        </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="date">Date</label>
+              <input type="date" id="date" name="date" min={today} value={formData.date} onChange={handleChange} required />
+              {errors.date && <div className="error-message">{errors.date}</div>}
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="specialRequests">Special Requests</label>
-          <textarea
-            id="specialRequests"
-            name="specialRequests"
-            value={formData.specialRequests}
-            onChange={handleChange}
-            maxLength={200}
-          ></textarea>
-        </div>
+            <div className="form-group">
+              <label htmlFor="time">Time</label>
+              <select id="time" name="time" value={formData.time} onChange={handleChange} required>
+                <option value="">Select a time</option>
+                {generateTimeSlots().map((slot) => (
+                  <option key={slot} value={slot}>{slot}</option>
+                ))}
+              </select>
+              {errors.time && <div className="error-message">{errors.time}</div>}
+            </div>
+          </div>
 
-        <div className="total-price">
-          <h3>Total Price: R{totalPrice}</h3>
-          <small>(R50 refundable deposit included)</small>
-        </div>
+          <div className="available-tables">
+            <h2>Available Tables</h2>
+            {availableTables.length === 0 ? (
+              <p>No tables available for selected date, time and guests.</p>
+            ) : (
+              <ul>
+                {availableTables.map(table => (
+                  <li key={table.id}>
+                    <label>
+                      <input type="radio" name="table" value={table.id} checked={selectedTable === table.id} onChange={() => setSelectedTable(table.id)} />
+                      {table.name} - Capacity: {table.capacity}
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {errors.table && <div className="error-message">{errors.table}</div>}
+          </div>
 
-        <button type="submit" disabled={isSubmitDisabled()}>
-          Reserve Table
-        </button>
-      </form>
+          <div className="form-group">
+            <label htmlFor="specialRequests">Special Requests</label>
+            <textarea id="specialRequests" name="specialRequests" value={formData.specialRequests} onChange={handleChange} maxLength={200}></textarea>
+          </div>
+
+          <div className="total-price">
+            <h3>Total Price: R{totalPrice}</h3>
+            <small>(R50 refundable deposit included)</small>
+          </div>
+
+          <button type="submit" disabled={isSubmitDisabled()}>Reserve Table</button>
+        </form>
+      )}
     </div>
   );
 };
