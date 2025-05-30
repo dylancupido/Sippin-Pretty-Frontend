@@ -4,8 +4,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import AdminNavbar from "./Components/navbarAdmin/AdminNavBar";
 import StaffNavbar from "./Components/navbarAdmin/StaffNavBar";
-import AdminDashboard from "./Components/navbarAdmin/AdminDashboard";
-import UserAdminPage from "./Components/navbarAdmin/UserAdminPage"; // Adjust the path if it's in a different folder
 
 import HomePage from "./Components/HomePage";
 import Menu from "./Components/MenuPage";
@@ -14,27 +12,17 @@ import BookingPage from "./Components/BookingPage/BookingPage";
 import PaymentPage from "./Components/PaymentPage/PaymentPage";
 import ConfirmationPage from "./Components/ConfirmationPage/ConfirmationPage";
 import MenuAdmin from "./Components/MenuPageAdmin";
+import UserAdminPage from "./Components/navbarAdmin/UserAdminPage";
+import AdminDashboard from "./Components/navbarAdmin/AdminDashboard";
 
 import "./App.css";
-
-// Admin Layout
-const AdminLayout = ({ children, onLogout }) => (
-  <>
-    <AdminNavbar onLogout={onLogout} />
-    <div className="admin-page-wrapper">{children}</div>
-  </>
-);
-
-// Admin Route Guard
-const ProtectedAdminRoute = ({ userRole, children }) => {
-  return userRole === "admin" ? children : <Navigate to="/" replace />;
-};
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState("user");
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     console.log("Current user role:", userRole);
@@ -50,6 +38,8 @@ function App() {
     setLoggedIn(false);
     setUserRole("user");
   };
+
+  const handleAddToCart = (item) => setCart((prev) => [...prev, item]);
 
   return (
     <div className="app-container">
@@ -69,15 +59,15 @@ function App() {
 
       {/* Routes */}
       <Routes>
-        {/* Removed the admin dashboard route */}
         <Route path="/" element={<HomePage />} />
         <Route path="/menuadmin" element={<MenuAdmin />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/cart" element={<CartPage />} />
+        <Route path="/menu" element={<Menu onAddToCart={handleAddToCart} />} />
+        <Route path="/cart" element={<CartPage cart={cart} />} />
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/admin/users" element={<UserAdminPage />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
 
       {/* Register Modal */}
