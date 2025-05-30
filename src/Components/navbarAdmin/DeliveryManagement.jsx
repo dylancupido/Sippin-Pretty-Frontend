@@ -178,17 +178,20 @@ const DeliveryManagement = () => {
               className="search-input"
             />
             
-            <select 
-              value={filter} 
-              onChange={(e) => setFilter(e.target.value)}
-              className="status-filter"
-            >
-              <option value="All">All Statuses</option>
-              <option value="Pending">Pending</option>
-              <option value="Out for Delivery">Out for Delivery</option>
-              <option value="Delivered">Delivered</option>
-              <option value="Cancelled">Cancelled</option>
-            </select>
+            <div className="select-container">
+              <select 
+                value={filter} 
+                onChange={(e) => setFilter(e.target.value)}
+                className="status-filter"
+                aria-label="Filter by status"
+              >
+                <option value="All">All Statuses</option>
+                <option value="Pending" className="status-option pending">Pending</option>
+                <option value="Out for Delivery" className="status-option out">Out for Delivery</option>
+                <option value="Delivered" className="status-option delivered">Delivered</option>
+                <option value="Cancelled" className="status-option cancelled">Cancelled</option>
+              </select>
+            </div>
           </div>
           
           <button 
@@ -235,16 +238,19 @@ const DeliveryManagement = () => {
                       >
                         View
                       </button>
-                      <select 
-                        className="update-status"
-                        value={delivery.status}
-                        onChange={(e) => updateDeliveryStatus(delivery.id, e.target.value)}
-                      >
-                        <option value="Pending">Pending</option>
-                        <option value="Out for Delivery">Out for Delivery</option>
-                        <option value="Delivered">Delivered</option>
-                        <option value="Cancelled">Cancelled</option>
-                      </select>
+                      <div className="select-container">
+                        <select 
+                          className="update-status"
+                          value={delivery.status}
+                          onChange={(e) => updateDeliveryStatus(delivery.id, e.target.value)}
+                          aria-label="Update delivery status"
+                        >
+                          <option value="Pending">Pending</option>
+                          <option value="Out for Delivery">Out for Delivery</option>
+                          <option value="Delivered">Delivered</option>
+                          <option value="Cancelled">Cancelled</option>
+                        </select>
+                      </div>
                       <button 
                         className="delete-btn"
                         onClick={() => handleDeleteDelivery(delivery.id)}
@@ -270,59 +276,61 @@ const DeliveryManagement = () => {
       
       {/* Delivery Details Modal */}
       {isModalOpen && selectedDelivery && (
-        <div className="modal-backdrop">
-          <div className="delivery-modal">
+        <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}>
+          <div className="delivery-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>Delivery Details</h2>
-              <button className="close-btn" onClick={() => setIsModalOpen(false)}>×</button>
+              <h2>Delivery Details - Order #{selectedDelivery.orderNumber}</h2>
+              <button className="close-btn" onClick={() => setIsModalOpen(false)}>&times;</button>
             </div>
             
             <div className="modal-content">
               <div className="delivery-info">
                 <div className="info-group">
-                  <h3>Order Information</h3>
-                  <p><strong>Order Number:</strong> {selectedDelivery.orderNumber}</p>
-                  <p><strong>Order Date:</strong> {formatDate(selectedDelivery.orderDate)}</p>
-                  <p><strong>Status:</strong> 
-                    <span className={`status-badge ${getStatusClass(selectedDelivery.status)}`}>
-                      {selectedDelivery.status}
-                    </span>
-                  </p>
-                </div>
-                
-                <div className="info-group">
                   <h3>Customer Information</h3>
                   <p><strong>Name:</strong> {selectedDelivery.customerName}</p>
-                  <p><strong>Delivery Address:</strong> {selectedDelivery.address}</p>
-                </div>
-                
-                <div className="info-group">
-                  <h3>Items</h3>
-                  <ul className="item-list">
-                    {selectedDelivery.items.map((item, index) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
+                  <p><strong>Address:</strong> {selectedDelivery.address}</p>
                 </div>
                 
                 <div className="info-group">
                   <h3>Delivery Information</h3>
-                  <p><strong>Estimated Delivery:</strong> {formatDate(selectedDelivery.deliveryDate)}</p>
+                  <p><strong>Status:</strong> 
+                    <span className={`status-badge status-${selectedDelivery.status.toLowerCase().replace(/\s+/g, '-')}`}>
+                      {selectedDelivery.status}
+                    </span>
+                  </p>
+                  <p><strong>Order Date:</strong> {formatDate(selectedDelivery.orderDate)}</p>
+                  <p><strong>Delivery Date:</strong> {formatDate(selectedDelivery.deliveryDate)}</p>
                   <p><strong>Driver:</strong> {selectedDelivery.driver || "Not assigned"}</p>
+                </div>
+                
+                <div className="info-group">
+                  <h3>Order Items</h3>
+                  {selectedDelivery.items.length > 0 ? (
+                    <ul className="item-list">
+                      {selectedDelivery.items.map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="no-items">No items in this order</p>
+                  )}
                 </div>
               </div>
               
               <div className="modal-actions">
-                <select 
-                  value={selectedDelivery.status}
-                  onChange={(e) => updateDeliveryStatus(selectedDelivery.id, e.target.value)}
-                  className="status-select"
-                >
-                  <option value="Pending">Pending</option>
-                  <option value="Out for Delivery">Out for Delivery</option>
-                  <option value="Delivered">Delivered</option>
-                  <option value="Cancelled">Cancelled</option>
-                </select>
+                <div className="select-container">
+                  <select 
+                    value={selectedDelivery.status}
+                    onChange={(e) => updateDeliveryStatus(selectedDelivery.id, e.target.value)}
+                    className="status-select"
+                    aria-label="Update status"
+                  >
+                    <option value="Pending">Pending</option>
+                    <option value="Out for Delivery">Out for Delivery</option>
+                    <option value="Delivered">Delivered</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </select>
+                </div>
                 <button className="print-btn">Print Details</button>
                 <button className="close-modal-btn" onClick={() => setIsModalOpen(false)}>Close</button>
               </div>
@@ -333,11 +341,11 @@ const DeliveryManagement = () => {
 
       {/* Add New Delivery Modal */}
       {isAddModalOpen && (
-        <div className="modal-backdrop">
-          <div className="delivery-modal">
+        <div className="modal-backdrop" onClick={() => setIsAddModalOpen(false)}>
+          <div className="delivery-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>Add New Delivery</h2>
-              <button className="close-btn" onClick={() => setIsAddModalOpen(false)}>×</button>
+              <button className="close-btn" onClick={() => setIsAddModalOpen(false)}>&times;</button>
             </div>
             
             <div className="modal-content">
@@ -368,8 +376,7 @@ const DeliveryManagement = () => {
                 
                 <div className="form-group">
                   <label htmlFor="address">Delivery Address*</label>
-                  <input 
-                    type="text" 
+                  <textarea 
                     id="address" 
                     name="address" 
                     value={newDelivery.address}
@@ -379,7 +386,7 @@ const DeliveryManagement = () => {
                 </div>
                 
                 <div className="form-group">
-                  <label htmlFor="orderDate">Order Date</label>
+                  <label htmlFor="orderDate">Order Date & Time</label>
                   <input 
                     type="datetime-local" 
                     id="orderDate" 
@@ -390,7 +397,7 @@ const DeliveryManagement = () => {
                 </div>
                 
                 <div className="form-group">
-                  <label htmlFor="deliveryDate">Estimated Delivery Date</label>
+                  <label htmlFor="deliveryDate">Estimated Delivery Date & Time</label>
                   <input 
                     type="datetime-local" 
                     id="deliveryDate" 
@@ -398,21 +405,6 @@ const DeliveryManagement = () => {
                     value={newDelivery.deliveryDate}
                     onChange={handleInputChange}
                   />
-                </div>
-                
-                <div className="form-group">
-                  <label htmlFor="status">Status</label>
-                  <select 
-                    id="status" 
-                    name="status" 
-                    value={newDelivery.status}
-                    onChange={handleInputChange}
-                  >
-                    <option value="Pending">Pending</option>
-                    <option value="Out for Delivery">Out for Delivery</option>
-                    <option value="Delivered">Delivered</option>
-                    <option value="Cancelled">Cancelled</option>
-                  </select>
                 </div>
                 
                 <div className="form-group">
@@ -426,8 +418,25 @@ const DeliveryManagement = () => {
                   />
                 </div>
                 
-                <div className="form-group items-group">
-                  <label>Items*</label>
+                <div className="form-group">
+                  <label htmlFor="status">Status</label>
+                  <div className="select-container">
+                    <select 
+                      id="status" 
+                      name="status" 
+                      value={newDelivery.status}
+                      onChange={handleInputChange}
+                    >
+                      <option value="Pending">Pending</option>
+                      <option value="Out for Delivery">Out for Delivery</option>
+                      <option value="Delivered">Delivered</option>
+                      <option value="Cancelled">Cancelled</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div className="items-group">
+                  <label>Order Items*</label>
                   <div className="add-item-container">
                     <input 
                       type="text" 
@@ -440,43 +449,46 @@ const DeliveryManagement = () => {
                       className="add-item-btn"
                       onClick={addItemToDelivery}
                     >
-                      Add
+                      Add Item
                     </button>
                   </div>
                   
-                  <ul className="items-list">
-                    {newDelivery.items.map((item, index) => (
-                      <li key={index} className="item-entry">
-                        <span>{item}</span>
-                        <button 
-                          type="button" 
-                          className="remove-item-btn"
-                          onClick={() => removeItemFromDelivery(index)}
-                        >
-                          ×
-                        </button>
-                      </li>
-                    ))}
-                    {newDelivery.items.length === 0 && (
-                      <li className="no-items">No items added yet</li>
-                    )}
-                  </ul>
+                  {newDelivery.items.length > 0 ? (
+                    <ul className="items-list">
+                      {newDelivery.items.map((item, index) => (
+                        <li key={index} className="item-entry">
+                          <span>{item}</span>
+                          <button 
+                            type="button" 
+                            className="remove-item-btn"
+                            onClick={() => removeItemFromDelivery(index)}
+                          >
+                            &times;
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="no-items">No items added yet</p>
+                  )}
                 </div>
-              </div>
-              
-              <div className="modal-actions">
-                <button 
-                  className="save-btn"
-                  onClick={handleSubmitDelivery}
-                >
-                  Save Delivery
-                </button>
-                <button 
-                  className="cancel-btn"
-                  onClick={() => setIsAddModalOpen(false)}
-                >
-                  Cancel
-                </button>
+                
+                <div className="form-actions">
+                  <button 
+                    type="button" 
+                    className="cancel-btn"
+                    onClick={() => setIsAddModalOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    type="button" 
+                    className="save-btn"
+                    onClick={handleSubmitDelivery}
+                  >
+                    Create Delivery
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -487,4 +499,7 @@ const DeliveryManagement = () => {
 };
 
 export default DeliveryManagement;
+
+
+
 
