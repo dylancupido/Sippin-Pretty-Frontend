@@ -14,6 +14,8 @@ import ConfirmationPage from "./Components/ConfirmationPage/ConfirmationPage";
 import MenuAdmin from "./Components/MenuPageAdmin";
 import UserAdminPage from "./Components/navbarAdmin/UserAdminPage";
 import AdminDashboard from "./Components/navbarAdmin/AdminDashboard";
+import ManageHomePage from "./Components/navbarAdmin/ManageHomePage";
+import DeliveryManagement from "./Components/navbarAdmin/DeliveryManagement";
 
 import "./App.css";
 
@@ -43,6 +45,20 @@ function App() {
 
   return (
     <div className="app-container">
+      {/* Debug info - remove after troubleshooting */}
+      <div style={{ 
+        position: 'fixed', 
+        bottom: '10px', 
+        right: '10px', 
+        background: '#333', 
+        color: 'white', 
+        padding: '5px 10px', 
+        borderRadius: '5px',
+        zIndex: 9999
+      }}>
+        Role: {userRole} | Logged in: {loggedIn ? 'Yes' : 'No'}
+      </div>
+      
       {/* Navbar - Only render one navbar based on role */}
       {userRole === "admin" ? (
         <AdminNavbar onLogout={handleLogout} />
@@ -68,6 +84,16 @@ function App() {
         <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/admin/users" element={<UserAdminPage />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route 
+          path="/admin/delivery" 
+          element={
+            userRole === "admin" ? (
+              <DeliveryManagement />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          } 
+        />
       </Routes>
 
       {/* Register Modal */}

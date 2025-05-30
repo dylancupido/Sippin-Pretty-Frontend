@@ -60,7 +60,8 @@
 .form-group textarea:focus {
   outline: none;
   border-color: #ca72b6;
-  box-shadow: 0 0 6px #9d1ca988;
+  box-shadow: 0 0 6px rgba(202, 114, 182, 0.4);
+  background-color: rgba(202, 114, 182, 0.05);
 }
 
 .form-row {
@@ -112,9 +113,49 @@
 
 .error-message {
   color: #cc0000;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   margin-top: 0.3rem;
   font-weight: 600;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Selected table styling */
+.selected-table {
+  font-weight: 700;
+  color: #83598b;
+}
+
+/* Character count for textarea */
+.char-count {
+  text-align: right;
+  font-size: 0.8rem;
+  color: #777;
+  margin-top: 0.2rem;
+}
+
+/* Optional field label */
+.optional {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #777;
+  font-style: italic;
+}
+
+/* Validation success indicator */
+.form-group input:valid:not(.input-error):not([value=""]),
+.form-group select:valid:not(.input-error):not([value=""]) {
+  border-left: 3px solid #4CAF50;
+}
+
+/* Error styling */
+.input-error {
+  border-color: #cc0000 !important;
+  background-color: rgba(255, 0, 0, 0.05);
 }
 
 .total-price {
@@ -142,16 +183,19 @@ button[type="submit"] {
   border-radius: 7px;
   padding: 0.8rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 button[type="submit"]:hover:not(:disabled) {
-  background-color: #cd20c7;
+  background-color: #9c27b0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 button[type="submit"]:disabled {
-  background-color: #7f5986;
+  background-color: #cccccc;
   cursor: not-allowed;
+  opacity: 0.7;
 }
  
 
