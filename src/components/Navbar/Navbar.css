@@ -145,6 +145,28 @@
 .account-button:focus .account-icon {
   transform: scale(1.1);
   outline: none;
+  border-color: rgba(212, 161, 186, 0.6);
+}
+
+/* Remove Bootstrap's default focus styles */
+.dropdown-toggle:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Override Bootstrap's default button focus/active states */
+.btn-primary:focus, 
+.btn-primary.focus,
+.btn-primary:active, 
+.btn-primary.active {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Ensure the dropdown toggle doesn't show any background color */
+.dropdown-toggle::after {
+  display: none;
 }
 
 /* Dropdown menu */
@@ -153,6 +175,21 @@
   box-shadow: 0 4px 10px rgba(215, 182, 236, 0.3);
   min-width: 140px;
 }
+.logout-button {
+  background-color: #d474a1;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c15683;
+}
+
 
 /* Mobile menu toggle button */
 .menu-toggle {
@@ -241,5 +278,34 @@
   .account-icon {
     width: 30px;
     height: 30px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 320px) {
+  .navbar {
+    min-height: 60px;
+    padding: 0.5rem;
+  }
+  
+  .logo {
+    height: 25px;
+  }
+  
+  .nav-logo {
+    font-size: 0.9rem;
+  }
+  
+  .menu-toggle {
+    font-size: 1rem;
+  }
+  
+  .nav-links.active {
+    padding: 0.5rem;
+  }
+  
+  .nav-links a {
+    padding: 0.6rem;
+    font-size: 0.9rem;
   }
 }

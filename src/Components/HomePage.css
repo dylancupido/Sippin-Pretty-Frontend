@@ -51,7 +51,7 @@ h1 {
 
   padding: 1rem;
   border-radius: 8px;
-  backdrop-filter: blur(2px);
+
 }
 
 .coffee-image, .rotating-mug {
@@ -190,5 +190,32 @@ h1 {
   
   .coffee-image, .rotating-mug {
     max-height: 200px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 320px) {
+  .content-container {
+    margin-top: 60px;
+    gap: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .tagline {
+    font-size: 1rem;
+    padding: 0.5rem;
+    line-height: 1.4;
+  }
+  
+  .coffee-image, .rotating-mug {
+    max-height: 180px;
+  }
+  
+  .cta-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
   }
 }

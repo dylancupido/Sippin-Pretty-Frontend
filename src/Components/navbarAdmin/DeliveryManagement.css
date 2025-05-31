@@ -1,0 +1,740 @@
+/* Delivery Management Styles with coffee shop color scheme */
+
+/* Main container */
+.delivery-management {
+  background-color: #f9f5f0; /* Light cream background */
+  min-height: calc(100vh - 80px);
+  color: #5a3921; /* Coffee brown text color */
+}
+
+/* Controls section */
+.delivery-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-filter {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+}
+
+.search-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #c8a27a; /* Coffee accent color */
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #5a3921;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #8c6d4f;
+  box-shadow: 0 0 0 2px rgba(200, 162, 122, 0.2);
+}
+
+.status-filter {
+  padding: 8px 12px;
+  border: 1px solid #c8a27a; /* Coffee accent color */
+  border-radius: 4px;
+  background-color: white;
+  font-size: 14px;
+  color: #5a3921;
+  appearance: none; /* Remove default arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235a3921' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px; /* Space for the arrow */
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.status-filter:hover {
+  border-color: #b08e69; /* Darker coffee color */
+}
+
+.status-filter:focus {
+  outline: none;
+  border-color: #8c6d4f;
+  box-shadow: 0 0 0 2px rgba(200, 162, 122, 0.2);
+}
+
+.add-delivery-btn {
+  background-color: #c8a27a; /* Coffee accent color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.add-delivery-btn:hover {
+  background-color: #b08e69; /* Darker coffee color on hover */
+}
+
+/* Table styles */
+.delivery-table-container {
+  overflow-x: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.delivery-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.delivery-table th,
+.delivery-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e9e1d6; /* Light coffee color */
+}
+
+.delivery-table th {
+  background-color: #f0e6d9; /* Very light coffee color */
+  font-weight: 600;
+  color: #5a3921;
+}
+
+.delivery-table tr:hover {
+  background-color: #f9f5f0; /* Light cream background */
+}
+
+.no-deliveries {
+  text-align: center;
+  padding: 20px;
+  color: #8c6d4f; /* Lighter brown */
+  font-style: italic;
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 100px;
+}
+
+.status-pending {
+  background-color: #f0e6d9; /* Very light coffee */
+  color: #8c6d4f; /* Medium coffee brown */
+  border: 1px solid #d9c5a9;
+}
+
+.status-out {
+  background-color: #e9d8c4; /* Light caramel */
+  color: #6f4e37; /* Dark coffee */
+  border: 1px solid #d9c5a9;
+}
+
+.status-delivered {
+  background-color: #d4edda; /* Light green */
+  color: #155724; /* Dark green */
+  border: 1px solid #c3e6cb;
+}
+
+.status-cancelled {
+  background-color: #f8d7da; /* Light red */
+  color: #721c24; /* Dark red */
+  border: 1px solid #f5c6cb;
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.view-btn {
+  background-color: #8c6d4f; /* Medium coffee brown */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.view-btn:hover {
+  background-color: #725a41; /* Darker coffee brown */
+}
+
+.update-status {
+  padding: 6px 10px;
+  border: 1px solid #c8a27a; /* Coffee accent color */
+  border-radius: 4px;
+  font-size: 12px;
+  color: #5a3921;
+  appearance: none; /* Remove default arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%235a3921' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  padding-right: 20px; /* Space for the arrow */
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.update-status:hover {
+  border-color: #b08e69; /* Darker coffee color */
+}
+
+.update-status:focus {
+  outline: none;
+  border-color: #8c6d4f;
+  box-shadow: 0 0 0 2px rgba(200, 162, 122, 0.2);
+}
+
+/* Delete button */
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Enhanced Modal Styles for Coffee Shop Theme */
+
+/* Modal backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(90, 57, 33, 0.5); /* Coffee brown with opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px); /* Subtle blur effect */
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal container */
+.delivery-modal {
+  background-color: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 30px rgba(90, 57, 33, 0.25);
+  animation: slideIn 0.3s ease-out;
+  border: 1px solid rgba(200, 162, 122, 0.2);
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Modal header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid #e9e1d6; /* Light coffee color */
+  background-color: #f0e6d9; /* Very light coffee color */
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #5a3921; /* Coffee brown */
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #8c6d4f; /* Lighter brown */
+  transition: color 0.2s ease;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #5a3921;
+  background-color: rgba(200, 162, 122, 0.1);
+}
+
+/* Modal content */
+.modal-content {
+  padding: 24px;
+  color: #5a3921;
+}
+
+/* Delivery info section */
+.delivery-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.info-group {
+  margin-bottom: 20px;
+}
+
+.info-group h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #5a3921; /* Coffee brown */
+  border-bottom: 1px solid #e9e1d6; /* Light coffee color */
+  padding-bottom: 8px;
+  font-weight: 600;
+}
+
+.info-group p {
+  margin: 8px 0;
+  line-height: 1.6;
+  color: #5a3921; /* Coffee brown */
+  display: flex;
+  align-items: center;
+}
+
+.info-group p strong {
+  min-width: 120px;
+  display: inline-block;
+  color: #8c6d4f;
+}
+
+.item-list {
+  margin: 0;
+  padding-left: 20px;
+  color: #5a3921; /* Coffee brown */
+}
+
+.item-list li {
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+
+/* Modal actions */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e9e1d6; /* Light coffee color */
+}
+
+/* Add Delivery Form in Modal */
+.add-delivery-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #5a3921; /* Coffee brown */
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px 12px;
+  border: 1px solid #c8a27a; /* Coffee accent color */
+  border-radius: 6px;
+  font-size: 14px;
+  color: #5a3921;
+  background-color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #8c6d4f;
+  box-shadow: 0 0 0 2px rgba(200, 162, 122, 0.2);
+}
+
+.form-group textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Items section in form */
+.items-group {
+  grid-column: 1 / -1;
+}
+
+.add-item-container {
+  display: flex;
+  gap: 10px;
+}
+
+.add-item-container input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #c8a27a;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #5a3921;
+}
+
+.add-item-container input:focus {
+  outline: none;
+  border-color: #8c6d4f;
+  box-shadow: 0 0 0 2px rgba(200, 162, 122, 0.2);
+}
+
+.add-item-btn {
+  background-color: #c8a27a; /* Coffee accent color */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.add-item-btn:hover {
+  background-color: #b08e69; /* Darker coffee color */
+}
+
+.items-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0 0;
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid #e9e1d6;
+  border-radius: 6px;
+}
+
+.item-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: #f9f5f0; /* Light cream background */
+  margin-bottom: 1px;
+}
+
+.item-entry:last-child {
+  margin-bottom: 0;
+}
+
+.item-entry:nth-child(even) {
+  background-color: #f0e6d9;
+}
+
+.remove-item-btn {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 16px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.remove-item-btn:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.no-items {
+  color: #8c6d4f; /* Lighter brown */
+  font-style: italic;
+  padding: 12px;
+  text-align: center;
+}
+
+/* Form action buttons */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  grid-column: 1 / -1;
+}
+
+.save-btn, .cancel-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.save-btn {
+  background-color: #c8a27a; /* Coffee accent color */
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #b08e69; /* Darker coffee color */
+  transform: translateY(-1px);
+}
+
+.save-btn:active {
+  transform: translateY(0);
+}
+
+.cancel-btn {
+  background-color: #f0e6d9;
+  color: #5a3921;
+  border: 1px solid #e9e1d6;
+}
+
+.cancel-btn:hover {
+  background-color: #e9e1d6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .delivery-modal {
+    width: 95%;
+    max-height: 95vh;
+  }
+  
+  .modal-header {
+    padding: 15px 20px;
+  }
+  
+  .modal-content {
+    padding: 15px;
+  }
+  
+  .delivery-info {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+  }
+  
+  .add-delivery-form {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .save-btn, .cancel-btn {
+    width: 100%;
+  }
+}
+
+/* Dropdown options styling (works in modern browsers) */
+select option {
+  padding: 8px;
+  background-color: white;
+  color: #5a3921;
+}
+
+select option:hover,
+select option:focus {
+  background-color: #f9f5f0;
+}
+
+/* Enhanced status selection styling */
+
+/* Status select dropdown - common styles */
+.status-select,
+.update-status,
+.status-filter,
+select[name="status"] {
+  appearance: none; /* Remove default arrow */
+  background-color: white;
+  border: 1px solid #c8a27a; /* Coffee accent color */
+  border-radius: 4px;
+  color: #5a3921; /* Coffee brown text */
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235a3921' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px; /* Space for the arrow */
+}
+
+/* Status select in modal */
+.status-select {
+  padding: 8px 12px;
+  font-size: 14px;
+  min-width: 180px;
+  font-weight: 500;
+}
+
+/* Update status in table */
+.update-status {
+  padding: 6px 10px;
+  font-size: 12px;
+  background-position: right 8px center;
+  padding-right: 25px;
+}
+
+/* Status filter in controls */
+.status-filter {
+  padding: 8px 12px;
+  font-size: 14px;
+  min-width: 150px;
+}
+
+/* Form status select */
+select[name="status"] {
+  padding: 8px 12px;
+  font-size: 14px;
+  width: 100%;
+}
+
+/* Hover and focus states */
+.status-select:hover,
+.update-status:hover,
+.status-filter:hover,
+select[name="status"]:hover {
+  border-color: #b08e69; /* Darker coffee color */
+}
+
+.status-select:focus,
+.update-status:focus,
+.status-filter:focus,
+select[name="status"]:focus {
+  outline: none;
+  border-color: #8c6d4f;
+  box-shadow: 0 0 0 2px rgba(200, 162, 122, 0.2);
+  background-color: rgba(200, 162, 122, 0.05);
+}
+
+/* Status options styling */
+.status-select option,
+.update-status option,
+.status-filter option,
+select[name="status"] option {
+  padding: 8px;
+  background-color: white;
+  color: #5a3921;
+}
+
+/* Status badge colors with coffee theme */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 100px;
+}
+
+.status-pending {
+  background-color: #f0e6d9; /* Very light coffee */
+  color: #8c6d4f; /* Medium coffee brown */
+  border: 1px solid #d9c5a9;
+}
+
+.status-out {
+  background-color: #e9d8c4; /* Light caramel */
+  color: #6f4e37; /* Dark coffee */
+  border: 1px solid #d9c5a9;
+}
+
+.status-delivered {
+  background-color: #d4edda; /* Light green */
+  color: #155724; /* Dark green */
+  border: 1px solid #c3e6cb;
+}
+
+.status-cancelled {
+  background-color: #f8d7da; /* Light red */
+  color: #721c24; /* Dark red */
+  border: 1px solid #f5c6cb;
+}
+
+/* Custom select container for better positioning */
+.select-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Status indicator dot for select options */
+.status-option {
+  display: flex;
+  align-items: center;
+}
+
+.status-option::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-option.pending::before {
+  background-color: #8c6d4f;
+}
+
+.status-option.out::before {
+  background-color: #6f4e37;
+}
+
+.status-option.delivered::before {
+  background-color: #155724;
+}
+
+.status-option.cancelled::before {
+  background-color: #721c24;
+}
+
+
+
+

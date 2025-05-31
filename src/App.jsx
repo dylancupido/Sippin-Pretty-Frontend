@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+
 import Navbar from "./Components/Navbar/Navbar";
-import "./App.css";
+import AdminNavbar from "./Components/navbarAdmin/AdminNavBar";
+import StaffNavbar from "./Components/navbarAdmin/StaffNavBar";
 
 import HomePage from "./Components/HomePage";
 import Menu from "./Components/MenuPage";
 import CartPage from "./Components/CartPage";
-import BookingPage from "./Components/BookingPage.jsx/BookingPage";
+import BookingPage from "./Components/BookingPage/BookingPage";
 import PaymentPage from "./Components/PaymentPage/PaymentPage";
 import ConfirmationPage from "./Components/ConfirmationPage/ConfirmationPage";
 import MenuAdmin from "./Components/MenuPageAdmin";
@@ -25,6 +27,7 @@ function App() {
     <div className="app-container">
       <Navbar loggedIn={loggedIn} />
 
+      {/* Routes */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route

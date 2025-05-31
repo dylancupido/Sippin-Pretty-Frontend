@@ -1,31 +1,37 @@
-import React, { useState } from "react";
-import "./Navbar.css";
-import Dropdown from "react-bootstrap/Dropdown";
-import logo from "../../assets/logo.png";
-import accountIcon from "../../assets/account.png";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import './Navbar.css';
+import Dropdown from 'react-bootstrap/Dropdown';
+import logo from '../../assets/logo.png';
+import accountIcon from '../../assets/account.png';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Link } from 'react-router-dom';
 
-const Navbar = ({ loggedIn = false }) => {
+const Navbar = ({
+  loggedIn = false,
+  showRegisterModal = () => {},
+  showLoginModal = () => {}
+}) => {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
+  
   return (
     <nav className="navbar" role="navigation" aria-label="Main Navigation">
+      {/* Left side: Logo */}
       <div className="navbar-left">
-        <a href="#" className="logo-container" aria-label="Homepage">
+        <Link to="/" className="logo-container" aria-label="Homepage">
           <div className="logo-stack">
             <img src={logo} alt="Sippin' Pretty Logo" className="logo" />
             <span className="nav-logo">Sippin'pretty</span>
           </div>
-        </a>
+        </Link>
       </div>
 
-      <button
-        className="menu-toggle"
+      {/* Mobile menu toggle */}
+      <button 
+        className="menu-toggle" 
         onClick={toggleMenu}
         aria-expanded={menuOpen}
         aria-label="Toggle navigation menu"
@@ -33,24 +39,14 @@ const Navbar = ({ loggedIn = false }) => {
         <i className={`fas ${menuOpen ? "fa-times" : "fa-bars"}`}></i>
       </button>
 
-      <ul className={`nav-links ${menuOpen ? "active" : ""}`} role="menubar">
-        <li role="none">
-          <a role="menuitem" href="/" onClick={() => setMenuOpen(false)}>
-            Home
-          </a>
-        </li>
-        <li role="none">
-          <a role="menuitem" href="/menu" onClick={() => setMenuOpen(false)}>
-            Menu
-          </a>
-        </li>
-        <li role="none">
-          <a role="menuitem" href="#" onClick={() => setMenuOpen(false)}>
-            About Us
-          </a>
-        </li>
+      {/* Center: Navigation links */}
+      <ul className={`nav-links ${menuOpen ? 'active' : ''}`} role="menubar">
+        <li role="none"><a role="menuitem" href="/" onClick={() => setMenuOpen(false)}>Home</a></li>
+        <li role="none"><a role="menuitem" href="/menu" onClick={() => setMenuOpen(false)}>Menu</a></li>
+        <li role="none"><a role="menuitem" href="#" onClick={() => setMenuOpen(false)}>About Us</a></li>
       </ul>
 
+      {/* Right side: Cart & Account */}
       <div className="nav-actions">
         <Link to="/cart" className="nav-cart" aria-label="Shopping Cart">
           <i className="fas fa-shopping-cart"></i>
@@ -65,16 +61,12 @@ const Navbar = ({ loggedIn = false }) => {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <img
-                src={accountIcon}
-                alt="Account Icon"
-                className="account-icon"
-              />
+              <img src={accountIcon} alt="Account Icon" className="account-icon" />
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
               {loggedIn ? (
-                <Dropdown.Item disabled>Logged in</Dropdown.Item>
+                <Dropdown.Item onClick={onLogout}>Logout</Dropdown.Item>
               ) : (
                 <>
                   <Dropdown.Item as={Link} to="/cusRegister">

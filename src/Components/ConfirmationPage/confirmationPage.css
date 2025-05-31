@@ -1,25 +1,74 @@
 .confirmation-container {
   max-width: 600px;
-  margin: auto;
+  margin: 2rem auto;
   padding: 2rem;
+  background-color: #fdfdfd;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
   text-align: center;
+  color: #333;
+}
+
+.confirmation-container h1 {
+  color: #2d8659;
+  margin-bottom: 0.5rem;
+}
+
+.confirmation-container p {
+  margin: 0.4rem 0;
+  line-height: 1.5;
 }
 
 .confirmation-details {
   text-align: left;
+  background: #f5f5f5;
+  padding: 1.2rem;
   margin-top: 1rem;
-  background-color: #f9f9f9;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border-radius: 10px;
+}
+
+.confirmation-details p {
+  margin: 0.3rem 0;
+  font-size: 1rem;
 }
 
 .cancellation-note {
-  margin-top: 20px;
-  padding: 15px;
-  border-left: 5px solid #d9534f;
-  background-color: #f2dede;
-  color: #a94442;
-  border-radius: 4px;
-  font-size: 0.95rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #fff6e0;
+  border-left: 4px solid #ffc107;
+  border-radius: 8px;
+  text-align: left;
+}
+
+button {
+  margin-top: 2rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #2d8659;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #256f4c;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .confirmation-container {
+    padding: 1.2rem;
+  }
+
+  .confirmation-details {
+    font-size: 0.95rem;
+  }
+
+  button {
+    width: 100%;
+  }
 }

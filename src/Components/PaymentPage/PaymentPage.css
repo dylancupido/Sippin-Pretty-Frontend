@@ -121,3 +121,70 @@
     flex-direction: column;
   }
 }
+
+/* Card input container for showing card type */
+.card-input-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card type indicator */
+.card-type {
+  position: absolute;
+  right: 12px;
+  top: 38px;
+  background-color: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4e342e;
+}
+
+/* Error styling */
+.input-error {
+  border-color: #e53935 !important;
+  background-color: #ffebee;
+}
+
+.error-message {
+  color: #e53935;
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Payment summary section */
+.payment-summary {
+  background-color: #f9f4f5;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 15px 0;
+  border: 1px solid #f8bbd0;
+}
+
+.payment-summary h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #6d4c41;
+  text-align: center;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #5d4037;
+}
+
+.summary-row.total {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #f8bbd0;
+  font-weight: 700;
+  font-size: 16px;
+  color: #4e342e;
+}
