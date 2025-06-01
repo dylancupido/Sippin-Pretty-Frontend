@@ -30,7 +30,7 @@ const ConfirmationPage = () => {
 
   return (
     <div className="confirmation-container">
-      <h1>Booking Confirmed 🎉</h1>
+      <h1>Booking Confirmed </h1>
       <p>Thank you, <strong>{name}</strong>! Your table has been reserved.</p>
 
       <div className="confirmation-details">

@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
-import './Navbar.css';
-import Dropdown from 'react-bootstrap/Dropdown';
-import logo from '../../assets/logo.png';
-import accountIcon from '../../assets/account.png';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import "./Navbar.css";
+import Dropdown from "react-bootstrap/Dropdown";
+import logo from "../../assets/logo.png";
+import accountIcon from "../../assets/account.png";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Link } from "react-router-dom";
 
-const Navbar = ({
-  loggedIn = false,
-  showRegisterModal = () => {},
-  showLoginModal = () => {}
-}) => {
+const Navbar = ({ loggedIn = false, onLogout }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-  
+
   return (
     <nav className="navbar" role="navigation" aria-label="Main Navigation">
       {/* Left side: Logo */}
@@ -30,8 +26,8 @@ const Navbar = ({
       </div>
 
       {/* Mobile menu toggle */}
-      <button 
-        className="menu-toggle" 
+      <button
+        className="menu-toggle"
         onClick={toggleMenu}
         aria-expanded={menuOpen}
         aria-label="Toggle navigation menu"
@@ -40,10 +36,22 @@ const Navbar = ({
       </button>
 
       {/* Center: Navigation links */}
-      <ul className={`nav-links ${menuOpen ? 'active' : ''}`} role="menubar">
-        <li role="none"><a role="menuitem" href="/" onClick={() => setMenuOpen(false)}>Home</a></li>
-        <li role="none"><a role="menuitem" href="/menu" onClick={() => setMenuOpen(false)}>Menu</a></li>
-        <li role="none"><a role="menuitem" href="#" onClick={() => setMenuOpen(false)}>About Us</a></li>
+      <ul className={`nav-links ${menuOpen ? "active" : ""}`} role="menubar">
+        <li role="none">
+          <a role="menuitem" href="/" onClick={() => setMenuOpen(false)}>
+            Home
+          </a>
+        </li>
+        <li role="none">
+          <a role="menuitem" href="/menu" onClick={() => setMenuOpen(false)}>
+            Menu
+          </a>
+        </li>
+        <li role="none">
+          <a role="menuitem" href="#" onClick={() => setMenuOpen(false)}>
+            About Us
+          </a>
+        </li>
       </ul>
 
       {/* Right side: Cart & Account */}
@@ -61,7 +69,11 @@ const Navbar = ({
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <img src={accountIcon} alt="Account Icon" className="account-icon" />
+              <img
+                src={accountIcon}
+                alt="Account Icon"
+                className="account-icon"
+              />
             </Dropdown.Toggle>
 
             <Dropdown.Menu>

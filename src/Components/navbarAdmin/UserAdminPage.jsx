@@ -5,11 +5,11 @@ const UserAdminPage = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch users from backend
+ 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("/api/users"); // <-- update this with your actual API endpoint
+        const response = await fetch("http://localhost:5010/api/Users"); 
         const data = await response.json();
         setUsers(data);
       } catch (error) {
@@ -25,7 +25,7 @@ const UserAdminPage = () => {
   // Delete user
   const handleDeleteUser = async (id) => {
     try {
-      const response = await fetch(`/api/users/${id}`, {
+      const response = await fetch(`http://localhost:5010/api/Users/${id}`, {
         method: "DELETE",
       });
 
@@ -64,7 +64,10 @@ const UserAdminPage = () => {
                   <td>{user.email}</td>
                   <td>{user.role}</td>
                   <td>
-                    <button className="delete-btn" onClick={() => handleDeleteUser(user.id)}>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDeleteUser(user.id)}
+                    >
                       Delete
                     </button>
                   </td>

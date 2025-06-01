@@ -3,7 +3,7 @@
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(14, 20, 13, 0.938);
   background-color: white;
-  min-height: 100vh;
+
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 40px auto;
 }
@@ -15,7 +15,6 @@
   margin-bottom: 20px;
   text-align: center;
 }
-
 
 .rdt_Table {
   border: 1px solid #ddd;
