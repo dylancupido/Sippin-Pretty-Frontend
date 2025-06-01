@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../Navbar/Navbar.css";
-import logo from "../../assets/logo.png"; // Import the logo
+import logo from "../../assets/logo.png";
 
 function AdminNavBar({ onLogout }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
   return (
-    <nav className="navbar">
+    <nav className="navbar admin-navbar">
       <div className="navbar-left">
         <Link to="/" className="logo-container">
           <div className="logo-stack">
@@ -15,17 +19,28 @@ function AdminNavBar({ onLogout }) {
         </Link>
       </div>
 
-      <ul className="nav-links">
-        <li><Link to="/admin/dashboard">Dashboard</Link></li>
-        <li><Link to="/menuadmin">Manage Menu</Link></li>
-        <li><Link to="/admin/home">Manage Home</Link></li>
-        <li><Link to="/admin/delivery">Delivery</Link></li>
-        <li><Link to="/admin/orders">Orders</Link></li>
-        <li><Link to="/admin/users">Users</Link></li>
+      {/* Mobile menu toggle */}
+      <button
+        className="menu-toggle"
+        onClick={toggleMenu}
+        aria-expanded={menuOpen}
+        aria-label="Toggle navigation menu"
+      >
+        <i className={`fas ${menuOpen ? "fa-times" : "fa-bars"}`}></i>
+      </button>
+
+      <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
+        <li><Link to="/menuadmin" onClick={() => setMenuOpen(false)}>Manage Menu</Link></li>
+        <li><Link to="/admin/home" onClick={() => setMenuOpen(false)}>Manage Home</Link></li>
+        <li><Link to="/admin/orders" onClick={() => setMenuOpen(false)}>Orders</Link></li>
+        <li><Link to="/admin/users" onClick={() => setMenuOpen(false)}>Users</Link></li>
+        <li><Link to="/" onClick={() => setMenuOpen(false)}>View Site</Link></li>
       </ul>
 
       <div className="nav-actions">
-        <button className="logout-button" onClick={onLogout}>Logout</button>
+        <button className="logout-button" onClick={onLogout}>
+          <i className="fas fa-sign-out-alt"></i> Logout
+        </button>
       </div>
     </nav>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import './ConfirmationPage.css'; // Optional CSS
+import './ConfirmationPage.css';
 
 const ConfirmationPage = () => {
   const { state } = useLocation();
@@ -16,13 +16,12 @@ const ConfirmationPage = () => {
   }
 
   const {
-    name,
+    fullName,
     email,
-    phone,
+    phoneNumber,
     date,
     time,
     guests,
-    specialRequests,
     table,
     totalPrice,
     cancellationFeeNotice
@@ -30,8 +29,8 @@ const ConfirmationPage = () => {
 
   return (
     <div className="confirmation-container">
-      <h1>Booking Confirmed 🎉</h1>
-      <p>Thank you, <strong>{name}</strong>! Your table has been reserved.</p>
+      <h1>Booking Confirmed</h1>
+      <p>Thank you, <strong>{fullName}</strong>! Your table has been reserved.</p>
 
       <div className="confirmation-details">
         <p><strong>Date:</strong> {date}</p>
@@ -39,8 +38,7 @@ const ConfirmationPage = () => {
         <p><strong>Guests:</strong> {guests}</p>
         <p><strong>Table:</strong> {table?.name} (Capacity: {table?.capacity})</p>
         <p><strong>Total Price:</strong> R{totalPrice}</p>
-        {specialRequests && <p><strong>Special Requests:</strong> {specialRequests}</p>}
-        <p><strong>Contact Info:</strong> {email} | {phone}</p>
+        <p><strong>Contact Info:</strong> {email} | {phoneNumber}</p>
       </div>
 
       {cancellationFeeNotice && (
@@ -50,7 +48,10 @@ const ConfirmationPage = () => {
         </div>
       )}
 
-      <button onClick={() => navigate('/')}>Return to Home</button>
+      <div className="confirmation-actions">
+        <button onClick={() => navigate('/')}>Return to Home</button>
+        <button onClick={() => window.print()}>Print Confirmation</button>
+      </div>
     </div>
   );
 };

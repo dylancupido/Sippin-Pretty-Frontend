@@ -2,40 +2,37 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './BookingPage.css';
 
+// This would come from your API in a real application
 const initialTables = [
-  { id: 1, name: "Table 1", type: "individual", capacity: 2 },
-  { id: 2, name: "Table 2", type: "individual", capacity: 2 },
-  { id: 3, name: "Table 3", type: "individual", capacity: 4 },
-  { id: 7, name: "Booth 1 - Table 1", type: "booth1", capacity: 4 },
-  { id: 8, name: "Booth 1 - Table 2", type: "booth1", capacity: 4 },
-  { id: 9, name: "Booth 2 - Table 1", type: "booth2", capacity: 4 },
-  { id: 10, name: "Booth 2 - Table 2", type: "booth2", capacity: 4 },
-  { id: 11, name: "Booth 3 - Table 1", type: "booth3", capacity: 6 },
-  { id: 12, name: "Booth 3 - Table 2", type: "booth3", capacity: 6 },
-  { id: 13, name: "Booth 4 - Table 1", type: "booth4", capacity: 8 },
-  { id: 14, name: "Booth 4 - Table 2", type: "booth4", capacity: 8 },
-  { id: 15, name: "Large Group Table 1", type: "large", capacity: 10 },
-  { id: 16, name: "Large Group Table 2", type: "large", capacity: 12 },
+  { id: 1, name: "Table 1", capacity: 5 },
+  { id: 2, name: "Table 2", capacity: 6 },
+  { id: 3, name: "Table 3", capacity: 7 },
+  { id: 4, name: "Table 4", capacity: 8 },
+  { id: 5, name: "Booth 1", capacity: 8 },
+  { id: 6, name: "Booth 2", capacity: 9 },
+  { id: 7, name: "Large Table", capacity: 10 },
+  { id: 8, name: "Large Booth", capacity: 10 }
 ];
 
+// Mock bookings - would be fetched from API
 const mockBookings = [
   { tableId: 2, date: '2025-05-30', time: '12:00' },
   { tableId: 5, date: '2025-05-30', time: '12:00' },
-  { tableId: 8, date: '2025-05-30', time: '14:30' },
-  { tableId: 13, date: '2025-05-31', time: '15:00' },
+  { tableId: 3, date: '2025-05-30', time: '14:30' },
+  { tableId: 1, date: '2025-05-31', time: '15:00' },
 ];
 
 const BookingPage = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
     email: '',
-    phone: '',
+    phoneNumber: '',
     date: '',
     time: '',
-    guests: 2,
-    specialRequests: ''
+    guests: 5,
+    tableId: null
   });
 
   const [availableTables, setAvailableTables] = useState([]);
@@ -60,15 +57,56 @@ const BookingPage = () => {
   const checkAvailability = (guests, date, time) => {
     if (!date || !time) return [];
 
+    // Find tables that can accommodate the guests
     const suitableTables = initialTables.filter(table => table.capacity >= guests);
 
+    // Filter out booked tables
     const availableTables = suitableTables.filter(table => {
       return !mockBookings.some(
         booking => booking.tableId === table.id && booking.date === date && booking.time === time
       );
     });
 
-    return availableTables.map(table => ({
+    // Sort tables by capacity (ascending) to prioritize tables closest to guest count
+    const sortedTables = [...availableTables].sort((a, b) => a.capacity - b.capacity);
+
+    // Ensure we have at least 3 options if possible
+    let finalTables = sortedTables;
+    
+    // If we have more than 3 tables, ensure we have a mix of table types
+    if (sortedTables.length > 3) {
+      // Get tables with capacity exactly matching or +1 guest count
+      const exactFitTables = sortedTables.filter(t => 
+        t.capacity === guests || t.capacity === guests + 1
+      );
+      
+      // Get tables with slightly larger capacity
+      const largerTables = sortedTables.filter(t => 
+        t.capacity > guests + 1 && t.capacity <= guests + 3
+      );
+      
+      // Get booth options (if any)
+      const boothOptions = sortedTables.filter(t => 
+        t.name.toLowerCase().includes('booth')
+      );
+      
+      // Combine options to ensure variety
+      finalTables = [
+        ...exactFitTables.slice(0, 1),
+        ...largerTables.slice(0, 1),
+        ...boothOptions.slice(0, 1)
+      ];
+      
+      // If we don't have 3 options yet, add more from the sorted list
+      if (finalTables.length < 3) {
+        const remainingOptions = sortedTables.filter(t => 
+          !finalTables.some(ft => ft.id === t.id)
+        );
+        finalTables = [...finalTables, ...remainingOptions.slice(0, 3 - finalTables.length)];
+      }
+    }
+
+    return finalTables.map(table => ({
       ...table,
       available: true
     }));
@@ -91,7 +129,6 @@ const BookingPage = () => {
   useEffect(() => {
     if (selectedTable) {
       const guestCount = parseInt(formData.guests, 10);
-      // Remove the R50 deposit from the calculation
       const dynamicPrice = guestCount * 25;
       setTotalPrice(dynamicPrice);
     } else {
@@ -99,102 +136,93 @@ const BookingPage = () => {
     }
   }, [selectedTable, formData.guests]);
 
+  const validateField = (name, value) => {
+    let errorMessage = null;
+    
+    switch (name) {
+      case 'fullName':
+        if (!value.trim()) errorMessage = 'Full name is required.';
+        break;
+      
+      case 'email':
+        if (!value.trim()) {
+          errorMessage = 'Email is required.';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          errorMessage = 'Invalid email format.';
+        }
+        break;
+      
+      case 'phoneNumber':
+        if (!value.trim()) {
+          errorMessage = 'Phone number is required.';
+        } else {
+          // Remove all non-digit characters for validation
+          const cleanNumber = value.replace(/\D/g, '');
+          
+          // Check if it starts with 0
+          if (!cleanNumber.startsWith('0')) {
+            errorMessage = 'Phone number must start with 0.';
+          } 
+          // Check if it has exactly 10 digits
+          else if (cleanNumber.length !== 10) {
+            errorMessage = 'Phone must be 10 digits.';
+          }
+        }
+        break;
+      
+      case 'date':
+        if (!value) errorMessage = 'Date is required.';
+        break;
+      
+      case 'time':
+        if (!value) errorMessage = 'Time is required.';
+        break;
+      
+      case 'guests':
+        const guests = parseInt(value, 10);
+        if (isNaN(guests) || guests < 5 || guests > 10) {
+          errorMessage = 'Number of guests must be between 5 and 10.';
+        }
+        break;
+      
+      default:
+        break;
+    }
+    
+    // Update only the specific field error
+    setErrors(prev => ({ ...prev, [name]: errorMessage }));
+    
+    return !errorMessage;
+  };
+
   const validate = () => {
     const newErrors = {};
+    let isValid = true;
     
-    // Name validation
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required.';
-    } else if (formData.name.trim().length < 3) {
-      newErrors.name = 'Name must be at least 3 characters.';
-    }
-    
-    // Email validation
-    if (!formData.email) {
-      newErrors.email = 'Email is required.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address.';
-    }
-    
-    // Phone validation
-    if (!formData.phone) {
-      newErrors.phone = 'Phone number is required.';
-    } else if (!/^\d{10}$/.test(formData.phone)) {
-      newErrors.phone = 'Phone number must be 10 digits (e.g., 0812345678).';
-    }
-    
-    // Date validation
-    if (!formData.date) {
-      newErrors.date = 'Date is required.';
-    } else {
-      const selectedDate = new Date(formData.date);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      
-      if (selectedDate < today) {
-        newErrors.date = 'Please select a future date.';
+    // Validate each field
+    Object.entries(formData).forEach(([name, value]) => {
+      if (name !== 'tableId') { // Skip tableId as it's handled separately
+        const fieldIsValid = validateField(name, value);
+        isValid = isValid && fieldIsValid;
       }
-      
-      // Check if date is more than 3 months in advance
-      const threeMonthsLater = new Date();
-      threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 3);
-      if (selectedDate > threeMonthsLater) {
-        newErrors.date = 'Bookings can only be made up to 3 months in advance.';
-      }
-    }
+    });
     
-    // Time validation
-    if (!formData.time) {
-      newErrors.time = 'Time is required.';
-    } else {
-      // Check if time is within operating hours (9:00 - 16:00)
-      const [hours] = formData.time.split(':');
-      const hourNum = parseInt(hours, 10);
-      if (hourNum < 9 || hourNum > 16) {
-        newErrors.time = 'Please select a time between 9:00 and 16:00.';
-      }
-    }
-    
-    // Guest count validation
-    if (!formData.guests || formData.guests < 5) {
-      newErrors.guests = 'Reservations require at least 5 guests.';
-    } else if (formData.guests > 10) {
-      newErrors.guests = 'For groups larger than 10, please contact us directly.';
-    }
-    
-    // Table selection validation
+    // Validate table selection
     if (!selectedTable) {
       newErrors.table = 'Please select a table.';
+      isValid = false;
+      setErrors(prev => ({ ...prev, table: 'Please select a table.' }));
     }
     
-    // Special requests validation (optional field)
-    if (formData.specialRequests && formData.specialRequests.length > 200) {
-      newErrors.specialRequests = 'Special requests must be less than 200 characters.';
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return isValid;
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Special handling for guest count
-    if (name === 'guests') {
-      const guestCount = parseInt(value, 10);
-      if (guestCount < 1) {
-        setFormData(prev => ({ ...prev, [name]: 1 }));
-      } else if (guestCount > 20) {
-        setFormData(prev => ({ ...prev, [name]: 20 }));
-      } else {
-        setFormData(prev => ({ ...prev, [name]: value }));
-      }
-    } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
-    }
-    
-    // Clear error when user types
-    setErrors(prev => ({ ...prev, [name]: null }));
+    // Validate the field immediately after change
+    validateField(name, value);
   };
 
   const handleSubmit = (e) => {
@@ -202,22 +230,17 @@ const BookingPage = () => {
     if (validate()) {
       const bookingDetails = {
         ...formData,
+        tableId: selectedTable,
         table: availableTables.find(t => t.id === selectedTable),
         totalPrice
       };
       console.log('Booking submitted:', bookingDetails);
       navigate('/payment', { state: bookingDetails });
-    } else {
-      // Scroll to the first error
-      const firstError = document.querySelector('.error-message');
-      if (firstError) {
-        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
     }
   };
 
   const isSubmitDisabled = () => {
-    const requiredFields = ['name', 'email', 'phone', 'date', 'time'];
+    const requiredFields = ['fullName', 'email', 'phoneNumber', 'date', 'time'];
     return (
       requiredFields.some(field => !formData[field]) ||
       Object.keys(errors).some(key => errors[key]) ||
@@ -238,8 +261,8 @@ const BookingPage = () => {
           type="number"
           id="guests"
           name="guests"
-          min="1"
-          max="20"
+          min="5"
+          max="10"
           value={formData.guests}
           onChange={handleChange}
           required
@@ -260,18 +283,20 @@ const BookingPage = () => {
       ) : (
         <form onSubmit={handleSubmit} className="booking-form" noValidate>
           <div className="form-group">
-            <label htmlFor="name">Full Name</label>
+            <label htmlFor="fullName">Full Name</label>
             <input 
               type="text" 
-              id="name" 
-              name="name" 
-              value={formData.name} 
+              id="fullName" 
+              name="fullName" 
+              value={formData.fullName} 
               onChange={handleChange} 
-              className={errors.name ? "input-error" : ""}
+              className={errors.fullName ? "input-error" : ""}
               required 
             />
-            {errors.name && <div className="error-message">{errors.name}</div>}
+            {errors.fullName && <div className="error-message">{errors.fullName}</div>}
           </div>
+
+          <div className="form-divider"></div>
 
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -288,20 +313,23 @@ const BookingPage = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="phone">Phone Number</label>
+            <label htmlFor="phoneNumber">Phone Number</label>
             <input 
               type="tel" 
-              id="phone" 
-              name="phone" 
-              value={formData.phone} 
+              id="phoneNumber" 
+              name="phoneNumber" 
+              value={formData.phoneNumber} 
               onChange={handleChange} 
-              pattern="\d{10}" 
+              pattern="0\d{9}" 
               placeholder="e.g. 0812345678" 
-              className={errors.phone ? "input-error" : ""}
+              className={errors.phoneNumber ? "input-error" : ""}
               required 
             />
-            {errors.phone && <div className="error-message">{errors.phone}</div>}
+            {errors.phoneNumber && <div className="error-message">{errors.phoneNumber}</div>}
+            {!errors.phoneNumber && <div className="input-hint">Must be 10 digits starting with 0</div>}
           </div>
+
+          <div className="form-divider"></div>
 
           <div className="form-row">
             <div className="form-group">
@@ -338,49 +366,46 @@ const BookingPage = () => {
             </div>
           </div>
 
+          <div className="form-divider"></div>
+
           <div className="available-tables">
             <h2>Available Tables</h2>
             {availableTables.length === 0 ? (
-              <p>No tables available for selected date, time and guests.</p>
+              <p>Please select a date and time to see available tables.</p>
             ) : (
-              <ul>
-                {availableTables.map(table => (
-                  <li key={table.id}>
-                    <label className={selectedTable === table.id ? "selected-table" : ""}>
-                      <input 
-                        type="radio" 
-                        name="table" 
-                        value={table.id} 
-                        checked={selectedTable === table.id} 
-                        onChange={() => setSelectedTable(table.id)} 
-                      />
-                      {table.name} - Capacity: {table.capacity}
-                    </label>
-                  </li>
-                ))}
-              </ul>
+              <>
+                <p className="table-selection-hint">Select a table that best fits your group size:</p>
+                <ul>
+                  {availableTables.map(table => (
+                    <li key={table.id}>
+                      <label className={selectedTable === table.id ? "selected-table" : ""}>
+                        <input 
+                          type="radio" 
+                          name="table" 
+                          value={table.id} 
+                          checked={selectedTable === table.id} 
+                          onChange={() => setSelectedTable(table.id)} 
+                        />
+                        {table.name} - Capacity: {table.capacity} 
+                        {table.name.toLowerCase().includes('booth') && 
+                          <span className="table-type">(Booth Seating)</span>}
+                        {!table.name.toLowerCase().includes('booth') && 
+                          <span className="table-type">(Table Seating)</span>}
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </>
             )}
             {errors.table && <div className="error-message">{errors.table}</div>}
           </div>
 
-          <div className="form-group">
-            <label htmlFor="specialRequests">Special Requests <span className="optional">(optional)</span></label>
-            <textarea 
-              id="specialRequests" 
-              name="specialRequests" 
-              value={formData.specialRequests} 
-              onChange={handleChange} 
-              maxLength={200}
-              className={errors.specialRequests ? "input-error" : ""}
-            ></textarea>
-            <div className="char-count">
-              {formData.specialRequests.length}/200 characters
-            </div>
-            {errors.specialRequests && <div className="error-message">{errors.specialRequests}</div>}
-          </div>
-
           <div className="total-price">
             <h3>Total Price: R{totalPrice}</h3>
+          </div>
+
+          <div className="booking-footer">
+            <p className="vintage-note">We look forward to serving you with love ♥</p>
           </div>
 
           <button type="submit" disabled={isSubmitDisabled()}>Reserve Table</button>

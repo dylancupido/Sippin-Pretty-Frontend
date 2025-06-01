@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import "./Navbar.css";
+import "../Navbar/Navbar.css";
 
-const Navbar = () => {
+const AdminNavbarOnly = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -13,7 +13,7 @@ const Navbar = () => {
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
-    <nav className="navbar user-navbar" role="navigation" aria-label="Main Navigation">
+    <nav className="navbar admin-navbar" role="navigation" aria-label="Admin Navigation">
       {/* Mobile menu toggle */}
       <button
         className="menu-toggle"
@@ -27,30 +27,32 @@ const Navbar = () => {
       {/* Navigation links */}
       <ul className={`nav-links ${menuOpen ? "active" : ""}`} role="menubar">
         <li role="none">
-          <Link to="/" role="menuitem" onClick={() => setMenuOpen(false)}>
-            Home
+          <Link to="/menuadmin" role="menuitem" onClick={() => setMenuOpen(false)}>
+            Manage Menu
           </Link>
         </li>
         <li role="none">
-          <Link to="/menu" role="menuitem" onClick={() => setMenuOpen(false)}>
-            Menu
+          <Link to="/admin/home" role="menuitem" onClick={() => setMenuOpen(false)}>
+            Manage Home
           </Link>
         </li>
         <li role="none">
-          <a href="#about" role="menuitem" onClick={() => setMenuOpen(false)}>
-            About Us
-          </a>
+          <Link to="/admin/orders" role="menuitem" onClick={() => setMenuOpen(false)}>
+            Orders
+          </Link>
+        </li>
+        <li role="none">
+          <Link to="/admin/users" role="menuitem" onClick={() => setMenuOpen(false)}>
+            Users
+          </Link>
         </li>
       </ul>
 
-      {/* Cart icon - keeping this in navbar */}
+      {/* No cart for admin */}
       <div className="nav-actions">
-        <Link to="/cart" className="nav-cart" aria-label="Shopping Cart">
-          <i className="fas fa-shopping-cart"></i>
-        </Link>
       </div>
     </nav>
   );
 };
 
-export default Navbar;
+export default AdminNavbarOnly;

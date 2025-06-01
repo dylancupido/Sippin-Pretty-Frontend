@@ -26,8 +26,33 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 #root {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fix for Tailwind and Bootstrap conflicts */
+.btn {
+  @apply inline-block font-medium rounded;
+}
+
+/* Ensure Bootstrap components don't break with Tailwind */
+.form-control {
+  display: block;
+  width: 100%;
+}
+
+/* Fix for modal z-index issues */
+.modal-backdrop {
+  z-index: 1050;
+}
+
+.modal-content {
+  z-index: 1060;
 }

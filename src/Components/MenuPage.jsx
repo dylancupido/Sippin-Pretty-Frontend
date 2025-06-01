@@ -4,15 +4,34 @@ import { useEffect, useState } from "react";
 
 const Menu = ({ onAddToCart }) => {
   const [menuItems, setMenuItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5010/api/MenuItemsAPI")
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchMenuItems = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("http://localhost:5010/api/MenuItemsAPI");
+        
+        if (!response.ok) {
+          throw new Error(`API request failed with status ${response.status}`);
+        }
+        
+        const data = await response.json();
         console.log("Fetched menu items:", data);
         setMenuItems(data);
-      })
-      .catch((err) => console.error("Failed to fetch menu:", err));
+        setError(null);
+      } catch (err) {
+        console.error("Failed to fetch menu:", err);
+        setError("Failed to load menu items. Please try again later.");
+        // Fallback data for development
+        setMenuItems([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMenuItems();
   }, []);
 
   const filterByGroup = (groupName) => menuItems.filter(item => item.group === groupName);

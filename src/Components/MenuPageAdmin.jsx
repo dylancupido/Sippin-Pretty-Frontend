@@ -49,6 +49,12 @@ const MenuAdmin = ({ onAddToCart }) => {
 
   const handleSave = async () => {
     try {
+      // Validate form data before saving
+      if (!formData.name || !formData.price || !formData.group) {
+        alert("Please fill in all required fields");
+        return;
+      }
+
       const url = editMode
         ? `http://localhost:5010/api/MenuItemsAPI/${formData.productID}`
         : "http://localhost:5010/api/MenuItemsAPI";
@@ -64,15 +70,39 @@ const MenuAdmin = ({ onAddToCart }) => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to save menu item.");
+        const errorData = await response.json().catch(() => null);
+        throw new Error(
+          errorData?.message || 
+          `Failed to save menu item. Status: ${response.status}`
+        );
       }
 
+      // Refresh menu items after successful save
       const updatedMenu = await fetch("http://localhost:5010/api/MenuItemsAPI");
+      if (!updatedMenu.ok) {
+        throw new Error("Failed to fetch updated menu items");
+      }
+      
       const data = await updatedMenu.json();
       setMenuItems(data);
       setShowAddModal(false);
+      
+      // Reset form data after successful save
+      setFormData({
+        productID: 0,
+        name: "",
+        description: "",
+        price: "",
+        imageUrl: "",
+        group: "",
+        isAvailable: true
+      });
+      
+      // Show success message
+      alert(editMode ? "Item updated successfully" : "Item added successfully");
     } catch (error) {
       console.error("Error saving item:", error);
+      alert(`Error: ${error.message}`);
     }
   };
 

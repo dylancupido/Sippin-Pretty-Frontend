@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import "../Navbar/Navbar.css";
 import logo from "../../assets/logo.png";
 
-const StaffNavbar = ({ onLogout }) => {
+function StaffNavBar({ onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
-    <nav className="navbar" role="navigation" aria-label="Staff Navigation">
+    <nav className="navbar staff-navbar">
       <div className="navbar-left">
-        <Link to="/" className="logo-container" aria-label="Homepage">
+        <Link to="/" className="logo-container">
           <div className="logo-stack">
             <img src={logo} alt="Sippin' Pretty Logo" className="logo" />
             <span className="nav-logo">Staff Panel</span>
@@ -29,16 +29,19 @@ const StaffNavbar = ({ onLogout }) => {
         <i className={`fas ${menuOpen ? "fa-times" : "fa-bars"}`}></i>
       </button>
 
-      <ul className={`nav-links ${menuOpen ? "active" : ""}`} role="menubar">
-        <li role="none"><Link to="/booking" role="menuitem">Bookings</Link></li>
-        <li role="none"><Link to="/menu" role="menuitem">Menu</Link></li>
+      <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
+        <li><Link to="/staff/orders" onClick={() => setMenuOpen(false)}>Orders</Link></li>
+        <li><Link to="/staff/tables" onClick={() => setMenuOpen(false)}>Tables</Link></li>
+        <li><Link to="/" onClick={() => setMenuOpen(false)}>View Site</Link></li>
       </ul>
 
       <div className="nav-actions">
-        <button className="logout-button" onClick={onLogout}>Logout</button>
+        <button className="logout-button" onClick={onLogout}>
+          <i className="fas fa-sign-out-alt"></i> Logout
+        </button>
       </div>
     </nav>
   );
-};
+}
 
-export default StaffNavbar;
+export default StaffNavBar;

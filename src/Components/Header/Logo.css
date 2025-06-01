@@ -1,0 +1,101 @@
+/* Header Logo Styles */
+.header-logo {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: transparent;
+  color: #dbc0d3;
+  font-family: 'Poppins', sans-serif;
+}
+
+.logo-container {
+  font-size: 1.2rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+color: #b45096;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  background: linear-gradient(to right, rgba(68, 41, 63, 0.9), rgba(108, 70, 85, 0.8));
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 0 1px rgba(139, 69, 19, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+ border: 2px solid rgba(139, 69, 19, 0.103);
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(160, 82, 45, 0.1) 0%, transparent 50%);
+    margin-top: -28px;
+}
+
+.logo-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.logo {
+  height: 50px;
+  transition: transform 0.3s ease;
+  order: -1; /* Ensures logo is on top */
+  filter: contrast(1.1) saturate(0.9) brightness(1.05);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  border-radius: 8px;
+}
+
+.logo-container:hover .logo {
+  transform: scale(1.05) rotate(1deg);
+  filter: contrast(1.15) saturate(1.0) brightness(1.1);
+}
+
+.nav-logo {
+  font-size: 1rem;
+color: #b45096;
+  text-shadow: none; /* Remove any text shadow/glow */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header-logo {
+    padding: 0.5rem;
+  }
+
+  .logo-container {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .logo {
+    height: 35px;
+  }
+
+  .nav-logo {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    height: 35px;
+  }
+
+  .nav-logo {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .logo {
+    height: 30px;
+  }
+
+  .nav-logo {
+    font-size: 0.7rem;
+  }
+}

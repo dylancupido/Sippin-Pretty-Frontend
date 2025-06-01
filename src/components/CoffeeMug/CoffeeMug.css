@@ -13,6 +13,23 @@
   position: relative;
   overflow: hidden;
   text-align: center;
+  position: relative;
+  border: 1px solid rgba(165, 126, 134, 0.3);
+}
+
+/* Add lace doily effect around the section */
+.booking-section::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  background-image: url('https://www.transparenttextures.com/patterns/doily.png');
+  background-size: 100% 100%;
+  opacity: 0.07;
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* Optional decorative elements */
@@ -37,6 +54,17 @@
   align-items: center;
 }
 
+/* Add a cute floral background pattern */
+.left-side::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('https://www.transparenttextures.com/patterns/flowers.png');
+  opacity: 0.03;
+  z-index: -1;
+  pointer-events: none;
+}
+
 .tagline h2 {
   font-family: 'Pacifico', cursive;
   font-size: 1.8rem;
@@ -44,6 +72,27 @@
   margin-bottom: 0.5rem;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
   animation: fadeInUp 0.8s ease-out;
+  position: relative;
+  display: inline-block;
+}
+
+/* Add decorative elements to tagline */
+.tagline h2::before,
+.tagline h2::after {
+  content: "✿";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  color: rgba(156, 105, 181, 0.7);
+}
+
+.tagline h2::before {
+  left: -20px;
+}
+
+.tagline h2::after {
+  right: -20px;
 }
 
 .tagline p {
@@ -125,6 +174,27 @@
 
 .shop-button:hover::after, .book-button:hover::after {
   transform: translateX(0);
+}
+
+/* Add cute button decorations */
+.book-button::after {
+  content: "♥";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  color: rgba(94, 65, 47, 0.8);
+}
+
+.shop-button::after {
+  content: "☕";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .search-bar {

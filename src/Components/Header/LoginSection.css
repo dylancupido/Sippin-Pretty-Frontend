@@ -1,0 +1,198 @@
+/* Login Section Styles */
+.login-section {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.25rem 1rem 0.5rem 1rem;
+  height: 50px; /* Match navbar height */
+}
+
+/* Account Dropdown Button */
+.account-button {
+  background: linear-gradient(to right, rgba(68, 41, 63, 0.9), rgba(108, 70, 85, 0.8));
+   border: 2px solid rgba(139, 69, 19, 0.103);
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 0 1px rgba(139, 69, 19, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  height: 50px;
+  width: 50px;
+  margin-top: -20px;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(160, 82, 45, 0.1) 0%, transparent 50%);
+}
+
+.account-icon {
+  margin-top: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.account-button:hover,
+.account-button:focus {
+  background: linear-gradient(to right, rgba(68, 41, 63, 0.95), rgba(108, 70, 85, 0.85));
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  outline: none;
+}
+
+.account-button:hover .account-icon,
+.account-button:focus .account-icon {
+  transform: scale(1.1);
+}
+
+/* Remove Bootstrap's default focus styles */
+.dropdown-toggle:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Override Bootstrap's default button focus/active states */
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Ensure the dropdown toggle doesn't show any background color */
+.dropdown-toggle::after {
+  display: none;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(215, 182, 236, 0.3);
+  min-width: 140px;
+  z-index: 1600; /* Higher than navbar but lower than modal */
+}
+
+/* Fix dropdown menu position */
+.dropup .dropdown-menu {
+  margin-bottom: 10px;
+}
+
+/* Logout button styling for admin/staff */
+.logout-button {
+  background: linear-gradient(to right, rgba(68, 41, 63, 0.9), rgba(108, 70, 85, 0.8));
+ border: 2px solid rgba(139, 69, 19, 0.103);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 25px;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 0 1px rgba(139, 69, 19, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+color: #b45096;
+  font-weight: 600;
+  font-family: 'Playfair Display', serif;
+  height: 50px;
+  margin-top: 0.1px;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(160, 82, 45, 0.1) 0%, transparent 50%);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  margin-top: -25px;
+}
+
+.logout-button:hover {
+  background: linear-gradient(to right, rgba(68, 41, 63, 0.95), rgba(108, 70, 85, 0.85));
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: #f3dde8;
+   border: 2px solid rgba(139, 69, 19, 0.103);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .login-section {
+    padding: 0.5rem;
+    height: 45px;
+  }
+
+  .account-button {
+    height: 45px;
+    width: 45px;
+    padding: 0.4rem;
+  }
+
+  .account-icon {
+
+    width: 28px;
+    height: 28px;
+  }
+
+  .logout-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-section {
+    height: 40px;
+  }
+
+  .account-button {
+    height: 40px;
+    width: 40px;
+    padding: 0.3rem;
+  }
+
+  .account-icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .logout-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    height: 40px;
+  }
+}
+
+@media (max-width: 320px) {
+  .login-section {
+    height: 35px;
+  }
+
+  .account-button {
+    height: 35px;
+    width: 35px;
+    padding: 0.25rem;
+  }
+
+  .account-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .logout-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    height: 35px;
+  }
+}

@@ -58,6 +58,17 @@ button:hover {
   background-color: #256f4c;
 }
 
+.confirmation-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.confirmation-actions button {
+  margin-top: 0;
+}
+
 /* Responsive tweaks */
 @media (max-width: 480px) {
   .confirmation-container {
@@ -68,7 +79,12 @@ button:hover {
     font-size: 0.95rem;
   }
 
-  button {
+  .confirmation-actions {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .confirmation-actions button {
     width: 100%;
   }
 }

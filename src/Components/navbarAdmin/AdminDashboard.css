@@ -1,30 +1,90 @@
-/* Basic styles to ensure the component is visible */
+/* Admin Dashboard Styles */
 .admin-dashboard {
-  padding: 20px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .dashboard-header {
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #f8bbd0;
+  padding-bottom: 1rem;
 }
 
 .dashboard-header h1 {
-  margin-bottom: 5px;
+  font-family: 'Pacifico', cursive;
+  color: #5e412f;
+  margin-bottom: 0.5rem;
 }
 
 .dashboard-date {
-  color: #666;
+  color: #777;
+  font-style: italic;
 }
 
 .dashboard-content {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
 }
 
-.test-message {
-  text-align: center;
-  padding: 50px;
+.dashboard-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card h3 {
+  color: #6d4c41;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f06292;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 1.5rem;
+    margin: 1.5rem;
+  }
+  
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-dashboard {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem;
+  }
 }

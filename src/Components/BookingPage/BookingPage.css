@@ -1,21 +1,48 @@
-/* BookingPage.css */
+/* BookingPage.css - Add vintage styling */
 
 .booking-container {
   max-width: 700px;
   margin: 2rem auto;
   padding: 1.5rem;
-  background: #f5cece2a;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.696);
+  background: rgba(245, 206, 206, 0.16);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
+  position: relative;
+  border: 1px solid rgba(165, 126, 134, 0.3);
+}
+
+/* Add vintage paper texture */
+.booking-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+  opacity: 0.2;
+  border-radius: 8px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Add subtle aged edges */
+.booking-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  box-shadow: inset 0 0 15px rgba(101, 67, 73, 0.2);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .booking-header h1 {
   margin-bottom: 0.2rem;
-  color:   #83598b;
+  color: #83598b;
   font-weight: 700;
   font-size: 2.4rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  font-family: 'Pacifico', cursive;
 }
 
 .booking-header p {
@@ -53,6 +80,7 @@
   transition: border-color 0.3s ease;
   font-family: inherit;
   resize: vertical;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .form-group input:focus,
@@ -74,10 +102,22 @@
 }
 
 .available-tables {
-  background: #fffeff29;
+  background: rgba(255, 254, 255, 0.15);
   border: 1.5px solid #c985b8;
   padding: 1rem 1.2rem;
   border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add subtle texture to available tables section */
+.available-tables::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('https://www.transparenttextures.com/patterns/cream-dust.png');
+  opacity: 0.1;
+  z-index: -1;
 }
 
 .available-tables h2 {
@@ -156,6 +196,13 @@
 .input-error {
   border-color: #cc0000 !important;
   background-color: rgba(255, 0, 0, 0.05);
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
 }
 
 .total-price {
@@ -175,7 +222,7 @@
 }
 
 button[type="submit"] {
-  background-color: hwb(283 45% 31% / 0.447);
+  background-color: rgba(156, 105, 181, 0.75);
   color: white;
   font-weight: 700;
   font-size: 1.2rem;
@@ -184,12 +231,25 @@ button[type="submit"] {
   padding: 0.8rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 button[type="submit"]:hover:not(:disabled) {
   background-color: #9c27b0;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Add vintage button effect */
+button[type="submit"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('https://www.transparenttextures.com/patterns/subtle-white-feathers.png');
+  opacity: 0.05;
+  z-index: -1;
 }
 
 button[type="submit"]:disabled {
@@ -204,4 +264,163 @@ button[type="submit"]:disabled {
   .form-row {
     flex-direction: column;
   }
+}
+
+/* Add these styles to BookingPage.css */
+
+.table-selection-hint {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 0.8rem;
+}
+
+.table-type {
+  font-size: 0.85rem;
+  color: #83598b;
+  margin-left: 0.5rem;
+  font-style: italic;
+}
+
+.available-tables ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.available-tables li {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 0.7rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.available-tables li:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: translateX(3px);
+}
+
+.selected-table {
+  color: #83598b;
+  font-weight: 700;
+}
+
+.selected-table::after {
+  content: " ✓";
+  color: #83598b;
+}
+
+.input-hint {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.2rem;
+  font-style: italic;
+}
+
+/* Make the placeholder text more visible */
+::placeholder {
+  color: #999;
+  opacity: 0.8;
+}
+
+/* Style for phone input to make the format clearer */
+input[type="tel"] {
+  letter-spacing: 0.5px;
+}
+
+/* Add these styles for the new elements */
+
+.vintage-note {
+  text-align: center;
+  font-style: italic;
+  color: #7e3b3ba9;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  position: relative;
+  padding: 0 20px;
+}
+
+.vintage-note::before,
+.vintage-note::after {
+  content: "♥";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  color: rgba(156, 105, 181, 0.7);
+}
+
+.vintage-note::before {
+  left: 0;
+}
+
+.vintage-note::after {
+  right: 0;
+}
+
+.booking-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(165, 126, 134, 0.4);
+}
+
+/* Add a cute background pattern to the form */
+.booking-form {
+  position: relative;
+}
+
+.booking-form::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('https://www.transparenttextures.com/patterns/flowers.png');
+  opacity: 0.03;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Style the table selection with more vintage elements */
+.available-tables li {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 0.7rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(165, 126, 134, 0.2);
+  position: relative;
+}
+
+.available-tables li:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: translateX(3px);
+}
+
+.selected-table {
+  color: #83598b;
+  font-weight: 700;
+}
+
+.selected-table::after {
+  content: " ✿";
+  color: #83598b;
+}
+
+/* Add a cute teacup icon to the total price */
+.total-price {
+  position: relative;
+  padding-left: 25px;
+  margin-top: 1.5rem;
+}
+
+.total-price::before {
+  content: "☕";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #83598b;
+}
+
+.total-price h3 {
+  margin: 0;
+  color: #83598b;
 }

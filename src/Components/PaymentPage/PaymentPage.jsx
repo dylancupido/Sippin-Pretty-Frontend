@@ -106,8 +106,8 @@ const PaymentPage = () => {
     const cleanCardNumber = cardData.cardNumber.replace(/\s+/g, "");
     if (!cleanCardNumber) {
       newErrors.cardNumber = "Card number is required";
-    } else if (!/^\d{16}$/.test(cleanCardNumber)) {
-      newErrors.cardNumber = "Card number must be 16 digits";
+    } else if (!/^\d{15,16}$/.test(cleanCardNumber)) {
+      newErrors.cardNumber = "Card number must be 15-16 digits";
     } else if (!cardType) {
       newErrors.cardNumber = "Only Visa, Mastercard, or Debit cards are accepted";
     }

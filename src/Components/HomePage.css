@@ -7,7 +7,7 @@
 }
 
 .content-container {
-  margin-top: 90px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
@@ -47,7 +47,7 @@ h1 {
   max-width: 600px;
   letter-spacing: 0.02em;
   font-weight: 400;
-  
+
 
   padding: 1rem;
   border-radius: 8px;
@@ -131,39 +131,39 @@ h1 {
   .home-page {
     padding: 1.5rem;
   }
-  
+
   .content-container {
-    margin-top: 110px;
+    margin-top: 60px;
     flex-direction: row;
     justify-content: space-between;
     text-align: left;
     gap: 3rem;
     margin-bottom: 3rem;
   }
-  
+
   .left-content {
     align-items: flex-start;
     flex: 1;
   }
-  
+
   .right-content {
     flex: 1;
     justify-content: flex-end;
   }
-  
+
   h1 {
     font-size: 2.5rem;
   }
-  
+
   .tagline {
     font-size: 1.4rem; /* Increased from 1.2rem */
     padding: 1.2rem;
   }
-  
+
   .coffee-image, .rotating-mug {
     max-height: 400px;
   }
-  
+
   .cta-button {
     width: auto;
     padding: 14px 28px;
@@ -174,20 +174,20 @@ h1 {
 /* Very small screens */
 @media (max-width: 360px) {
   .content-container {
-    margin-top: 70px;
+    margin-top: 30px;
     gap: 1.5rem;
   }
-  
+
   h1 {
     font-size: 1.7rem;
   }
-  
+
   .tagline {
     font-size: 1.2rem; /* Increased from 1rem */
     padding: 0.8rem;
     line-height: 1.5;
   }
-  
+
   .coffee-image, .rotating-mug {
     max-height: 200px;
   }
@@ -196,24 +196,24 @@ h1 {
 /* Very small phones */
 @media (max-width: 320px) {
   .content-container {
-    margin-top: 60px;
+    margin-top: 20px;
     gap: 1rem;
   }
-  
+
   h1 {
     font-size: 1.5rem;
   }
-  
+
   .tagline {
     font-size: 1rem;
     padding: 0.5rem;
     line-height: 1.4;
   }
-  
+
   .coffee-image, .rotating-mug {
     max-height: 180px;
   }
-  
+
   .cta-button {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;

@@ -1,26 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// Import other components
-import ManageHomePage from "./Components/navbarAdmin/ManageHomePage";
-import DeliveryManagement from "./Components/navbarAdmin/DeliveryManagement";
+// This file should be deleted or renamed to avoid conflicts with App.jsx
+// The content below is a placeholder to make the file valid JS until it's deleted
 
-function App() {
-  // Your existing state and functions
-  
+import React from "react";
+
+function AppOld() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          {/* Existing routes */}
-          
-          {/* Admin routes */}
-          <Route path="/admin/dashboard" element={/* Your admin dashboard component */} />
-          <Route path="/admin/home" element={<ManageHomePage />} />
-          <Route path="/admin/delivery" element={<DeliveryManagement />} />
-          {/* Other routes */}
-        </Routes>
-      </div>
-    </Router>
+    <div>
+      <p>This file should be deleted. Please use App.jsx instead.</p>
+    </div>
   );
 }
 
-export default App;
+export default AppOld;
