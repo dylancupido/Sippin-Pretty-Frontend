@@ -41,7 +41,10 @@ function App() {
         <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/cusRegister" element={<CusRegisterForm />} />
         <Route path="/staffRegister" element={<StaffRegisterForm />} />
-        <Route path="/login" element={<LoginForm setLoggedIn={setLoggedIn}/>} />
+        <Route
+          path="/login"
+          element={<LoginForm setLoggedIn={setLoggedIn} />}
+        />
         <Route path="/Orders" element={<OrdersPage />} />
       </Routes>
     </div>
