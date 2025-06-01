@@ -6,9 +6,11 @@ import axios from "axios";
  
 const StaffRegisterForm = () => {
   const [name, setName] = useState('');
+  const [dob, setDOB] = useState(null); // use Date object
   const [username, setId] = useState('');
   const [password, setPassword] = useState('');
   const [phonenumber, setPhonenumber] = useState('');
+  const [address, setAddress] = useState('');
   const role = 'Staff';
  
   const handleOnClick = (event) => {
@@ -20,16 +22,18 @@ const StaffRegisterForm = () => {
       PhoneNumber: phonenumber,
       Password: password,
       Role: role,
+      Address: address,
+      DOB: dob ? dob.toISOString() : null,
  
     };
  
-    const url = 'http://localhost:5010/api/Users/RegisterStaff';
+    const url = 'http://localhost:5010/api/Staff/RegisterStaff';
  
     axios.post(url, data)
       .then((response) => {
         const message = response.data;
         switch (message) {
-          case 'Registration successful.':
+          case 'Registration Successfull':
             alert('Registration successful!');
             break;
           case 'Alreday Exist':
@@ -96,7 +100,32 @@ const StaffRegisterForm = () => {
             onChange={(e) => setPhonenumber(e.target.value)}
             required
           />
-        </div> 
+        </div>
+ 
+        <div className="Inputbox">
+          <DatePicker
+            selected={dob}
+            onChange={(date) => setDOB(date)}
+            dateFormat="yyyy-MM-dd"
+            placeholderText="Select date of birth*"
+            maxDate={new Date()}
+            showYearDropdown
+            scrollableYearDropdown
+            yearDropdownItemNumber={100}
+            required
+          />
+        </div>
+ 
+        <div className="Inputbox">
+          <input
+            value={address}
+            type="text"
+            placeholder="Home Address*"
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
+        </div>
+ 
         <button onClick={handleOnClick}>Register</button>
       </form>
     </div>
