@@ -10,6 +10,35 @@
   color: #333;
 }
 
+.confirmation-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.confirmation-icon i {
+  font-size: 4rem;
+  color: #d4a59a;
+  background: linear-gradient(45deg, #d4a59a, #f8ae9d, #e6b8a2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 4px 8px rgba(212, 165, 154, 0.3);
+  animation: lavishGlow 2s ease-in-out infinite alternate;
+  filter: drop-shadow(0 2px 4px rgba(212, 165, 154, 0.4));
+}
+
+@keyframes lavishGlow {
+  0% {
+    transform: scale(1) rotate(-2deg);
+    filter: drop-shadow(0 2px 4px rgba(212, 165, 154, 0.4)) brightness(1);
+  }
+  100% {
+    transform: scale(1.05) rotate(2deg);
+    filter: drop-shadow(0 4px 8px rgba(212, 165, 154, 0.6)) brightness(1.1);
+  }
+}
+
 .confirmation-container h1 {
   color: #2d8659;
   margin-bottom: 0.5rem;
@@ -75,6 +104,10 @@ button:hover {
     padding: 1.2rem;
   }
 
+  .confirmation-icon i {
+    font-size: 3rem;
+  }
+
   .confirmation-details {
     font-size: 0.95rem;
   }
@@ -86,5 +119,111 @@ button:hover {
 
   .confirmation-actions button {
     width: 100%;
+  }
+}
+
+/* Print styles */
+@media print {
+  .confirmation-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 2rem;
+    background-color: white !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    color: black !important;
+    font-family: 'Times New Roman', serif;
+  }
+
+  .confirmation-icon {
+    margin-bottom: 1rem;
+  }
+
+  .confirmation-icon i {
+    color: black !important;
+    background: none !important;
+    -webkit-text-fill-color: black !important;
+    text-shadow: none !important;
+    animation: none !important;
+    filter: none !important;
+    font-size: 2.5rem;
+  }
+
+  .confirmation-container h1 {
+    color: black !important;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid black;
+    padding-bottom: 0.5rem;
+  }
+
+  .confirmation-container p {
+    color: black !important;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .confirmation-details {
+    background: white !important;
+    border: 2px solid black !important;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 !important;
+  }
+
+  .confirmation-details p {
+    margin: 0.8rem 0;
+    font-size: 1.1rem;
+    color: black !important;
+  }
+
+  .cancellation-note {
+    background-color: #f5f5f5 !important;
+    border: 1px solid black !important;
+    border-left: 4px solid black !important;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border-radius: 0 !important;
+    color: black !important;
+  }
+
+  /* Hide buttons in print */
+  .confirmation-actions {
+    display: none !important;
+  }
+
+  /* Add print header */
+  .confirmation-container::before {
+    content: "BOOKING CONFIRMATION RECEIPT";
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid black;
+    letter-spacing: 2px;
+  }
+
+  /* Add print footer */
+  .confirmation-container::after {
+    content: "Thank you for choosing Sippin' Pretty! Please keep this confirmation for your records.";
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid black;
+    font-style: italic;
+  }
+
+  /* Ensure page breaks properly */
+  .confirmation-container {
+    page-break-inside: avoid;
+  }
+
+  .confirmation-details {
+    page-break-inside: avoid;
   }
 }

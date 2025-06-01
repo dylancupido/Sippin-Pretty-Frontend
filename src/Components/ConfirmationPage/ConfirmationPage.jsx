@@ -29,6 +29,9 @@ const ConfirmationPage = () => {
 
   return (
     <div className="confirmation-container">
+      <div className="confirmation-icon">
+        <i className="fas fa-crown"></i>
+      </div>
       <h1>Booking Confirmed</h1>
       <p>Thank you, <strong>{fullName}</strong>! Your table has been reserved.</p>
 
