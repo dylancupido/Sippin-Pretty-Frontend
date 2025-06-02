@@ -17,6 +17,13 @@ const PaymentPageCart = () => {
 
   const [errors, setErrors] = useState({});
   const [cardType, setCardType] = useState("");
+  const [orderType, setOrderType] = useState("collection");
+
+  const [deliveryAddress, setDeliveryAddress] = useState({
+    street: "",
+    city: "",
+    postalCode: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,6 +31,11 @@ const PaymentPageCart = () => {
     setErrors((prev) => ({ ...prev, [name]: null }));
 
     if (name === "cardNumber") detectCardType(value);
+  };
+
+  const handleAddressChange = (e) => {
+    const { name, value } = e.target;
+    setDeliveryAddress((prev) => ({ ...prev, [name]: value }));
   };
 
   const detectCardType = (number) => {
@@ -87,10 +99,29 @@ const PaymentPageCart = () => {
       item_price: item.price,
     }));
 
-    const payload = { order, orderItems };
+    const payload = { order: { ...order, orderType }, orderItems };
+    console.log("Sending order payload:", payload);
 
     try {
-      await axios.post("http://localhost:5010/api/Orders/WithItems", payload);
+      const response = await axios.post(
+        "http://localhost:5010/api/Orders/WithItems",
+        payload
+      );
+      console.log("Order posted successfully:", response.data);
+
+      if (orderType === "delivery") {
+        const delivery = {
+          orderID: order.orderID,
+          userID: order.userID,
+          streetAddress: deliveryAddress.street,
+          city: deliveryAddress.city,
+          postalCode: deliveryAddress.postalCode,
+        };
+        console.log("Sending delivery info:", delivery);
+
+        await axios.post("http://localhost:5010/api/Deliveries", delivery);
+      }
+
       alert("Payment successful and order placed!");
       localStorage.removeItem(`cart_${order.userID}`);
       navigate("/confirmation", {
@@ -98,6 +129,11 @@ const PaymentPageCart = () => {
       });
     } catch (error) {
       console.error("Order failed:", error);
+      if (error.response) {
+        console.error("Error response data:", error.response.data);
+        console.error("Error response status:", error.response.status);
+        console.error("Error response headers:", error.response.headers);
+      }
       alert("Something went wrong while placing your order.");
     }
   };
@@ -110,9 +146,8 @@ const PaymentPageCart = () => {
       </div>
 
       <form className="payment-form" onSubmit={handleSubmit}>
-        <label htmlFor="cardName">Cardholder Name</label>
+        <label>Cardholder Name</label>
         <input
-          id="cardName"
           type="text"
           name="cardName"
           placeholder="e.g. John Smith"
@@ -125,9 +160,8 @@ const PaymentPageCart = () => {
         )}
 
         <div className="card-input-container">
-          <label htmlFor="cardNumber">Card Number</label>
+          <label>Card Number</label>
           <input
-            id="cardNumber"
             type="text"
             name="cardNumber"
             placeholder="1234 5678 9012 3456"
@@ -145,9 +179,8 @@ const PaymentPageCart = () => {
 
         <div className="card-row">
           <div>
-            <label htmlFor="expiry">Expiry</label>
+            <label>Expiry</label>
             <input
-              id="expiry"
               type="text"
               name="expiry"
               placeholder="MM/YY"
@@ -162,9 +195,8 @@ const PaymentPageCart = () => {
             )}
           </div>
           <div>
-            <label htmlFor="cvc">CVC</label>
+            <label>CVC</label>
             <input
-              id="cvc"
               type="text"
               name="cvc"
               placeholder="123"
@@ -176,6 +208,55 @@ const PaymentPageCart = () => {
             {errors.cvc && <div className="error-message">{errors.cvc}</div>}
           </div>
         </div>
+
+        <div className="order-type-selection">
+          <label>
+            <input
+              type="radio"
+              name="orderType"
+              checked={orderType === "collection"}
+              onChange={() => setOrderType("collection")}
+            />
+            Collection
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="orderType"
+              checked={orderType === "delivery"}
+              onChange={() => setOrderType("delivery")}
+            />
+            Delivery
+          </label>
+        </div>
+
+        {orderType === "delivery" && (
+          <div className="delivery-fields">
+            <label>Street Address</label>
+            <input
+              type="text"
+              name="street"
+              value={deliveryAddress.street}
+              onChange={handleAddressChange}
+            />
+
+            <label>City</label>
+            <input
+              type="text"
+              name="city"
+              value={deliveryAddress.city}
+              onChange={handleAddressChange}
+            />
+
+            <label>Postal Code</label>
+            <input
+              type="text"
+              name="postalCode"
+              value={deliveryAddress.postalCode}
+              onChange={handleAddressChange}
+            />
+          </div>
+        )}
 
         <div className="payment-summary">
           <h3>Order Summary</h3>
