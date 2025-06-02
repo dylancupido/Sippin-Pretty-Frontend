@@ -13,12 +13,12 @@
   padding-top: 40px;
   padding-bottom: 20px;
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
 }
 
 .-section-title h1 {
-    font-family: 'Pacifico', cursive;
+  font-family: "Pacifico", cursive;
   color: #5e412f;
   font-size: 3rem;
   margin-bottom: 1rem;
@@ -96,17 +96,17 @@
     gap: 20px;
     padding: 40px;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .section-title h1 {
     max-width: 500px;
     padding: 20px;
     font-size: inherit;
   }
-  
+
   .card-image {
     width: 200px;
     height: 200px;
@@ -118,19 +118,49 @@
   .card-container {
     padding: 10px;
   }
-  
+
   .section-title h1 {
     max-width: 250px;
     padding: 10px;
     font-size: 1.1rem;
   }
-  
+
   .custom-card {
     padding: 10px;
   }
-  
+
   .card-image {
     width: 120px;
     height: 120px;
+  }
+}
+.cart-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: fade-in-out 3s ease;
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
   }
 }
