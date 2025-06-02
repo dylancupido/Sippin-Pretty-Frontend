@@ -1,7 +1,7 @@
 .calculator-app-container {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 20px;
-  background-color: #f3f3f3;
+  background-color: transparent;
   min-height: 100vh;
 }
 
@@ -26,7 +26,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   flex: 1;
   min-width: 300px;
-  max-width: 400px;
+  max-width: 550px;
 }
 
 .calculator-app-container .receipt h3,
@@ -116,22 +116,29 @@
 }
 
 .calculator-app-container .menu-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  padding-top: 10px;
 }
 
 .calculator-app-container .menu-button {
   background-color: #ffc107;
   border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  font-weight: bold;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  color: #333;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.4;
 }
 
 .calculator-app-container .menu-button:hover {
   background-color: #e0a800;
+  transform: translateY(-1px);
 }

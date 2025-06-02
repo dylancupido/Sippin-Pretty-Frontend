@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./UserAdminPage.css";
 
 const UserAdminPage = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // ✅ Add this
 
- 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:5010/api/Users"); 
+        const response = await fetch("http://localhost:5010/api/Users");
         const data = await response.json();
         setUsers(data);
       } catch (error) {
@@ -22,7 +23,6 @@ const UserAdminPage = () => {
     fetchUsers();
   }, []);
 
-  // Delete user
   const handleDeleteUser = async (id) => {
     try {
       const response = await fetch(`http://localhost:5010/api/Users/${id}`, {
@@ -39,9 +39,18 @@ const UserAdminPage = () => {
     }
   };
 
+  const handleAddStaff = () => {
+    navigate("/admin/registerstaff"); // ✅ Navigate to register page
+  };
+
   return (
     <div className="user-admin-container">
       <h2>Registered Users</h2>
+
+      <button className="add-staff-button" onClick={handleAddStaff}>
+        + Add Staff Member
+      </button>
+
       {loading ? (
         <p>Loading users...</p>
       ) : (

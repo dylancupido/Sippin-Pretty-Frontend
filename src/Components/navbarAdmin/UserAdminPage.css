@@ -190,3 +190,19 @@
     font-size: 0.9rem;
   }
 }
+.add-staff-button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-staff-button:hover {
+  background-color: #388e3c;
+}

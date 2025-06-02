@@ -3,19 +3,19 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../Styles/Register.css";
 import axios from "axios";
- 
+
 const StaffRegisterForm = () => {
-  const [name, setName] = useState('');
-  const [dob, setDOB] = useState(null); // use Date object
-  const [username, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [phonenumber, setPhonenumber] = useState('');
-  const [address, setAddress] = useState('');
-  const role = 'Staff';
- 
+  const [name, setName] = useState("");
+  const [username, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [phonenumber, setPhonenumber] = useState("");
+  const [dob, setDOB] = useState(null);
+  const [address, setAddress] = useState("");
+  const role = "Staff";
+
   const handleOnClick = (event) => {
     event.preventDefault();
- 
+
     const data = {
       Id: username,
       Name: name,
@@ -24,44 +24,43 @@ const StaffRegisterForm = () => {
       Role: role,
       Address: address,
       DOB: dob ? dob.toISOString() : null,
- 
     };
- 
-    const url = 'http://localhost:5010/api/Staff/RegisterStaff';
- 
-    axios.post(url, data)
+
+    const url = "http://localhost:5010/api/Users/RegisterCus";
+
+    axios
+      .post(url, data)
       .then((response) => {
         const message = response.data;
         switch (message) {
-          case 'Registration Successfull':
-            alert('Registration successful!');
+          case "Registration Successfull":
+            alert("Staff registered successfully!");
             break;
-          case 'Alreday Exist':
-            alert('User already exists. Try a different username.');
+          case "Error":
+            alert("User already exists. Try a different ID.");
             break;
           default:
-            alert('Server response: ' + message);
+            alert("Server response: " + message);
         }
       })
       .catch((error) => {
-  console.error('Registration error:', error);
-  if (error.response) {
-    alert(`Error: ${JSON.stringify(error.response.data)}`);
-  } else if (error.request) {
-    alert('No response from server. Is your backend running?');
-  } else {
-    alert('Error setting up request: ' + error.message);
-  }
-});
- 
+        console.error("Registration error:", error);
+        if (error.response) {
+          alert(`Error: ${JSON.stringify(error.response.data)}`);
+        } else if (error.request) {
+          alert("No response from server. Is your backend running?");
+        } else {
+          alert("Error setting up request: " + error.message);
+        }
+      });
   };
- 
+
   return (
     <div className="Wrapper">
       <form>
         <h1>Register Staff</h1>
         <p>Staff Details</p>
- 
+
         <div className="Inputbox">
           <input
             value={name}
@@ -71,17 +70,17 @@ const StaffRegisterForm = () => {
             required
           />
         </div>
- 
+
         <div className="Inputbox">
           <input
             value={username}
             type="text"
-            placeholder="Staff ID number*"
+            placeholder="Staff ID Number*"
             onChange={(e) => setId(e.target.value)}
             required
           />
         </div>
- 
+
         <div className="Inputbox">
           <input
             value={password}
@@ -91,7 +90,7 @@ const StaffRegisterForm = () => {
             required
           />
         </div>
- 
+
         <div className="Inputbox">
           <input
             value={phonenumber}
@@ -101,13 +100,13 @@ const StaffRegisterForm = () => {
             required
           />
         </div>
- 
+
         <div className="Inputbox">
           <DatePicker
             selected={dob}
             onChange={(date) => setDOB(date)}
             dateFormat="yyyy-MM-dd"
-            placeholderText="Select date of birth*"
+            placeholderText="Date of Birth*"
             maxDate={new Date()}
             showYearDropdown
             scrollableYearDropdown
@@ -115,7 +114,7 @@ const StaffRegisterForm = () => {
             required
           />
         </div>
- 
+
         <div className="Inputbox">
           <input
             value={address}
@@ -125,13 +124,11 @@ const StaffRegisterForm = () => {
             required
           />
         </div>
- 
+
         <button onClick={handleOnClick}>Register</button>
       </form>
     </div>
   );
 };
- 
+
 export default StaffRegisterForm;
- 
- 

@@ -22,7 +22,7 @@ function AdminNavBar({ onLogout }) {
         <li><Link to="/admin/delivery">Delivery</Link></li>
         <li><Link to="/admin/orders">Orders</Link></li>
         <li><Link to="/admin/users">Users</Link></li>
-        <li><Link to="/till">Till</Link></li>
+        
       </ul>
 
       <div className="nav-actions">

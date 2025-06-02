@@ -30,12 +30,18 @@ const StaffNavbar = ({ onLogout }) => {
       </button>
 
       <ul className={`nav-links ${menuOpen ? "active" : ""}`} role="menubar">
-        <li role="none"><Link to="/booking" role="menuitem">Orders</Link></li>
-        <li role="none"><Link to="/menu" role="menuitem">Till</Link></li>
+        <li>
+          <Link to="/staff/orders">Orders</Link>
+        </li>
+        <li>
+          <Link to="/till">Till</Link>
+        </li>
       </ul>
 
       <div className="nav-actions">
-        <button className="logout-button" onClick={onLogout}>Logout</button>
+        <button className="logout-button" onClick={onLogout}>
+          Logout
+        </button>
       </div>
     </nav>
   );

@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
-import '../Styles/Till.css'; // Make sure the path is correct
-
-const menuItems = [
-  { id: 1, name: 'Burger', price: 45 },
-  { id: 2, name: 'Chips', price: 25 },
-  { id: 3, name: 'Soda', price: 15 },
-  { id: 4, name: 'Coffee', price: 20 },
-  { id: 5, name: 'Salad', price: 30 },
-  { id: 6, name: 'Ice Cream', price: 18 },
-];
+import React, { useEffect, useState } from "react";
+import "../Styles/Till.css";
+import axios from "axios";
 
 export default function TillPage() {
+  const [menuItems, setMenuItems] = useState([]);
   const [receiptItems, setReceiptItems] = useState([]);
-  const [paymentType, setPaymentType] = useState('');
+  const [paymentType, setPaymentType] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:5010/api/MenuItemsAPI")
+      .then((res) => res.json())
+      .then((data) => {
+        const formatted = data.map((item) => ({
+          ...item,
+          id: item.productID,
+          name: item.productName,
+          price: item.price,
+          productID: item.productID,
+          quantity: 1,
+        }));
+        setMenuItems(formatted);
+      })
+      .catch((err) => console.error("Failed to fetch menu:", err));
+  }, []);
 
   const handleAddItem = (item) => {
     setReceiptItems([...receiptItems, item]);
@@ -20,7 +30,7 @@ export default function TillPage() {
 
   const handleClear = () => {
     setReceiptItems([]);
-    setPaymentType('');
+    setPaymentType("");
   };
 
   const handlePayment = (type) => {
@@ -28,6 +38,57 @@ export default function TillPage() {
   };
 
   const total = receiptItems.reduce((sum, item) => sum + item.price, 0);
+
+  const handleCheckout = async () => {
+    if (receiptItems.length === 0) {
+      alert("No items to checkout.");
+      return;
+    }
+
+    const orderID =
+      "ORD-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+    const userID = "INSTORE1"; // fixed user added to DB manually
+
+    const order = {
+      orderID,
+      userID,
+      totalAmount: parseFloat(total.toFixed(2)),
+      orderType: "In-Store",
+      status: "in progress",
+    };
+
+    const orderItems = receiptItems.map((item) => ({
+      orderID,
+      productID: item.productID,
+      quantity: item.quantity || 1,
+      item_price: item.price,
+    }));
+
+    const payload = {
+      order,
+      orderItems,
+    };
+
+    try {
+      console.log("Sending payload:", payload);
+      const response = await axios.post(
+        "http://localhost:5010/api/Orders/WithItems",
+        payload
+      );
+      console.log("Checkout success:", response.data);
+      alert("In-store order placed successfully!");
+      handleClear();
+    } catch (error) {
+      console.error(
+        "Error placing in-store order:",
+        error.response?.data || error.message
+      );
+      alert(
+        "Something went wrong: " +
+          (error.response?.data?.error || error.message)
+      );
+    }
+  };
 
   return (
     <div className="calculator-app-container">
@@ -54,7 +115,7 @@ export default function TillPage() {
           <div className="checkout-controls">
             <button
               className="checkout"
-              onClick={() => alert(`Checked out with ${paymentType || 'no'} payment method.`)}
+              onClick={handleCheckout}
               disabled={receiptItems.length === 0}
             >
               Checkout
@@ -66,9 +127,18 @@ export default function TillPage() {
 
           <div className="payment-options">
             <p>Select Payment:</p>
-            <button className="payment" onClick={() => handlePayment('Cash')}>Cash</button>
-            <button className="payment" onClick={() => handlePayment('Card')}>Card</button>
-            <button className="payment" onClick={() => handlePayment('SnapScan')}>SnapScan</button>
+            <button className="payment" onClick={() => handlePayment("Cash")}>
+              Cash
+            </button>
+            <button className="payment" onClick={() => handlePayment("Card")}>
+              Card
+            </button>
+            <button
+              className="payment"
+              onClick={() => handlePayment("SnapScan")}
+            >
+              SnapScan
+            </button>
           </div>
         </div>
 
@@ -78,7 +148,7 @@ export default function TillPage() {
           <div className="menu-grid">
             {menuItems.map((item) => (
               <button
-                key={item.id}
+                key={item.productID}
                 className="menu-button"
                 onClick={() => handleAddItem(item)}
               >
