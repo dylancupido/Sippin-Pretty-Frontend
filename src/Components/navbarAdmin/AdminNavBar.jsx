@@ -16,7 +16,7 @@ function AdminNavBar({ onLogout }) {
       </div>
 
       <ul className="nav-links">
-        <li><Link to="/admin/dashboard">Dashboard</Link></li>
+        
         <li><Link to="/menuadmin">Manage Menu</Link></li>
         <li><Link to="/admin/home">Manage Home</Link></li>
         <li><Link to="/admin/delivery">Delivery</Link></li>

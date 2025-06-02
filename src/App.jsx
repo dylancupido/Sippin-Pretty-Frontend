@@ -25,6 +25,7 @@ import { AboutUs } from "./Components/About us";
 
 import "./App.css";
 import TillPage from "./Components/TillPage";
+import OrderItemsAdminPage from "./Components/StaffOrders";
 
 function App() {
   const navigate = useNavigate();
@@ -157,6 +158,7 @@ function App() {
         <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/till" element={<TillPage />} />
+        <Route path="/staff/orders" element={<OrderItemsAdminPage />} />
 
         {/* Admin Routes */}
         <Route
