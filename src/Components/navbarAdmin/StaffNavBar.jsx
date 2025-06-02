@@ -36,6 +36,9 @@ const StaffNavbar = ({ onLogout }) => {
         <li>
           <Link to="/till">Till</Link>
         </li>
+        <li>
+          <Link to="/deliveries">Deliveries</Link>
+        </li>
       </ul>
 
       <div className="nav-actions">

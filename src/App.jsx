@@ -28,6 +28,7 @@ import TillPage from "./Components/TillPage";
 import OrderItemsAdminPage from "./Components/StaffOrders";
 import StaffRegisterForm from "./Components/RegisterStaff";
 import PaymentPageCart from "./Components/PaymentPage/PaymentPageCart";
+import DeliveriesPage from "./Components/DeliveriesPage";
 
 function App() {
   const navigate = useNavigate();
@@ -163,6 +164,7 @@ function App() {
         <Route path="/staff/orders" element={<OrderItemsAdminPage />} />
         <Route path="/admin/registerstaff" element={<StaffRegisterForm />} />
         <Route path="/cartpayment" element={<PaymentPageCart />} />
+        <Route path="/deliveries" element={<DeliveriesPage />} />
 
         {/* Admin Routes */}
         <Route

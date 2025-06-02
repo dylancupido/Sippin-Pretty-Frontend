@@ -38,12 +38,18 @@ const OrderItemsAdminPage = () => {
       );
 
       if (remaining.length === 0) {
-        // All items completed, update order status to complete
+        // Fetch order to check type
         const orderResponse = await fetch(
           `http://localhost:5010/api/Orders/${orderID}`
         );
         const order = await orderResponse.json();
-        order.status = "complete";
+
+        // Update status conditionally
+        if (order.orderType === "delivery") {
+          order.status = "ready";
+        } else {
+          order.status = "complete";
+        }
 
         await fetch(`http://localhost:5010/api/Orders/${orderID}`, {
           method: "PUT",
@@ -61,9 +67,11 @@ const OrderItemsAdminPage = () => {
           );
         }
 
-        // Refresh order items view
+        // Refresh view
         fetchOrderItems();
-        alert(`Order ${orderID} marked as complete and all items deleted.`);
+        alert(
+          `Order ${orderID} marked as ${order.status} and all items deleted.`
+        );
       }
     } catch (error) {
       console.error("Error completing order:", error);
