@@ -1,16 +1,17 @@
 import React from "react";
 import "../Styles/CartPage.css";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = ({ cart, setCart }) => {
+  const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
 
-  // Calculate total cost of cart
+  // Calculate total cart value
   const calculateTotal = () =>
     cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
 
-  // Handle checkout action
-  const handleCheckout = async () => {
+  // Handle checkout - go to payment page with order data
+  const handleCheckout = () => {
     if (!userId) {
       alert("Please log in before checking out.");
       return;
@@ -32,33 +33,12 @@ const CartPage = ({ cart, setCart }) => {
       status: "in progress",
     };
 
-    const orderItems = cart.map((item) => ({
-      orderID,
-      productID: item.productID,
-      quantity: item.quantity,
-      item_price: item.price,
-    }));
-
-    const payload = {
-      order: order,
-      orderItems: orderItems,
-    };
-
-    try {
-      const response = await axios.post(
-        "http://localhost:5010/api/Orders/WithItems",
-        payload
-      );
-      console.log("Order response:", response.data);
-      alert("Order placed successfully!");
-
-      // Clear cart in state and localStorage
-      setCart([]);
-      localStorage.removeItem(`cart_${userId}`);
-    } catch (error) {
-      console.error("Error placing order:", error);
-      alert("Something went wrong while placing your order.");
-    }
+    navigate("/cartpayment", {
+      state: {
+        cart,
+        order,
+      },
+    });
   };
 
   return (
