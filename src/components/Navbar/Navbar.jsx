@@ -48,7 +48,7 @@ const Navbar = ({ loggedIn = false, onLogout }) => {
           </a>
         </li>
         <li role="none">
-          <a role="menuitem" href="#" onClick={() => setMenuOpen(false)}>
+          <a role="menuitem" href="/aboutus" onClick={() => setMenuOpen(false)}>
             About Us
           </a>
         </li>

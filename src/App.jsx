@@ -21,8 +21,10 @@ import OrdersPage from "./Components/OrdersPage";
 
 import LoginForm from "./Components/LoginPage";
 import CusRegisterForm from "./Components/RegisterPage";
+import { AboutUs } from "./Components/About us";
 
 import "./App.css";
+import TillPage from "./Components/TillPage";
 
 function App() {
   const navigate = useNavigate();
@@ -153,6 +155,8 @@ function App() {
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/confirmation" element={<ConfirmationPage />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/till" element={<TillPage />} />
 
         {/* Admin Routes */}
         <Route
