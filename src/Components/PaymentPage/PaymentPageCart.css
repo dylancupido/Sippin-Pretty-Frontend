@@ -24,7 +24,7 @@
   margin-bottom: 1.5rem;
 }
 
-/* User Input Form */
+
 .payment-form {
   display: flex;
   flex-direction: column;
@@ -52,7 +52,7 @@
   border-color: #f48fb1;
 }
 
-/* Card Inputs */
+
 .card-row {
   display: flex;
   gap: 12px;
@@ -62,7 +62,7 @@
   flex: 1;
 }
 
-/* QR Payment */
+
 .qr-section {
   text-align: center;
   margin: 2rem 0 1.5rem 0;
@@ -81,7 +81,7 @@
   color: #6e4c4c;
 }
 
-/* Payment Button */
+
 .pay-btn {
   background: linear-gradient(to right, #f8bbd0, #f9c9d4);
   border: none;
@@ -100,7 +100,7 @@
   box-shadow: 0 8px 16px rgba(249, 168, 212, 0.5);
 }
 
-/* Back Link */
+
 .back-btn {
   margin-top: 1rem;
   color: #5d4037;
@@ -110,7 +110,7 @@
   font-size: 0.9rem;
 }
 
-/* Responsive */
+
 @media (max-width: 480px) {
   .payment-container {
     margin: 2rem 1rem;
@@ -122,14 +122,14 @@
   }
 }
 
-/* Card input container for showing card type */
+
 .card-input-container {
   position: relative;
   display: flex;
   flex-direction: column;
 }
 
-/* Card type indicator */
+
 .card-type {
   position: absolute;
   right: 12px;
@@ -142,7 +142,7 @@
   color: #4e342e;
 }
 
-/* Error styling */
+
 .input-error {
   border-color: #e53935 !important;
   background-color: #ffebee;
@@ -155,7 +155,7 @@
   font-weight: 500;
 }
 
-/* Payment summary section */
+
 .payment-summary {
   background-color: #f9f4f5;
   border-radius: 10px;

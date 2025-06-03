@@ -128,7 +128,7 @@ button:focus {
   box-shadow: 0 4px 14px rgba(212, 165, 154, 0.35), 0 0 0 3px rgba(212, 165, 154, 0.3);
 }
 
-/* Button ripple effect */
+
 button::before {
   content: '';
   position: absolute;
@@ -155,7 +155,6 @@ button span {
   transition: transform 0.2s ease;
 }
 
-/* Button loading state (optional) */
 button.loading {
   pointer-events: none;
   opacity: 0.8;
@@ -185,7 +184,7 @@ button.loading::after {
   100% { transform: rotate(360deg); }
 }
 
-/* Button text animation on hover */
+
 .confirmation-actions button:hover span {
   transform: translateY(-1px);
 }
@@ -209,7 +208,6 @@ button.loading::after {
 }
 
 
-/* Individual button styling with enhanced effects */
 .confirmation-actions button:nth-child(1) {
   background: linear-gradient(135deg, #2d8659, #256f4c, #1e5a3d);
   box-shadow: 0 4px 14px rgba(45, 134, 89, 0.35);

@@ -112,7 +112,7 @@
   background-color: #c9302c;
 }
 
-/* Responsive styles */
+
 @media (max-width: 768px) {
   .user-admin-container {
     padding: 1.5rem;
@@ -162,7 +162,6 @@
   }
 }
 
-/* Very small phones */
 @media (max-width: 320px) {
   .user-admin-container {
     padding: 0.8rem;

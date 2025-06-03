@@ -1,4 +1,4 @@
-/* CoffeeMug.css - Complete Updated Version */
+
 
 .booking-section {
   display: flex;
@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-/* Optional decorative elements */
+
 .booking-section::before {
   content: "";
   position: absolute;
@@ -154,7 +154,7 @@
   justify-content: center;
   perspective: 1000px;
   position: relative;
-  z-index: 1; /* Lower z-index than navbar */
+  z-index: 1; 
 }
 
 .coffee-mug {
@@ -167,10 +167,10 @@
   will-change: transform;
   transition: all 0.5s ease;
   position: relative;
-  z-index: 1; /* Lower z-index than navbar */
+  z-index: 1; 
 }
 
-/* Simple spin animation */
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -180,7 +180,7 @@
   }
 }
 
-/* Coffee steam effect (optional) */
+
 .coffee-mug::before {
   content: "";
   position: absolute;
@@ -207,7 +207,7 @@
   }
 }
 
-/* Tablet and larger */
+
 @media (min-width: 768px) {
   .booking-section {
     flex-direction: row;

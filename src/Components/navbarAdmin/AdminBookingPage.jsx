@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./AdminBookingPage.css";
 
+// Component: Admin Booking Management Page
 const AdminBookingPage = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Fetch bookings from backend on component mount
   useEffect(() => {
     const fetchBookings = async () => {
       try {
@@ -21,6 +23,7 @@ const AdminBookingPage = () => {
     fetchBookings();
   }, []);
 
+  // Delete a booking by ID
   const handleDeleteBooking = async (id) => {
     try {
       const response = await fetch(`http://localhost:5010/api/Bookings/${id}`, {
@@ -41,6 +44,7 @@ const AdminBookingPage = () => {
     <div className="admin-booking-container">
       <h2>Bookings</h2>
 
+      {/* Loading indicator */}
       {loading ? (
         <p>Loading bookings...</p>
       ) : (
@@ -59,6 +63,7 @@ const AdminBookingPage = () => {
             </tr>
           </thead>
           <tbody>
+            {/* Render booking rows */}
             {bookings.length > 0 ? (
               bookings.map((booking) => (
                 <tr key={booking.id}>

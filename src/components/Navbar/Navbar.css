@@ -1,11 +1,11 @@
-/* Reset */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Navbar Container */
+
 .navbar {
   background: linear-gradient(to right, rgba(68, 41, 63, 0.85), rgba(108, 70, 85, 0.75));
   display: flex;
@@ -21,12 +21,12 @@
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(212, 161, 186, 0.2);
   position: relative;
-  z-index: 1000; /* Higher z-index to stay on top */
+  z-index: 1000; 
 }
 
 
 
-/* Logo */
+
 .logo-container {
   font-size: 1.2rem;
   font-family: 'Playfair Display';
@@ -47,7 +47,7 @@
 .logo {
   height: 40px;
   transition: transform 0.3s ease;
-  order: -1; /* Ensures logo is on top */
+  order: -1; 
 }
 
 .logo-container:hover .logo {
@@ -58,14 +58,14 @@
   font-size: 0.9rem;
   
   color: #e8d4e3;
-  text-shadow: none; /* Remove any text shadow/glow */
+  text-shadow: none; 
 }
 
 .navbar-left {
   padding-left: 1rem;
 }
 
-/* Nav links */
+
 .nav-links {
   list-style: none;
   display: flex;
@@ -98,7 +98,7 @@
   box-shadow: 0 0 12px rgba(212, 161, 186, 0.4);
 }
 
-/* Nav actions: cart + account */
+
 .nav-actions {
   display: flex;
   align-items: center;
@@ -106,7 +106,7 @@
   padding-right: 1rem;
 }
 
-/* Cart icon */
+
 .nav-cart {
    font-size: 1.5rem;
   color: #d4a1ba;
@@ -116,13 +116,13 @@
 }
 .nav-cart:hover,
 .nav-cart:focus {
-  /* background-color: rgba(212, 161, 186, 0.1); */
+
   box-shadow: 0 0 10px rgba(212, 161, 186, 0.3);
   cursor: pointer;
   outline: none;
 }
 
-/* Account Dropdown Button */
+
 .account-button {
   background-color: transparent;
   border: none;
@@ -148,16 +148,16 @@
 .account-button:focus .account-icon {
   transform: scale(1.1);
   outline: none;
-  /* border-color: rgba(212, 161, 186, 0.6); */
+  
 }
 
-/* Remove Bootstrap's default focus styles */
+
 .dropdown-toggle:focus {
   box-shadow: none !important;
   outline: none !important;
 }
 
-/* Override Bootstrap's default button focus/active states */
+
 .btn-primary:focus, 
 .btn-primary.focus,
 .btn-primary:active, 
@@ -167,15 +167,15 @@
   box-shadow: none !important;
 }
 
-/* Ensure the dropdown toggle doesn't show any background color */
+
 .dropdown-toggle::after {
   display: none;
 }
 
-/* Dropdown menu */
+
 .dropdown-menu {
   border-radius: 10px;
-  /* box-shadow: 0 4px 10px rgba(215, 182, 236, 0.3); */
+  
   min-width: 140px;
 }
 .logout-button {
@@ -194,7 +194,7 @@
 }
 
 
-/* Mobile menu toggle button */
+
 .menu-toggle {
   display: none;
   background: transparent;
@@ -205,14 +205,14 @@
   padding: 0.5rem;
   transition: all 0.3s ease;
   position: relative;
-  z-index: 1001; /* Even higher z-index for the toggle */
+  z-index: 1001; 
 }
 
 .menu-toggle:hover {
   color: #f3dde8;
 }
 
-/* Responsive styles */
+
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem;

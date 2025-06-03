@@ -6,6 +6,8 @@ const BASE_URL = "http://localhost:5010";
 
 const BookingPage = () => {
   const navigate = useNavigate();
+
+  // Form state
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -20,8 +22,10 @@ const BookingPage = () => {
   const [selectedTable, setSelectedTable] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
   const [errors, setErrors] = useState({});
+
   const today = new Date().toISOString().split("T")[0];
 
+  // Generate time slots from 9:00 to 16:00
   const generateTimeSlots = () => {
     const slots = [];
     for (let hour = 9; hour <= 16; hour++) {
@@ -30,6 +34,7 @@ const BookingPage = () => {
     return slots;
   };
 
+  // Fetch available tables
   const checkAvailability = async (guests, date, time) => {
     try {
       const res = await fetch(
@@ -42,6 +47,7 @@ const BookingPage = () => {
     }
   };
 
+  // Recheck availability when formData changes
   useEffect(() => {
     const { guests, date, time } = formData;
     if (guests >= 5 && guests <= 10 && date && time) {
@@ -53,18 +59,18 @@ const BookingPage = () => {
     }
   }, [formData.guests, formData.date, formData.time]);
 
+  // Update price when guest count or selected table changes
   useEffect(() => {
     if (selectedTable) {
-      const price = formData.guests * 25;
-      setTotalPrice(price);
+      setTotalPrice(formData.guests * 25);
     } else {
       setTotalPrice(0);
     }
   }, [selectedTable, formData.guests]);
 
+  // Field-specific validation
   const validateField = (name, value) => {
     let message = null;
-
     switch (name) {
       case "fullName":
         if (!value.trim()) message = "Full name is required.";
@@ -77,9 +83,8 @@ const BookingPage = () => {
       case "phoneNumber":
         const digits = value.replace(/\D/g, "");
         if (!value.trim()) message = "Phone number is required.";
-        else if (!digits.startsWith("0"))
-          message = "Phone number must start with 0.";
-        else if (digits.length !== 10) message = "Phone must be 10 digits.";
+        else if (!digits.startsWith("0")) message = "Phone must start with 0.";
+        else if (digits.length !== 10) message = "Must be 10 digits.";
         break;
       case "date":
         if (!value) message = "Date is required.";
@@ -88,9 +93,8 @@ const BookingPage = () => {
         if (!value) message = "Time is required.";
         break;
       case "guests":
-        const guests = parseInt(value, 10);
-        if (isNaN(guests) || guests < 5 || guests > 10)
-          message = "Guests must be 5–10.";
+        const g = parseInt(value, 10);
+        if (isNaN(g) || g < 5 || g > 10) message = "Guests must be 5–10.";
         break;
       default:
         break;
@@ -100,12 +104,11 @@ const BookingPage = () => {
     return !message;
   };
 
+  // Full form validation
   const validate = () => {
     let isValid = true;
     Object.entries(formData).forEach(([key, value]) => {
-      if (key !== "tableId") {
-        if (!validateField(key, value)) isValid = false;
-      }
+      if (key !== "tableId" && !validateField(key, value)) isValid = false;
     });
 
     if (!selectedTable) {
@@ -122,6 +125,7 @@ const BookingPage = () => {
     validateField(name, value);
   };
 
+  // Submit booking to backend
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
@@ -144,7 +148,6 @@ const BookingPage = () => {
       });
 
       if (response.ok) {
-        const result = await response.json();
         navigate("/payment", { state: { ...booking, totalPrice } });
       } else {
         const error = await response.text();
@@ -163,6 +166,7 @@ const BookingPage = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="booking-form" noValidate>
+        {/* Name */}
         <div className="form-group">
           <label htmlFor="fullName">Full Name</label>
           <input
@@ -179,6 +183,7 @@ const BookingPage = () => {
           )}
         </div>
 
+        {/* Email */}
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -193,6 +198,7 @@ const BookingPage = () => {
           {errors.email && <div className="error-message">{errors.email}</div>}
         </div>
 
+        {/* Phone Number */}
         <div className="form-group">
           <label htmlFor="phoneNumber">Phone Number</label>
           <input
@@ -209,6 +215,7 @@ const BookingPage = () => {
           )}
         </div>
 
+        {/* Date & Time */}
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="date">Date</label>
@@ -246,6 +253,7 @@ const BookingPage = () => {
           </div>
         </div>
 
+        {/* Guest Count */}
         <div className="form-group">
           <label htmlFor="guests">Number of Guests</label>
           <input
@@ -264,6 +272,7 @@ const BookingPage = () => {
           )}
         </div>
 
+        {/* Available Tables */}
         <div className="available-tables">
           <h2>Available Tables</h2>
           {availableTables.length === 0 ? (
@@ -296,6 +305,7 @@ const BookingPage = () => {
           {errors.table && <div className="error-message">{errors.table}</div>}
         </div>
 
+        {/* Price Summary */}
         <div className="total-price">
           Total Price: R{totalPrice} <small>(R25 per guest)</small>
         </div>

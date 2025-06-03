@@ -3,26 +3,28 @@ import { useNavigate } from "react-router-dom";
 import "./UserAdminPage.css";
 
 const UserAdminPage = () => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // ✅ Add this
+  const [users, setUsers] = useState([]); // State to hold user data
+  const [loading, setLoading] = useState(true); // Track loading status
+  const navigate = useNavigate(); // Navigation hook
 
+  // Fetch user data when component mounts
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await fetch("http://localhost:5010/api/Users");
         const data = await response.json();
-        setUsers(data);
+        setUsers(data); // Set retrieved user data
       } catch (error) {
         console.error("Error fetching users:", error);
       } finally {
-        setLoading(false);
+        setLoading(false); // Stop loading spinner regardless of result
       }
     };
 
     fetchUsers();
   }, []);
 
+  // Handle deleting a user by ID
   const handleDeleteUser = async (id) => {
     try {
       const response = await fetch(`http://localhost:5010/api/Users/${id}`, {
@@ -30,6 +32,7 @@ const UserAdminPage = () => {
       });
 
       if (response.ok) {
+        // Remove user from UI after successful deletion
         setUsers(users.filter((user) => user.id !== id));
       } else {
         console.error("Failed to delete user");
@@ -39,18 +42,21 @@ const UserAdminPage = () => {
     }
   };
 
+  // Navigate to staff registration page
   const handleAddStaff = () => {
-    navigate("/admin/registerstaff"); // ✅ Navigate to register page
+    navigate("/admin/registerstaff");
   };
 
   return (
     <div className="user-admin-container">
       <h2>Users</h2>
 
+      {/* Add staff button */}
       <button className="add-staff-button" onClick={handleAddStaff}>
         + Add Staff Member
       </button>
 
+      {/* Conditional rendering based on loading status */}
       {loading ? (
         <p>Loading users...</p>
       ) : (

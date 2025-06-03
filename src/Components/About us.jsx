@@ -36,7 +36,7 @@ export function AboutUs() {
               className="circle-image"
             />
           </div>
-          <p className="container-text">Dylan Cupido</p>
+          <h1>Dylan Cupido</h1>
           <p className="container-text">Fullstack Developer</p>
         </div>
       </div>
@@ -53,7 +53,7 @@ export function AboutUs() {
               className="circle-image"
             />
           </div>
-          <p className="container-text">Farhan Waggie</p>
+          <h1>Farhan Waggie</h1>
           <p className="container-text">
             Backend Developer / Product Documentor
           </p>
@@ -72,7 +72,7 @@ export function AboutUs() {
               className="circle-image"
             />
           </div>
-          <p className="container-text">Mulanga Radzilani</p>
+          <h1>Mulanga Radzilani</h1>
           <p className="container-text">
             Backend Developer / Database Specialist
           </p>
@@ -91,7 +91,7 @@ export function AboutUs() {
               className="circle-image"
             />
           </div>
-          <p className="container-text">Sintu Tabata</p>
+          <h1>Sintu Tabata</h1>
           <p className="container-text">
             UI Designer / Automation Tester / Front-End Developer
           </p>

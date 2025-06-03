@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import "../Navbar/Navbar.css";
 import logo from "../../assets/logo.png";
 
+// Staff navigation bar component
 const StaffNavbar = ({ onLogout }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // Mobile menu toggle state
 
+  // Toggle menu open/close on small screens
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
     <nav className="navbar" role="navigation" aria-label="Staff Navigation">
+      {/* Left: Logo and label */}
       <div className="navbar-left">
         <Link to="/" className="logo-container" aria-label="Homepage">
           <div className="logo-stack">
@@ -19,7 +22,7 @@ const StaffNavbar = ({ onLogout }) => {
         </Link>
       </div>
 
-      {/* Mobile menu toggle */}
+      {/* Toggle button for mobile menu */}
       <button
         className="menu-toggle"
         onClick={toggleMenu}
@@ -29,6 +32,7 @@ const StaffNavbar = ({ onLogout }) => {
         <i className={`fas ${menuOpen ? "fa-times" : "fa-bars"}`}></i>
       </button>
 
+      {/* Navigation links */}
       <ul className={`nav-links ${menuOpen ? "active" : ""}`} role="menubar">
         <li>
           <Link to="/staff/orders">Orders</Link>
@@ -41,6 +45,7 @@ const StaffNavbar = ({ onLogout }) => {
         </li>
       </ul>
 
+      {/* Logout action button */}
       <div className="nav-actions">
         <button className="logout-button" onClick={onLogout}>
           Logout

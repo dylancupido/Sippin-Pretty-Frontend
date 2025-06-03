@@ -1,13 +1,9 @@
-/* Delivery Management Styles with coffee shop color scheme */
-
-/* Main container */
 .delivery-management {
-  background-color: #f9f5f0; /* Light cream background */
+  background-color: #f9f5f0;
   min-height: calc(100vh - 80px);
-  color: #5a3921; /* Coffee brown text color */
+  color: #5a3921;
 }
 
-/* Controls section */
 .delivery-controls {
   display: flex;
   justify-content: space-between;
@@ -24,7 +20,7 @@
 .search-input {
   flex: 1;
   padding: 8px 12px;
-  border: 1px solid #c8a27a; /* Coffee accent color */
+  border: 1px solid #c8a27a;
   border-radius: 4px;
   font-size: 14px;
   background-color: #fff;
@@ -39,22 +35,24 @@
 
 .status-filter {
   padding: 8px 12px;
-  border: 1px solid #c8a27a; /* Coffee accent color */
+  border: 1px solid #c8a27a;
   border-radius: 4px;
   background-color: white;
   font-size: 14px;
   color: #5a3921;
-  appearance: none; /* Remove default arrow */
+  appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235a3921' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
-  padding-right: 30px; /* Space for the arrow */
+  padding-right: 30px;
   cursor: pointer;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .status-filter:hover {
-  border-color: #b08e69; /* Darker coffee color */
+  border-color: #b08e69;
 }
 
 .status-filter:focus {
@@ -64,7 +62,7 @@
 }
 
 .add-delivery-btn {
-  background-color: #c8a27a; /* Coffee accent color */
+  background-color: #c8a27a;
   color: white;
   border: none;
   border-radius: 4px;
@@ -75,10 +73,9 @@
 }
 
 .add-delivery-btn:hover {
-  background-color: #b08e69; /* Darker coffee color on hover */
+  background-color: #b08e69;
 }
 
-/* Table styles */
 .delivery-table-container {
   overflow-x: auto;
   background-color: #fff;
@@ -96,27 +93,26 @@
 .delivery-table td {
   padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid #e9e1d6; /* Light coffee color */
+  border-bottom: 1px solid #e9e1d6;
 }
 
 .delivery-table th {
-  background-color: #f0e6d9; /* Very light coffee color */
+  background-color: #f0e6d9;
   font-weight: 600;
   color: #5a3921;
 }
 
 .delivery-table tr:hover {
-  background-color: #f9f5f0; /* Light cream background */
+  background-color: #f9f5f0;
 }
 
 .no-deliveries {
   text-align: center;
   padding: 20px;
-  color: #8c6d4f; /* Lighter brown */
+  color: #8c6d4f;
   font-style: italic;
 }
 
-/* Status badges */
 .status-badge {
   display: inline-block;
   padding: 4px 10px;
@@ -128,37 +124,36 @@
 }
 
 .status-pending {
-  background-color: #f0e6d9; /* Very light coffee */
-  color: #8c6d4f; /* Medium coffee brown */
+  background-color: #f0e6d9;
+  color: #8c6d4f;
   border: 1px solid #d9c5a9;
 }
 
 .status-out {
-  background-color: #e9d8c4; /* Light caramel */
-  color: #6f4e37; /* Dark coffee */
+  background-color: #e9d8c4;
+  color: #6f4e37;
   border: 1px solid #d9c5a9;
 }
 
 .status-delivered {
-  background-color: #d4edda; /* Light green */
-  color: #155724; /* Dark green */
+  background-color: #d4edda;
+  color: #155724;
   border: 1px solid #c3e6cb;
 }
 
 .status-cancelled {
-  background-color: #f8d7da; /* Light red */
-  color: #721c24; /* Dark red */
+  background-color: #f8d7da;
+  color: #721c24;
   border: 1px solid #f5c6cb;
 }
 
-/* Action buttons */
 .action-buttons {
   display: flex;
   gap: 8px;
 }
 
 .view-btn {
-  background-color: #8c6d4f; /* Medium coffee brown */
+  background-color: #8c6d4f;
   color: white;
   border: none;
   border-radius: 4px;
@@ -169,26 +164,26 @@
 }
 
 .view-btn:hover {
-  background-color: #725a41; /* Darker coffee brown */
+  background-color: #725a41;
 }
 
 .update-status {
   padding: 6px 10px;
-  border: 1px solid #c8a27a; /* Coffee accent color */
+  border: 1px solid #c8a27a;
   border-radius: 4px;
   font-size: 12px;
   color: #5a3921;
-  appearance: none; /* Remove default arrow */
+  appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%235a3921' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 6px center;
-  padding-right: 20px; /* Space for the arrow */
+  padding-right: 20px;
   cursor: pointer;
   transition: border-color 0.3s ease;
 }
 
 .update-status:hover {
-  border-color: #b08e69; /* Darker coffee color */
+  border-color: #b08e69;
 }
 
 .update-status:focus {
@@ -197,7 +192,6 @@
   box-shadow: 0 0 0 2px rgba(200, 162, 122, 0.2);
 }
 
-/* Delete button */
 .delete-btn {
   background-color: #e74c3c;
   color: white;
@@ -212,30 +206,30 @@
   background-color: #c0392b;
 }
 
-/* Enhanced Modal Styles for Coffee Shop Theme */
-
-/* Modal backdrop */
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(90, 57, 33, 0.5); /* Coffee brown with opacity */
+  background-color: rgba(90, 57, 33, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(3px); /* Subtle blur effect */
+  backdrop-filter: blur(3px);
   animation: fadeIn 0.2s ease-out;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-/* Modal container */
 .delivery-modal {
   background-color: white;
   border-radius: 12px;
@@ -249,26 +243,31 @@
 }
 
 @keyframes slideIn {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-/* Modal header */
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 18px 24px;
-  border-bottom: 1px solid #e9e1d6; /* Light coffee color */
-  background-color: #f0e6d9; /* Very light coffee color */
+  border-bottom: 1px solid #e9e1d6;
+  background-color: #f0e6d9;
   border-radius: 12px 12px 0 0;
 }
 
 .modal-header h2 {
   margin: 0;
   font-size: 22px;
-  color: #5a3921; /* Coffee brown */
-  font-family: 'Playfair Display', serif;
+  color: #5a3921;
+  font-family: "Playfair Display", serif;
   font-weight: 600;
 }
 
@@ -277,7 +276,7 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #8c6d4f; /* Lighter brown */
+  color: #8c6d4f;
   transition: color 0.2s ease;
   width: 32px;
   height: 32px;
@@ -292,13 +291,11 @@
   background-color: rgba(200, 162, 122, 0.1);
 }
 
-/* Modal content */
 .modal-content {
   padding: 24px;
   color: #5a3921;
 }
 
-/* Delivery info section */
 .delivery-info {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -314,8 +311,8 @@
   margin-top: 0;
   margin-bottom: 12px;
   font-size: 16px;
-  color: #5a3921; /* Coffee brown */
-  border-bottom: 1px solid #e9e1d6; /* Light coffee color */
+  color: #5a3921;
+  border-bottom: 1px solid #e9e1d6;
   padding-bottom: 8px;
   font-weight: 600;
 }
@@ -323,7 +320,7 @@
 .info-group p {
   margin: 8px 0;
   line-height: 1.6;
-  color: #5a3921; /* Coffee brown */
+  color: #5a3921;
   display: flex;
   align-items: center;
 }
@@ -337,7 +334,7 @@
 .item-list {
   margin: 0;
   padding-left: 20px;
-  color: #5a3921; /* Coffee brown */
+  color: #5a3921;
 }
 
 .item-list li {
@@ -345,17 +342,15 @@
   padding-left: 4px;
 }
 
-/* Modal actions */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
   margin-top: 24px;
   padding-top: 20px;
-  border-top: 1px solid #e9e1d6; /* Light coffee color */
+  border-top: 1px solid #e9e1d6;
 }
 
-/* Add Delivery Form in Modal */
 .add-delivery-form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -372,19 +367,21 @@
 .form-group label {
   font-weight: 500;
   font-size: 14px;
-  color: #5a3921; /* Coffee brown */
+  color: #5a3921;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
   padding: 10px 12px;
-  border: 1px solid #c8a27a; /* Coffee accent color */
+  border: 1px solid #c8a27a;
   border-radius: 6px;
   font-size: 14px;
   color: #5a3921;
   background-color: #fff;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .form-group input:focus,
@@ -400,7 +397,6 @@
   resize: vertical;
 }
 
-/* Items section in form */
 .items-group {
   grid-column: 1 / -1;
 }
@@ -426,7 +422,7 @@
 }
 
 .add-item-btn {
-  background-color: #c8a27a; /* Coffee accent color */
+  background-color: #c8a27a;
   color: white;
   border: none;
   border-radius: 6px;
@@ -437,7 +433,7 @@
 }
 
 .add-item-btn:hover {
-  background-color: #b08e69; /* Darker coffee color */
+  background-color: #b08e69;
 }
 
 .items-list {
@@ -455,7 +451,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
-  background-color: #f9f5f0; /* Light cream background */
+  background-color: #f9f5f0;
   margin-bottom: 1px;
 }
 
@@ -487,13 +483,12 @@
 }
 
 .no-items {
-  color: #8c6d4f; /* Lighter brown */
+  color: #8c6d4f;
   font-style: italic;
   padding: 12px;
   text-align: center;
 }
 
-/* Form action buttons */
 .form-actions {
   display: flex;
   justify-content: flex-end;
@@ -502,22 +497,25 @@
   grid-column: 1 / -1;
 }
 
-.save-btn, .cancel-btn {
+.save-btn,
+.cancel-btn {
   padding: 10px 20px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
 }
 
 .save-btn {
-  background-color: #c8a27a; /* Coffee accent color */
+  background-color: #c8a27a;
   color: white;
 }
 
 .save-btn:hover {
-  background-color: #b08e69; /* Darker coffee color */
+  background-color: #b08e69;
   transform: translateY(-1px);
 }
 
@@ -535,44 +533,43 @@
   background-color: #e9e1d6;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .delivery-modal {
     width: 95%;
     max-height: 95vh;
   }
-  
+
   .modal-header {
     padding: 15px 20px;
   }
-  
+
   .modal-content {
     padding: 15px;
   }
-  
+
   .delivery-info {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-  
+
   .modal-actions {
     flex-direction: column;
   }
-  
+
   .add-delivery-form {
     grid-template-columns: 1fr;
   }
-  
+
   .form-actions {
     flex-direction: column;
   }
-  
-  .save-btn, .cancel-btn {
+
+  .save-btn,
+  .cancel-btn {
     width: 100%;
   }
 }
 
-/* Dropdown options styling (works in modern browsers) */
 select option {
   padding: 8px;
   background-color: white;
@@ -584,28 +581,26 @@ select option:focus {
   background-color: #f9f5f0;
 }
 
-/* Enhanced status selection styling */
-
-/* Status select dropdown - common styles */
 .status-select,
 .update-status,
 .status-filter,
 select[name="status"] {
-  appearance: none; /* Remove default arrow */
+  appearance: none;
   background-color: white;
-  border: 1px solid #c8a27a; /* Coffee accent color */
+  border: 1px solid #c8a27a;
   border-radius: 4px;
-  color: #5a3921; /* Coffee brown text */
+  color: #5a3921;
   cursor: pointer;
   font-family: inherit;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235a3921' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
-  padding-right: 30px; /* Space for the arrow */
+  padding-right: 30px;
 }
 
-/* Status select in modal */
 .status-select {
   padding: 8px 12px;
   font-size: 14px;
@@ -613,7 +608,6 @@ select[name="status"] {
   font-weight: 500;
 }
 
-/* Update status in table */
 .update-status {
   padding: 6px 10px;
   font-size: 12px;
@@ -621,26 +615,23 @@ select[name="status"] {
   padding-right: 25px;
 }
 
-/* Status filter in controls */
 .status-filter {
   padding: 8px 12px;
   font-size: 14px;
   min-width: 150px;
 }
 
-/* Form status select */
 select[name="status"] {
   padding: 8px 12px;
   font-size: 14px;
   width: 100%;
 }
 
-/* Hover and focus states */
 .status-select:hover,
 .update-status:hover,
 .status-filter:hover,
 select[name="status"]:hover {
-  border-color: #b08e69; /* Darker coffee color */
+  border-color: #b08e69;
 }
 
 .status-select:focus,
@@ -653,7 +644,6 @@ select[name="status"]:focus {
   background-color: rgba(200, 162, 122, 0.05);
 }
 
-/* Status options styling */
 .status-select option,
 .update-status option,
 .status-filter option,
@@ -663,7 +653,6 @@ select[name="status"] option {
   color: #5a3921;
 }
 
-/* Status badge colors with coffee theme */
 .status-badge {
   display: inline-block;
   padding: 4px 10px;
@@ -675,36 +664,34 @@ select[name="status"] option {
 }
 
 .status-pending {
-  background-color: #f0e6d9; /* Very light coffee */
-  color: #8c6d4f; /* Medium coffee brown */
+  background-color: #f0e6d9;
+  color: #8c6d4f;
   border: 1px solid #d9c5a9;
 }
 
 .status-out {
-  background-color: #e9d8c4; /* Light caramel */
-  color: #6f4e37; /* Dark coffee */
+  background-color: #e9d8c4;
+  color: #6f4e37;
   border: 1px solid #d9c5a9;
 }
 
 .status-delivered {
-  background-color: #d4edda; /* Light green */
-  color: #155724; /* Dark green */
+  background-color: #d4edda;
+  color: #155724;
   border: 1px solid #c3e6cb;
 }
 
 .status-cancelled {
-  background-color: #f8d7da; /* Light red */
-  color: #721c24; /* Dark red */
+  background-color: #f8d7da;
+  color: #721c24;
   border: 1px solid #f5c6cb;
 }
 
-/* Custom select container for better positioning */
 .select-container {
   position: relative;
   display: inline-block;
 }
 
-/* Status indicator dot for select options */
 .status-option {
   display: flex;
   align-items: center;
@@ -734,7 +721,3 @@ select[name="status"] option {
 .status-option.cancelled::before {
   background-color: #721c24;
 }
-
-
-
-
