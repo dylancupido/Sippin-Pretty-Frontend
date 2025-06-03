@@ -26,6 +26,9 @@ function AdminNavBar({ onLogout }) {
         <li>
           <Link to="/admin/users">Users</Link>
         </li>
+         <li>
+          <Link to="/admin/bookings">Bookings</Link>
+        </li>
       </ul>
 
       <div className="nav-actions">

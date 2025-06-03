@@ -45,7 +45,7 @@ const UserAdminPage = () => {
 
   return (
     <div className="user-admin-container">
-      <h2>Registered Users</h2>
+      <h2>Users</h2>
 
       <button className="add-staff-button" onClick={handleAddStaff}>
         + Add Staff Member

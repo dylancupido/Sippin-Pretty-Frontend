@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import Navbar from "./Components/Navbar/Navbar";
 import AdminNavbar from "./Components/navbarAdmin/AdminNavBar";
 import StaffNavbar from "./Components/navbarAdmin/StaffNavBar";
-import CartConfirmationPage from "./Components/ConfirmationPage/CartConfirmationPage"
+import CartConfirmationPage from "./Components/ConfirmationPage/CartConfirmationPage";
 import HomePage from "./Components/HomePage";
 import Menu from "./Components/MenuPage";
 import CartPage from "./Components/CartPage";
@@ -29,6 +29,7 @@ import OrderItemsAdminPage from "./Components/StaffOrders";
 import StaffRegisterForm from "./Components/RegisterStaff";
 import PaymentPageCart from "./Components/PaymentPage/PaymentPageCart";
 import DeliveriesPage from "./Components/DeliveriesPage";
+import AdminBookingPage from "./Components/navbarAdmin/AdminBookingPage";
 
 function App() {
   const navigate = useNavigate();
@@ -155,7 +156,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/menu" element={<Menu onAddToCart={handleAddToCart} />} />
-        <Route path="/cart" element={<CartPage cart={cart} setCart={setCart} />} />
+        <Route
+          path="/cart"
+          element={<CartPage cart={cart} setCart={setCart} />}
+        />
         <Route path="/cart" element={<CartPage cart={cart} />} />
         <Route path="/cart-confirmation" element={<CartConfirmationPage />} />
         <Route path="/booking" element={<BookingPage />} />
@@ -167,6 +171,7 @@ function App() {
         <Route path="/admin/registerstaff" element={<StaffRegisterForm />} />
         <Route path="/cartpayment" element={<PaymentPageCart />} />
         <Route path="/deliveries" element={<DeliveriesPage />} />
+        <Route path="/admin/bookings" element={<AdminBookingPage />} />
 
         {/* Admin Routes */}
         <Route
