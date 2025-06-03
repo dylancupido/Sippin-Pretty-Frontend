@@ -2,42 +2,42 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./PaymentPageCart.css";
 import axios from "axios";
-
+ 
 const PaymentPageCart = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { cart, order } = location.state || {};
-
+ 
   const [cardData, setCardData] = useState({
     cardName: "",
     cardNumber: "",
     expiry: "",
     cvc: "",
   });
-
+ 
   const [errors, setErrors] = useState({});
   const [cardType, setCardType] = useState("");
   const [orderType, setOrderType] = useState("collection");
-
+ 
   const [deliveryAddress, setDeliveryAddress] = useState({
     street: "",
     city: "",
     postalCode: "",
   });
-
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCardData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: null }));
-
+ 
     if (name === "cardNumber") detectCardType(value);
   };
-
+ 
   const handleAddressChange = (e) => {
     const { name, value } = e.target;
     setDeliveryAddress((prev) => ({ ...prev, [name]: value }));
   };
-
+ 
   const detectCardType = (number) => {
     const clean = number.replace(/\s+/g, "");
     if (/^4/.test(clean)) setCardType("Visa");
@@ -49,7 +49,7 @@ const PaymentPageCart = () => {
     else if (/^5/.test(clean)) setCardType("Debit");
     else setCardType("");
   };
-
+ 
   const formatCardNumber = (e) => {
     let value = e.target.value.replace(/\D/g, "");
     value = value.replace(/(\d{4})(?=\d)/g, "$1 ");
@@ -57,7 +57,7 @@ const PaymentPageCart = () => {
     setCardData((prev) => ({ ...prev, cardNumber: value }));
     detectCardType(value);
   };
-
+ 
   const formatExpiry = (e) => {
     let value = e.target.value.replace(/\D/g, "");
     if (value.length > 2)
@@ -65,7 +65,7 @@ const PaymentPageCart = () => {
     e.target.value = value;
     setCardData((prev) => ({ ...prev, expiry: value }));
   };
-
+ 
   const validateForm = () => {
     const newErrors = {};
     if (!cardData.cardName.trim())
@@ -87,28 +87,28 @@ const PaymentPageCart = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-
+ 
     const orderItems = cart.map((item) => ({
       orderID: order.orderID,
       productID: item.productID,
       quantity: item.quantity,
       item_price: item.price,
     }));
-
+ 
     const payload = { order: { ...order, orderType }, orderItems };
     console.log("Sending order payload:", payload);
-
+ 
     try {
       const response = await axios.post(
         "http://localhost:5010/api/Orders/WithItems",
         payload
       );
       console.log("Order posted successfully:", response.data);
-
+ 
       if (orderType === "delivery") {
         const delivery = {
           orderID: order.orderID,
@@ -118,14 +118,20 @@ const PaymentPageCart = () => {
           postalCode: deliveryAddress.postalCode,
         };
         console.log("Sending delivery info:", delivery);
-
+ 
         await axios.post("http://localhost:5010/api/Deliveries", delivery);
       }
-
+ 
       alert("Payment successful and order placed!");
       localStorage.removeItem(`cart_${order.userID}`);
-      navigate("/confirmation", {
-        state: { orderID: order.orderID, total: order.totalAmount },
+      navigate("/cart-confirmation", {
+        state: {
+          orderID: order.orderID,
+          total: order.totalAmount,
+          orderType: orderType,
+          cart: cart,
+          deliveryAddress: orderType === "delivery" ? deliveryAddress : null
+        },
       });
     } catch (error) {
       console.error("Order failed:", error);
@@ -137,14 +143,14 @@ const PaymentPageCart = () => {
       alert("Something went wrong while placing your order.");
     }
   };
-
+ 
   return (
     <div className="payment-container">
       <div className="payment-header">
         <h2>Complete Cart Payment</h2>
         <p>Secure your order now!</p>
       </div>
-
+ 
       <form className="payment-form" onSubmit={handleSubmit}>
         <label>Cardholder Name</label>
         <input
@@ -158,7 +164,7 @@ const PaymentPageCart = () => {
         {errors.cardName && (
           <div className="error-message">{errors.cardName}</div>
         )}
-
+ 
         <div className="card-input-container">
           <label>Card Number</label>
           <input
@@ -176,7 +182,7 @@ const PaymentPageCart = () => {
             <div className="error-message">{errors.cardNumber}</div>
           )}
         </div>
-
+ 
         <div className="card-row">
           <div>
             <label>Expiry</label>
@@ -208,7 +214,7 @@ const PaymentPageCart = () => {
             {errors.cvc && <div className="error-message">{errors.cvc}</div>}
           </div>
         </div>
-
+ 
         <div className="order-type-selection">
           <label>
             <input
@@ -229,7 +235,7 @@ const PaymentPageCart = () => {
             Delivery
           </label>
         </div>
-
+ 
         {orderType === "delivery" && (
           <div className="delivery-fields">
             <label>Street Address</label>
@@ -239,7 +245,7 @@ const PaymentPageCart = () => {
               value={deliveryAddress.street}
               onChange={handleAddressChange}
             />
-
+ 
             <label>City</label>
             <input
               type="text"
@@ -247,7 +253,7 @@ const PaymentPageCart = () => {
               value={deliveryAddress.city}
               onChange={handleAddressChange}
             />
-
+ 
             <label>Postal Code</label>
             <input
               type="text"
@@ -257,7 +263,7 @@ const PaymentPageCart = () => {
             />
           </div>
         )}
-
+ 
         <div className="payment-summary">
           <h3>Order Summary</h3>
           <div className="summary-row total">
@@ -265,7 +271,7 @@ const PaymentPageCart = () => {
             <span>R{order.totalAmount}</span>
           </div>
         </div>
-
+ 
         <button type="submit" className="pay-btn">
           Confirm & Pay
         </button>
@@ -273,5 +279,7 @@ const PaymentPageCart = () => {
     </div>
   );
 };
-
+ 
 export default PaymentPageCart;
+ 
+ 

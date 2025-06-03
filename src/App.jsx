@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import Navbar from "./Components/Navbar/Navbar";
 import AdminNavbar from "./Components/navbarAdmin/AdminNavBar";
 import StaffNavbar from "./Components/navbarAdmin/StaffNavBar";
-
+import CartConfirmationPage from "./Components/ConfirmationPage/CartConfirmationPage"
 import HomePage from "./Components/HomePage";
 import Menu from "./Components/MenuPage";
 import CartPage from "./Components/CartPage";
@@ -155,7 +155,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/menu" element={<Menu onAddToCart={handleAddToCart} />} />
+        <Route path="/cart" element={<CartPage cart={cart} setCart={setCart} />} />
         <Route path="/cart" element={<CartPage cart={cart} />} />
+        <Route path="/cart-confirmation" element={<CartConfirmationPage />} />
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/confirmation" element={<ConfirmationPage />} />
