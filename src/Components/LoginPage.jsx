@@ -9,7 +9,7 @@ const LoginForm = ({ setLoggedIn, handleLogin }) => {
   const [username, setId] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = {
@@ -19,39 +19,46 @@ const LoginForm = ({ setLoggedIn, handleLogin }) => {
 
     const url = "http://localhost:5010/api/Login/LoginCus";
 
-    axios
-      .post(url, data)
-      .then((response) => {
-        const { message, token, user } = response.data;
+    try {
+      const response = await axios.post(url, data);
+      const { message, token, user } = response.data;
 
-        if (message === "Login successful") {
-          // ✅ Store token, role, and user ID
-          localStorage.setItem("token", token);
-          localStorage.setItem("role", user.role.toLowerCase());
-          localStorage.setItem("userId", user.id);
+      if (message === "Login successful") {
+        localStorage.setItem("token", token);
+        localStorage.setItem("role", user.role.toLowerCase());
+        localStorage.setItem("userId", user.id);
 
-          alert("Login successful!");
+        alert("Login successful!");
+        setLoggedIn(true);
 
-          setLoggedIn(true);
-          if (user && user.role) {
-            handleLogin(user.role.toLowerCase());
+        if (user && user.role) {
+          const role = user.role.toLowerCase();
+          handleLogin(role);
+
+          // Conditional routing based on role
+          if (role === "admin") {
+            navigate("/admin");
+          } else if (role === "staff") {
+            navigate("/staff");
+          } else {
+            navigate("/");
           }
-
+        } else {
           navigate("/");
-        } else {
-          alert("Server response: " + message);
         }
-      })
-      .catch((error) => {
-        console.error("Login error:", error);
-        if (error.response) {
-          alert(`Error: ${error.response.data.message}`);
-        } else if (error.request) {
-          alert("No response from server. Is your backend running?");
-        } else {
-          alert("Error setting up request: " + error.message);
-        }
-      });
+      } else {
+        alert("Server response: " + message);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      if (error.response) {
+        alert(`Error: ${error.response.data.message}`);
+      } else if (error.request) {
+        alert("No response from server. Is your backend running?");
+      } else {
+        alert("Error setting up request: " + error.message);
+      }
+    }
   };
 
   return (
