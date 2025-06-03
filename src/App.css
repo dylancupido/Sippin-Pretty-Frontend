@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap');
 
-/* Full Page Background */
+
 body, html, #root {
   margin: 0;
   padding: 0;
@@ -15,7 +15,7 @@ body, html, #root {
   position: relative;
 }
 
-/* Enhanced vintage overlay */
+
 body::before {
   content: "";
   position: fixed;
@@ -26,7 +26,7 @@ body::before {
   pointer-events: none;
 }
 
-/* Layout Container */
+
 .app-container {
   min-height: 100vh;
   position: relative;
@@ -39,14 +39,14 @@ body::before {
   box-sizing: border-box;
 }
 
-/* Mobile-first approach */
+
 @media (min-width: 768px) {
   .app-container {
     padding: 2rem;
   }
 }
 
-/* Cute Mug Animation */
+
 .coffee-mug {
   margin-top: 3rem;
   animation: float 3s ease-in-out infinite;
@@ -58,18 +58,18 @@ body::before {
   100% { transform: translateY(0); }
 }
 
-/* Heading */
+
 .left-heading h1 {
   .left-heading h1 {
   text-shadow:
     1px 1px #fff8dc,
-    0 0 10px #d4af37, /* gold glow */
+    0 0 10px #d4af37, 
     0 0 20px #d4af37;
 }
 
 }
 
-/* Modal Styling */
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -134,21 +134,21 @@ body::before {
   }
 }
 
-/* Fix for horizontal overflow */
+
 body, html, #root, .app-container {
   overflow-x: hidden;
   width: 100%;
   max-width: 100%;
 }
 
-/* Additional responsive adjustments */
+
 @media (max-width: 380px) {
   .app-container {
     padding: 0.5rem;
   }
 }
 
-/* Very small phones */
+
 @media (max-width: 320px) {
   .app-container {
     padding: 0.3rem;

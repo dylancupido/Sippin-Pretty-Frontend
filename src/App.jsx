@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
+// Navigation components for different user roles
 import Navbar from "./Components/Navbar/Navbar";
 import AdminNavbar from "./Components/navbarAdmin/AdminNavBar";
 import StaffNavbar from "./Components/navbarAdmin/StaffNavBar";
+
+// Pages
 import CartConfirmationPage from "./Components/ConfirmationPage/CartConfirmationPage";
 import HomePage from "./Components/HomePage";
 import Menu from "./Components/MenuPage";
@@ -18,18 +21,17 @@ import AdminDashboard from "./Components/navbarAdmin/AdminDashboard";
 import ManageHomePage from "./Components/navbarAdmin/ManageHomePage";
 import DeliveryManagement from "./Components/navbarAdmin/DeliveryManagement";
 import OrdersPage from "./Components/OrdersPage";
-
 import LoginForm from "./Components/LoginPage";
 import CusRegisterForm from "./Components/RegisterPage";
 import { AboutUs } from "./Components/About us";
-
-import "./App.css";
 import TillPage from "./Components/TillPage";
 import OrderItemsAdminPage from "./Components/StaffOrders";
 import StaffRegisterForm from "./Components/RegisterStaff";
 import PaymentPageCart from "./Components/PaymentPage/PaymentPageCart";
 import DeliveriesPage from "./Components/DeliveriesPage";
 import AdminBookingPage from "./Components/navbarAdmin/AdminBookingPage";
+
+import "./App.css";
 
 function App() {
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ function App() {
   );
   const [cart, setCart] = useState([]);
 
-  // 🔐 On app load: validate token and restore cart
+  // Check token validity and restore cart on app load
   useEffect(() => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
@@ -57,7 +59,6 @@ function App() {
           setLoggedIn(true);
           setUserRole(role || "user");
 
-          // ✅ Restore cart from localStorage
           if (userId) {
             const savedCart = localStorage.getItem(`cart_${userId}`);
             setCart(savedCart ? JSON.parse(savedCart) : []);
@@ -72,7 +73,7 @@ function App() {
     }
   }, []);
 
-  // 💾 Save cart to localStorage on change
+  // Save cart to localStorage when it changes
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     if (userId) {
@@ -80,7 +81,7 @@ function App() {
     }
   }, [cart]);
 
-  // ✅ After successful login
+  // Handle successful login
   const handleLogin = (role) => {
     setLoggedIn(true);
     setUserRole(role.toLowerCase());
@@ -92,7 +93,7 @@ function App() {
     }
   };
 
-  // ✅ On logout: clear cart and session
+  // Clear session and cart on logout
   const handleLogout = () => {
     const userId = localStorage.getItem("userId");
     if (userId) {
@@ -106,7 +107,7 @@ function App() {
     navigate("/");
   };
 
-  // ➕ Add to cart (with quantity support)
+  // Add item to cart with quantity tracking
   const handleAddToCart = (item) => {
     setCart((prev) => {
       const existingItem = prev.find(
@@ -127,7 +128,7 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Debug bar */}
+      {/* Display current role and login status */}
       <div
         style={{
           position: "fixed",
@@ -143,7 +144,7 @@ function App() {
         Role: {userRole} | Logged in: {loggedIn ? "Yes" : "No"}
       </div>
 
-      {/* Role-based Navbar */}
+      {/* Load appropriate navbar based on role */}
       {userRole === "admin" ? (
         <AdminNavbar onLogout={handleLogout} />
       ) : userRole === "staff" ? (
@@ -152,7 +153,7 @@ function App() {
         <Navbar loggedIn={loggedIn} onLogout={handleLogout} />
       )}
 
-      {/* Routing */}
+      {/* Define application routes */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/menu" element={<Menu onAddToCart={handleAddToCart} />} />
@@ -173,7 +174,7 @@ function App() {
         <Route path="/deliveries" element={<DeliveriesPage />} />
         <Route path="/admin/bookings" element={<AdminBookingPage />} />
 
-        {/* Admin Routes */}
+        {/* Admin-only routes */}
         <Route
           path="/menuadmin"
           element={
@@ -217,7 +218,7 @@ function App() {
           }
         />
 
-        {/* Auth Routes */}
+        {/* Auth routes */}
         <Route
           path="/login"
           element={

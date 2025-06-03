@@ -1,14 +1,14 @@
 
 
-/* Center the container row horizontally on the page */
+
 .page-center {
     display: flex;
     justify-content: center;
-    padding: 40px 20px; /* Top/bottom space and mobile-friendly horizontal padding */
+    padding: 40px 20px; 
     background-color: #ffffff;
 }
 
-/* Heading style */
+
 .heading {
     font-family: 'Pacifico', cursive;
   color: #5e412f;
@@ -18,19 +18,19 @@
     padding-top: 50px;
 }
 
-/* Paragraph style */
+
 .paragraph {
   position: relative;
   font-family: 'Poppins', sans-serif;
   text-align: center;
   font-size: 1.3rem;
-  margin: 0 auto 12px auto; /* <-- this centers the block element */
+  margin: 0 auto 12px auto; 
   color: black;
   width: 50%;
 }
 
 
-/* Wrapper for the circular image */
+
 .circle-wrapper {
     display: flex;
     justify-content: center;
@@ -38,7 +38,7 @@
     padding: 20px;
 }
 
-/* Circular image style */
+
 .circle-image {
     width: 150px;
     height: 150px;
@@ -48,14 +48,14 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Horizontal flex layout for containers */
+
 .container-wrapper {
     display: flex;
     gap: 16px;
     flex-wrap: nowrap;
 }
 
-/* Individual container box */
+
 .container {
     position: relative;
     width: 100px;
@@ -69,7 +69,7 @@
     justify-content: flex-start;
 }
 
-/* Text at the bottom of each container */
+
 .container-text {
     position: absolute;
     bottom: 12px;

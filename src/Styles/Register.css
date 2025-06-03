@@ -96,7 +96,7 @@ code {
   border: none;
   background-color: rgba(68, 41, 63, 0.85);
 }
-/* Style the react-datepicker to match your input fields */
+
 .react-datepicker-wrapper {
   width: 100%;
 }
@@ -121,7 +121,7 @@ code {
   cursor: pointer;
 }
 
-/* Error styling - matching PaymentPage */
+
 .input-error {
   border-color: #e53935 !important;
   background-color: #ffebee;
