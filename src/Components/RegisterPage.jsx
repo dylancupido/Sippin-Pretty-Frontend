@@ -2,113 +2,121 @@ import React, { useState } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
 import "../Styles/Register.css";
 import axios from "axios";
- 
+
 const CusRegisterForm = () => {
-  const [name, setName] = useState('');
-  const [username, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [phonenumber, setPhonenumber] = useState('');
+  const [name, setName] = useState("");
+  const [username, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [phonenumber, setPhonenumber] = useState("");
   const [errors, setErrors] = useState({});
-  const role = 'Customer';
- 
-  // Validation functions
+  const role = "Customer";
+
+  // Validate email format
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
+  // Validate password: min 8 chars, one number, one special character
   const validatePassword = (password) => {
-    // At least 8 characters, one special character, one number
-    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+    const passwordRegex =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
     return passwordRegex.test(password);
   };
 
+  // Handle email input change and clear error if present
   const handleIdChange = (e) => {
     const value = e.target.value;
     setId(value);
-
-    // Clear email error when user starts typing
     if (errors.email) {
-      setErrors(prev => ({ ...prev, email: '' }));
+      setErrors((prev) => ({ ...prev, email: "" }));
     }
   };
 
+  // Handle full name input change
   const handleNameChange = (e) => setName(e.target.value);
 
+  // Handle password input change and clear error if present
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
-
-    // Clear password error when user starts typing
     if (errors.password) {
-      setErrors(prev => ({ ...prev, password: '' }));
+      setErrors((prev) => ({ ...prev, password: "" }));
     }
   };
 
+  // Handle phone number input change
   const handlePhonenumberChange = (e) => setPhonenumber(e.target.value);
- 
+
+  // Handle form submission
   const handleOnClick = (event) => {
     event.preventDefault();
 
-    // Validate inputs
     const newErrors = {};
 
+    // Validate email and password inputs
     if (!validateEmail(username)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = "Please enter a valid email address";
     }
 
     if (!validatePassword(password)) {
-      newErrors.password = 'Password must be at least 8 characters with one number and one special character (!@#$%^&*)';
+      newErrors.password =
+        "Password must be at least 8 characters with one number and one special character (!@#$%^&*)";
     }
 
-    // If there are validation errors, set them and return
+    // If validation errors exist, display them
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
+    // Prepare data to send to backend
     const data = {
       Id: username,
       Name: name,
       PhoneNumber: phonenumber,
       Password: password,
-      Role: role
+      Role: role,
     };
 
-    const url = 'http://localhost:5010/api/Users/RegisterCus';
- 
-    axios.post(url, data)
+    const url = "http://localhost:5010/api/Users/RegisterCus";
+
+    // Send POST request to register user
+    axios
+      .post(url, data)
       .then((response) => {
         const message = response.data;
- 
+
         switch (message) {
-          case 'Registration Successfull':
-            alert('Registration successful!');
+          case "Registration Successfull":
+            alert("Registration successful!");
             break;
-          case 'Error':
-            alert('User already exists. Try a different username.');
+          case "Error":
+            alert("User already exists. Try a different username.");
             break;
           default:
-            alert('Server response: ' + message);
+            alert("Server response: " + message);
         }
       })
       .catch((error) => {
-        console.error('Registration error:', error);
+        console.error("Registration error:", error);
         if (error.response) {
           alert(`Error: ${error.response.data}`);
         } else if (error.request) {
-          alert('No response from server. Is your backend running?');
+          alert("No response from server. Is your backend running?");
         } else {
-          alert('Error setting up request: ' + error.message);
+          alert("Error setting up request: " + error.message);
         }
       });
   };
- 
+
   return (
     <div className="Wrapper">
       <form>
         <h1>Sign up</h1>
         <p>Sign up to continue</p>
+
+        {/* Full Name input */}
         <div className="Inputbox">
           <input
             value={name}
@@ -118,6 +126,8 @@ const CusRegisterForm = () => {
             required
           />
         </div>
+
+        {/* Email input */}
         <div className="Inputbox">
           <input
             value={username}
@@ -125,10 +135,12 @@ const CusRegisterForm = () => {
             placeholder="Email Address*"
             onChange={handleIdChange}
             required
-            className={errors.email ? 'input-error' : ''}
+            className={errors.email ? "input-error" : ""}
           />
           {errors.email && <div className="error-message">{errors.email}</div>}
         </div>
+
+        {/* Password input */}
         <div className="Inputbox">
           <input
             value={password}
@@ -136,10 +148,14 @@ const CusRegisterForm = () => {
             placeholder="Password*"
             onChange={handlePasswordChange}
             required
-            className={errors.password ? 'input-error' : ''}
+            className={errors.password ? "input-error" : ""}
           />
-          {errors.password && <div className="error-message">{errors.password}</div>}
+          {errors.password && (
+            <div className="error-message">{errors.password}</div>
+          )}
         </div>
+
+        {/* Phone number input */}
         <div className="Inputbox">
           <input
             value={phonenumber}
@@ -149,15 +165,17 @@ const CusRegisterForm = () => {
             required
           />
         </div>
+
+        {/* Submit button */}
         <button onClick={handleOnClick}>Sign up</button>
       </form>
+
+      {/* Login prompt */}
       <p className="login-prompt">
         Already have an account? <a href="">Log in</a>
       </p>
     </div>
   );
 };
- 
+
 export default CusRegisterForm;
- 
- 

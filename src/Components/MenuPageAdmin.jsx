@@ -6,6 +6,7 @@ const MenuAdmin = ({ onAddToCart }) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
+  // Form state for creating or editing menu items
   const [formData, setFormData] = useState({
     productName: "",
     group: "",
@@ -14,6 +15,7 @@ const MenuAdmin = ({ onAddToCart }) => {
     imageUrl: "",
   });
 
+  // Fetch menu items from API on component mount
   useEffect(() => {
     fetch("http://localhost:5010/api/MenuItemsAPI")
       .then((res) => res.json())
@@ -21,15 +23,19 @@ const MenuAdmin = ({ onAddToCart }) => {
       .catch((err) => console.error("Failed to fetch menu:", err));
   }, []);
 
+  // Menu categories to display
   const categories = [
     "Hot Beverages",
     "Cold Beverages",
     "Breakfast",
     "Sweet Treats",
   ];
+
+  // Filter items by category group
   const filterByGroup = (group) =>
     menuItems.filter((item) => item.group === group);
 
+  // Open modal for adding a new item in the selected group
   const openAddModal = (group) => {
     setFormData({
       productName: "",
@@ -42,11 +48,13 @@ const MenuAdmin = ({ onAddToCart }) => {
     setShowAddModal(true);
   };
 
+  // Handle input changes in the form
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Save new or edited item to the backend
   const handleSave = async () => {
     try {
       const url = editMode
@@ -67,6 +75,7 @@ const MenuAdmin = ({ onAddToCart }) => {
         throw new Error("Failed to save menu item.");
       }
 
+      // Refresh menu items after save
       const updatedMenu = await fetch("http://localhost:5010/api/MenuItemsAPI");
       const data = await updatedMenu.json();
       setMenuItems(data);
@@ -76,6 +85,7 @@ const MenuAdmin = ({ onAddToCart }) => {
     }
   };
 
+  // Delete an item by ID
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this item?")) return;
 
@@ -101,20 +111,24 @@ const MenuAdmin = ({ onAddToCart }) => {
       console.error("Error deleting item:", error);
     }
   };
+
+  // Open modal in edit mode with existing item data
   const openEditModal = (item) => {
-    setFormData({ ...item }); // populate form with item values
+    setFormData({ ...item });
     setEditMode(true);
     setShowAddModal(true);
   };
 
   return (
     <>
+      {/* Render each category section */}
       {categories.map((category, idx) => (
         <div key={`category-${idx}`}>
           <div className="section-title">
             <h1>{category}</h1>
           </div>
           <div className="card-container">
+            {/* Render menu items for the category */}
             {filterByGroup(category).map((item) => (
               <div key={`item-${item.productID}`} className="custom-card">
                 <div className="card-image-align">
@@ -129,7 +143,6 @@ const MenuAdmin = ({ onAddToCart }) => {
                   <p className="card-description">{item.description}</p>
                   <p className="card-price">R{item.price}</p>
                   <div className="card-actions">
-                   
                     <button
                       className="edit-btn"
                       onClick={() => openEditModal(item)}
@@ -146,6 +159,7 @@ const MenuAdmin = ({ onAddToCart }) => {
                 </div>
               </div>
             ))}
+            {/* Add new item card */}
             <div
               className="custom-card add-card"
               onClick={() => openAddModal(category)}
@@ -156,6 +170,7 @@ const MenuAdmin = ({ onAddToCart }) => {
         </div>
       ))}
 
+      {/* Modal for adding or editing menu items */}
       {showAddModal && (
         <div className="custom-modal-overlay">
           <div className="custom-modal">

@@ -5,6 +5,7 @@ const Menu = ({ onAddToCart }) => {
   const [menuItems, setMenuItems] = useState([]);
   const [notification, setNotification] = useState("");
 
+  // Fetch menu items from API
   useEffect(() => {
     fetch("http://localhost:5010/api/MenuItemsAPI")
       .then((res) => res.json())
@@ -15,9 +16,11 @@ const Menu = ({ onAddToCart }) => {
       .catch((err) => console.error("Failed to fetch menu:", err));
   }, []);
 
+  // Filter menu items by group/category
   const filterByGroup = (groupName) =>
     menuItems.filter((item) => item.group === groupName);
 
+  // Categories to display
   const categories = [
     "Hot Beverages",
     "Cold Beverages",
@@ -25,16 +28,19 @@ const Menu = ({ onAddToCart }) => {
     "Sweet Treats",
   ];
 
+  // Handle add-to-cart action and show notification
   const handleAddToCart = (item) => {
     onAddToCart(item);
     setNotification(`${item.productName} added to cart!`);
-    setTimeout(() => setNotification(""), 3000);
+    setTimeout(() => setNotification(""), 3000); // Hide after 3 seconds
   };
 
   return (
     <>
+      {/* Show temporary cart notification */}
       {notification && <div className="cart-notification">{notification}</div>}
 
+      {/* Render each category with its menu items */}
       {categories.map((category) => (
         <div key={category}>
           <div className="-section-title">

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../Styles/Till.css";
 import axios from "axios";
- 
+
 export default function TillPage() {
   const [menuItems, setMenuItems] = useState([]);
   const [receiptItems, setReceiptItems] = useState([]);
   const [paymentType, setPaymentType] = useState("");
- 
+
+  // Load menu items from the API
   useEffect(() => {
     fetch("http://localhost:5010/api/MenuItemsAPI")
       .then((res) => res.json())
@@ -23,58 +24,63 @@ export default function TillPage() {
       })
       .catch((err) => console.error("Failed to fetch menu:", err));
   }, []);
- 
+
+  // Add an item to the receipt
   const handleAddItem = (item) => {
     setReceiptItems([...receiptItems, item]);
   };
- 
+
+  // Clear receipt and payment selection
   const handleClear = () => {
     setReceiptItems([]);
     setPaymentType("");
   };
- 
+
+  // Set selected payment method
   const handlePayment = (type) => {
     setPaymentType(type);
   };
- 
+
+  // Calculate total cost of items in the receipt
   const total = receiptItems.reduce((sum, item) => sum + item.price, 0);
- 
+
+  // Submit order and order items to the backend
   const handleCheckout = async () => {
     if (receiptItems.length === 0) {
       alert("No items to checkout.");
       return;
     }
- 
+
     if (!paymentType) {
       alert("Please select a payment method.");
       return;
     }
- 
+
     const orderID =
       "ORD-" + Math.random().toString(36).substr(2, 9).toUpperCase();
-    const userID = "INSTORE1"; // fixed user added to DB manually
- 
+    const userID = "INSTORE1";
+
     const order = {
       orderID,
       userID,
       totalAmount: parseFloat(total.toFixed(2)),
       orderType: "In-Store",
       status: "in progress",
-      paymentMethod: paymentType // Add payment method to order
+      paymentMethod: paymentType,
     };
- 
+
     const orderItems = receiptItems.map((item) => ({
       orderID,
       productID: item.productID,
       quantity: item.quantity || 1,
       item_price: item.price,
     }));
- 
+
     const payload = {
       order,
       orderItems,
     };
- 
+
     try {
       console.log("Sending payload:", payload);
       const response = await axios.post(
@@ -95,13 +101,13 @@ export default function TillPage() {
       );
     }
   };
- 
+
   return (
     <div className="calculator-app-container">
       <h1 className="heading">Till System</h1>
- 
+
       <div className="till-container">
-        {/* Receipt Section */}
+        {/* Receipt display and actions */}
         <div className="receipt">
           <h3>Receipt</h3>
           {receiptItems.length === 0 ? (
@@ -117,7 +123,8 @@ export default function TillPage() {
             </ul>
           )}
           <div className="total">Total: R{total.toFixed(2)}</div>
- 
+
+          {/* Checkout and clear buttons */}
           <div className="checkout-controls">
             <button
               className="checkout"
@@ -130,7 +137,8 @@ export default function TillPage() {
               Clear
             </button>
           </div>
- 
+
+          {/* Payment method selection */}
           <div className="payment-options">
             <p>Select Payment:</p>
             <button
@@ -147,8 +155,8 @@ export default function TillPage() {
             </button>
           </div>
         </div>
- 
-        {/* Menu Section */}
+
+        {/* Menu display */}
         <div className="menu">
           <h3>Menu</h3>
           <div className="menu-grid">
@@ -167,5 +175,3 @@ export default function TillPage() {
     </div>
   );
 }
- 
- 

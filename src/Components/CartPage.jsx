@@ -6,25 +6,29 @@ const CartPage = ({ cart, setCart }) => {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
 
-  // Calculate total cart value
+  // Calculate total amount for all cart items
   const calculateTotal = () =>
     cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
 
-  // Handle checkout - go to payment page with order data
+  // Handle checkout button click
   const handleCheckout = () => {
+    // Require user to be logged in
     if (!userId) {
       alert("Please log in before checking out.");
       return;
     }
 
+    // Ensure cart is not empty
     if (cart.length === 0) {
       alert("Cart is empty.");
       return;
     }
 
+    // Generate unique order ID
     const orderID =
       "ORD-" + Math.random().toString(36).substr(2, 9).toUpperCase();
 
+    // Prepare order data
     const order = {
       orderID,
       userID: userId,
@@ -33,6 +37,7 @@ const CartPage = ({ cart, setCart }) => {
       status: "in progress",
     };
 
+    // Navigate to payment page and pass order/cart data via route state
     navigate("/cartpayment", {
       state: {
         cart,
@@ -45,10 +50,12 @@ const CartPage = ({ cart, setCart }) => {
     <div className="cart-page">
       <h1>Your Cart</h1>
 
+      {/* Show empty cart message or cart item list */}
       {cart.length === 0 ? (
         <p className="empty-cart">Your cart is empty.</p>
       ) : (
         <div className="cart-items-container">
+          {/* Render each cart item */}
           {cart.map((item, index) => (
             <div key={index} className="cart-item">
               <img
@@ -67,6 +74,7 @@ const CartPage = ({ cart, setCart }) => {
             </div>
           ))}
 
+          {/* Show total and checkout button */}
           <div className="cart-total">
             <h2>Total: R{calculateTotal()}</h2>
             <button className="checkout-button" onClick={handleCheckout}>

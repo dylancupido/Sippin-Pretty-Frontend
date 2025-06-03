@@ -10,48 +10,52 @@ const StaffRegisterForm = () => {
   const [errors, setErrors] = useState({});
   const role = "Staff";
 
-  // Validation functions
+  // Email validation
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
+  // Password validation (min 8 chars, one number, one special character)
   const validatePassword = (password) => {
-    // At least 8 characters, one special character, one number
-    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+    const passwordRegex =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
     return passwordRegex.test(password);
   };
 
+  // South African phone number validation (10 digits)
   const validatePhoneNumber = (phone) => {
-    // South African phone number format (10 digits)
     const phoneRegex = /^[0-9]{10}$/;
     return phoneRegex.test(phone);
   };
 
+  // Handle registration form submission
   const handleOnClick = (event) => {
     event.preventDefault();
 
-    // Validate inputs
     const newErrors = {};
 
+    // Validate each input field
     if (!validateEmail(username)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = "Please enter a valid email address";
     }
 
     if (!validatePassword(password)) {
-      newErrors.password = 'Password must be at least 8 characters with one number and one special character (!@#$%^&*)';
+      newErrors.password =
+        "Password must be at least 8 characters with one number and one special character (!@#$%^&*)";
     }
 
     if (!validatePhoneNumber(phonenumber)) {
-      newErrors.phone = 'Phone number must be exactly 10 digits';
+      newErrors.phone = "Phone number must be exactly 10 digits";
     }
 
-    // If there are validation errors, set them and return
+    // If validation fails, show error messages
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
+    // Construct registration payload
     const data = {
       Id: username,
       Name: name,
@@ -62,6 +66,7 @@ const StaffRegisterForm = () => {
 
     const url = "http://localhost:5010/api/Users/RegisterCus";
 
+    // Send POST request to backend
     axios
       .post(url, data)
       .then((response) => {
@@ -95,6 +100,7 @@ const StaffRegisterForm = () => {
         <h1>Register Staff</h1>
         <p>Staff Details</p>
 
+        {/* Full Name input */}
         <div className="Inputbox">
           <input
             value={name}
@@ -105,6 +111,7 @@ const StaffRegisterForm = () => {
           />
         </div>
 
+        {/* Email input */}
         <div className="Inputbox">
           <input
             value={username}
@@ -113,15 +120,16 @@ const StaffRegisterForm = () => {
             onChange={(e) => {
               setId(e.target.value);
               if (errors.email) {
-                setErrors(prev => ({ ...prev, email: '' }));
+                setErrors((prev) => ({ ...prev, email: "" }));
               }
             }}
             required
-            className={errors.email ? 'input-error' : ''}
+            className={errors.email ? "input-error" : ""}
           />
           {errors.email && <div className="error-message">{errors.email}</div>}
         </div>
 
+        {/* Password input */}
         <div className="Inputbox">
           <input
             value={password}
@@ -130,15 +138,18 @@ const StaffRegisterForm = () => {
             onChange={(e) => {
               setPassword(e.target.value);
               if (errors.password) {
-                setErrors(prev => ({ ...prev, password: '' }));
+                setErrors((prev) => ({ ...prev, password: "" }));
               }
             }}
             required
-            className={errors.password ? 'input-error' : ''}
+            className={errors.password ? "input-error" : ""}
           />
-          {errors.password && <div className="error-message">{errors.password}</div>}
+          {errors.password && (
+            <div className="error-message">{errors.password}</div>
+          )}
         </div>
 
+        {/* Phone number input */}
         <div className="Inputbox">
           <input
             value={phonenumber}
@@ -147,17 +158,16 @@ const StaffRegisterForm = () => {
             onChange={(e) => {
               setPhonenumber(e.target.value);
               if (errors.phone) {
-                setErrors(prev => ({ ...prev, phone: '' }));
+                setErrors((prev) => ({ ...prev, phone: "" }));
               }
             }}
             required
-            className={errors.phone ? 'input-error' : ''}
+            className={errors.phone ? "input-error" : ""}
           />
           {errors.phone && <div className="error-message">{errors.phone}</div>}
         </div>
 
-
-
+        {/* Submit button */}
         <button onClick={handleOnClick}>Register</button>
       </form>
     </div>

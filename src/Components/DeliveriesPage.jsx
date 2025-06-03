@@ -6,10 +6,12 @@ const DeliveriesPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Fetch deliveries and orders when component mounts
   useEffect(() => {
     fetchData();
   }, []);
 
+  // Fetch deliveries and corresponding orders from API
   const fetchData = async () => {
     try {
       const [deliveriesRes, ordersRes] = await Promise.all([
@@ -29,6 +31,7 @@ const DeliveriesPage = () => {
     }
   };
 
+  // Mark delivery as complete by updating the order status
   const handleComplete = async (orderID) => {
     try {
       const order = orders.find((o) => o.orderID === orderID);
@@ -47,7 +50,7 @@ const DeliveriesPage = () => {
 
       if (response.ok) {
         alert(`Order ${orderID} marked as complete.`);
-        fetchData(); // Refresh deliveries and orders
+        fetchData(); // Refresh data after update
       } else {
         console.error("Failed to update order status.");
       }
@@ -56,6 +59,7 @@ const DeliveriesPage = () => {
     }
   };
 
+  // Get the current status of a given order
   const getOrderStatus = (orderID) => {
     const order = orders.find((o) => o.orderID === orderID);
     return order?.status || "unknown";
@@ -64,6 +68,8 @@ const DeliveriesPage = () => {
   return (
     <div className="deliveries-container">
       <h2>Deliveries</h2>
+
+      {/* Show loading state or data table */}
       {loading ? (
         <p>Loading deliveries...</p>
       ) : (
@@ -82,6 +88,7 @@ const DeliveriesPage = () => {
             </tr>
           </thead>
           <tbody>
+            {/* Render delivery rows or fallback message */}
             {deliveries.length > 0 ? (
               deliveries.map((delivery) => {
                 const status = getOrderStatus(delivery.orderID);

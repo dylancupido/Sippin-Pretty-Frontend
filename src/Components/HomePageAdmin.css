@@ -28,7 +28,7 @@
   justify-content: center;
   width: 100%;
   position: relative;
-  z-index: 1; /* Lower z-index than navbar */
+  z-index: 1; 
 }
 
 h1 {
@@ -41,7 +41,7 @@ h1 {
 .tagline {
   font-family: 'Poppins', sans-serif;
   color: #5e412f;
-  font-size: 1.3rem; /* Increased from 1.1rem */
+  font-size: 1.3rem; 
   line-height: 1.6;
   margin-bottom: 1.8rem;
   max-width: 600px;
@@ -63,7 +63,7 @@ h1 {
   filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.15));
   will-change: transform;
   position: relative;
-  z-index: 1; /* Lower z-index than navbar */
+  z-index: 1; 
 }
 
 .cta-button {
@@ -88,7 +88,7 @@ h1 {
   box-shadow: 0 6px 12px rgba(244, 143, 177, 0.3);
 }
 
-/* Simple spin animation */
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -98,7 +98,7 @@ h1 {
   }
 }
 
-/* Steam effect for the mug */
+
 .rotating-mug::before {
   content: "";
   position: absolute;
@@ -156,7 +156,7 @@ h1 {
   }
   
   .tagline {
-    font-size: 1.4rem; /* Increased from 1.2rem */
+    font-size: 1.4rem; 
     padding: 1.2rem;
   }
   
@@ -183,7 +183,7 @@ h1 {
   }
   
   .tagline {
-    font-size: 1.2rem; /* Increased from 1rem */
+    font-size: 1.2rem; 
     padding: 0.8rem;
     line-height: 1.5;
   }

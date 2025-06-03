@@ -5,6 +5,7 @@ const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Fetch all orders
   useEffect(() => {
     fetch("http://localhost:5010/api/Orders")
       .then((res) => res.json())
@@ -13,6 +14,7 @@ const OrdersPage = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  // Handle deletion of an order
   const handleDelete = async (orderID) => {
     try {
       const response = await fetch(
@@ -23,6 +25,7 @@ const OrdersPage = () => {
       );
 
       if (response.ok) {
+        // Remove the deleted order from state
         setOrders(orders.filter((order) => order.orderID !== orderID));
       } else {
         console.error("Failed to delete order");
@@ -35,6 +38,8 @@ const OrdersPage = () => {
   return (
     <div className="orders-container">
       <h2>Orders</h2>
+
+      {/* Show loading indicator or orders table */}
       {loading ? (
         <p>Loading orders...</p>
       ) : (
@@ -51,6 +56,7 @@ const OrdersPage = () => {
             </tr>
           </thead>
           <tbody>
+            {/* Render orders if available, else show fallback row */}
             {orders.length > 0 ? (
               orders.map((order) => (
                 <tr key={order.orderID}>

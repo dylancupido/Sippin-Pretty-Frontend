@@ -9,6 +9,7 @@ const LoginForm = ({ setLoggedIn, handleLogin }) => {
   const [username, setId] = useState("");
   const [password, setPassword] = useState("");
 
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -20,10 +21,12 @@ const LoginForm = ({ setLoggedIn, handleLogin }) => {
     const url = "http://localhost:5010/api/Login/LoginCus";
 
     try {
+      // Send login request to backend
       const response = await axios.post(url, data);
       const { message, token, user } = response.data;
 
       if (message === "Login successful") {
+        // Store token and user details in localStorage
         localStorage.setItem("token", token);
         localStorage.setItem("role", user.role.toLowerCase());
         localStorage.setItem("userId", user.id);
@@ -31,11 +34,11 @@ const LoginForm = ({ setLoggedIn, handleLogin }) => {
         alert("Login successful!");
         setLoggedIn(true);
 
+        // Handle role-based navigation
         if (user && user.role) {
           const role = user.role.toLowerCase();
           handleLogin(role);
 
-          // Conditional routing based on role
           if (role === "admin") {
             navigate("/admin");
           } else if (role === "staff") {
@@ -50,6 +53,7 @@ const LoginForm = ({ setLoggedIn, handleLogin }) => {
         alert("Server response: " + message);
       }
     } catch (error) {
+      // Handle errors from server or network
       console.error("Login error:", error);
       if (error.response) {
         alert(`Error: ${error.response.data.message}`);
@@ -66,6 +70,7 @@ const LoginForm = ({ setLoggedIn, handleLogin }) => {
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
 
+        {/* Username or email input */}
         <div className="inputbox">
           <input
             type="text"
@@ -77,6 +82,7 @@ const LoginForm = ({ setLoggedIn, handleLogin }) => {
           <FaUser className="icon" />
         </div>
 
+        {/* Password input */}
         <div className="inputbox">
           <input
             type="password"
@@ -88,6 +94,7 @@ const LoginForm = ({ setLoggedIn, handleLogin }) => {
           <FaLock className="icon" />
         </div>
 
+        {/* Remember me and forgot password links */}
         <div className="RemembermeBox-forget">
           <label>
             <input type="checkbox" /> Remember me
@@ -97,10 +104,12 @@ const LoginForm = ({ setLoggedIn, handleLogin }) => {
           </a>
         </div>
 
+        {/* Submit button */}
         <button id="BtnLogin" type="submit">
           Log In
         </button>
 
+        {/* Registration link */}
         <div className="registerLink">
           <p>
             Don't have an account? <Link to="/cusRegister">Register</Link>

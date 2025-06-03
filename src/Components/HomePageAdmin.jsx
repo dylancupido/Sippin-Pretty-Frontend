@@ -9,20 +9,23 @@ const HomePageAdmin = () => {
 
   return (
     <div className="home-page">
+      {/* Main content layout */}
       <div className="content-container">
+        {/* Left section: heading, description, and CTA */}
         <div className="left-content">
           <h1>Welcome to Sippin' Pretty</h1>
           <p className="tagline">
-            We’re not ordinary. We’re made to shine, stand out, <br></br>and
-            carry ourselves with flair and confidence just like a perfectly
-            crafted latte with a designer touch. <br></br>So stay cute, stay
-            glam, and never forget who you are
+            We’re not ordinary. We’re made to shine, stand out, <br />
+            and carry ourselves with flair and confidence just like a perfectly
+            crafted latte with a designer touch. <br />
+            So stay cute, stay glam, and never forget who you are
           </p>
           <button className="cta-button" onClick={() => navigate("/booking")}>
             Book a Table
           </button>
         </div>
 
+        {/* Right section: rotating coffee mug image */}
         <div className="right-content">
           <img
             src={coffeeMug}
@@ -31,6 +34,8 @@ const HomePageAdmin = () => {
           />
         </div>
       </div>
+
+      {/* Promotional slider component */}
       <PromotionSlider />
     </div>
   );

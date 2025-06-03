@@ -6,10 +6,12 @@ const OrderItemsAdminPage = () => {
   const [loading, setLoading] = useState(true);
   const [completedItems, setCompletedItems] = useState([]);
 
+  // Load order items on component mount
   useEffect(() => {
     fetchOrderItems();
   }, []);
 
+  // Fetch all order items from the backend
   const fetchOrderItems = async () => {
     try {
       const response = await fetch("http://localhost:5010/api/OrderItems");
@@ -22,42 +24,47 @@ const OrderItemsAdminPage = () => {
     }
   };
 
+  // Mark a single order item as complete
   const markAsComplete = async (orderItemId, orderID) => {
     try {
-      // Mark the item as completed locally
+      // Track completed item locally
       setCompletedItems((prev) => [...prev, orderItemId]);
 
-      // Re-fetch all items for this order to check if all are completed
+      // Get all items related to the same order
       const relatedItems = orderItems.filter(
         (item) => item.orderID === orderID
       );
+
+      // Check if there are any remaining items not yet marked as complete
       const remaining = relatedItems.filter(
         (item) =>
           !completedItems.includes(item.order_Item_ID) &&
           item.order_Item_ID !== orderItemId
       );
 
+      // If all items in the order are completed
       if (remaining.length === 0) {
-        // Fetch order to check type
+        // Fetch the full order to determine its type
         const orderResponse = await fetch(
           `http://localhost:5010/api/Orders/${orderID}`
         );
         const order = await orderResponse.json();
 
-        // Update status conditionally
+        // Update the order status based on order type
         if (order.orderType === "delivery") {
           order.status = "ready";
         } else {
           order.status = "complete";
         }
 
+        // Save updated order to backend
         await fetch(`http://localhost:5010/api/Orders/${orderID}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(order),
         });
 
-        // Delete all order items for this order
+        // Delete all order items related to this order
         for (const item of relatedItems) {
           await fetch(
             `http://localhost:5010/api/OrderItems/${item.order_Item_ID}`,
@@ -67,7 +74,7 @@ const OrderItemsAdminPage = () => {
           );
         }
 
-        // Refresh view
+        // Refresh the list of order items
         fetchOrderItems();
         alert(
           `Order ${orderID} marked as ${order.status} and all items deleted.`
@@ -81,6 +88,8 @@ const OrderItemsAdminPage = () => {
   return (
     <div className="order-items-container">
       <h2>Order Items</h2>
+
+      {/* Show loading message or table */}
       {loading ? (
         <p>Loading order items...</p>
       ) : (
@@ -96,6 +105,7 @@ const OrderItemsAdminPage = () => {
             </tr>
           </thead>
           <tbody>
+            {/* Display order items or show empty message */}
             {orderItems.length > 0 ? (
               orderItems.map((item) => (
                 <tr key={item.order_Item_ID}>
