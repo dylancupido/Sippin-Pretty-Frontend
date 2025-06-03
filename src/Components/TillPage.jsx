@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../Styles/Till.css";
 import axios from "axios";
-
+ 
 export default function TillPage() {
   const [menuItems, setMenuItems] = useState([]);
   const [receiptItems, setReceiptItems] = useState([]);
   const [paymentType, setPaymentType] = useState("");
-
+ 
   useEffect(() => {
     fetch("http://localhost:5010/api/MenuItemsAPI")
       .then((res) => res.json())
@@ -23,52 +23,58 @@ export default function TillPage() {
       })
       .catch((err) => console.error("Failed to fetch menu:", err));
   }, []);
-
+ 
   const handleAddItem = (item) => {
     setReceiptItems([...receiptItems, item]);
   };
-
+ 
   const handleClear = () => {
     setReceiptItems([]);
     setPaymentType("");
   };
-
+ 
   const handlePayment = (type) => {
     setPaymentType(type);
   };
-
+ 
   const total = receiptItems.reduce((sum, item) => sum + item.price, 0);
-
+ 
   const handleCheckout = async () => {
     if (receiptItems.length === 0) {
       alert("No items to checkout.");
       return;
     }
-
+ 
+    if (!paymentType) {
+      alert("Please select a payment method.");
+      return;
+    }
+ 
     const orderID =
       "ORD-" + Math.random().toString(36).substr(2, 9).toUpperCase();
     const userID = "INSTORE1"; // fixed user added to DB manually
-
+ 
     const order = {
       orderID,
       userID,
       totalAmount: parseFloat(total.toFixed(2)),
       orderType: "In-Store",
       status: "in progress",
+      paymentMethod: paymentType // Add payment method to order
     };
-
+ 
     const orderItems = receiptItems.map((item) => ({
       orderID,
       productID: item.productID,
       quantity: item.quantity || 1,
       item_price: item.price,
     }));
-
+ 
     const payload = {
       order,
       orderItems,
     };
-
+ 
     try {
       console.log("Sending payload:", payload);
       const response = await axios.post(
@@ -89,11 +95,11 @@ export default function TillPage() {
       );
     }
   };
-
+ 
   return (
     <div className="calculator-app-container">
-      <h1 className="heading">Simple Till System</h1>
-
+      <h1 className="heading">Till System</h1>
+ 
       <div className="till-container">
         {/* Receipt Section */}
         <div className="receipt">
@@ -110,13 +116,13 @@ export default function TillPage() {
               ))}
             </ul>
           )}
-          <div className="total">Total: R{total}</div>
-
+          <div className="total">Total: R{total.toFixed(2)}</div>
+ 
           <div className="checkout-controls">
             <button
               className="checkout"
               onClick={handleCheckout}
-              disabled={receiptItems.length === 0}
+              disabled={receiptItems.length === 0 || !paymentType}
             >
               Checkout
             </button>
@@ -124,24 +130,24 @@ export default function TillPage() {
               Clear
             </button>
           </div>
-
+ 
           <div className="payment-options">
             <p>Select Payment:</p>
-            <button className="payment" onClick={() => handlePayment("Cash")}>
+            <button
+              className={`payment ${paymentType === "Cash" ? "selected" : ""}`}
+              onClick={() => handlePayment("Cash")}
+            >
               Cash
             </button>
-            <button className="payment" onClick={() => handlePayment("Card")}>
-              Card
-            </button>
             <button
-              className="payment"
-              onClick={() => handlePayment("SnapScan")}
+              className={`payment ${paymentType === "Card" ? "selected" : ""}`}
+              onClick={() => handlePayment("Card")}
             >
-              SnapScan
+              Card
             </button>
           </div>
         </div>
-
+ 
         {/* Menu Section */}
         <div className="menu">
           <h3>Menu</h3>
@@ -161,3 +167,5 @@ export default function TillPage() {
     </div>
   );
 }
+ 
+ 

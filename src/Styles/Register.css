@@ -120,3 +120,19 @@ code {
   transition: background-color 0.3s ease;
   cursor: pointer;
 }
+
+/* Error styling - matching PaymentPage */
+.input-error {
+  border-color: #e53935 !important;
+  background-color: #ffebee;
+}
+
+.error-message {
+  color: #e53935;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-bottom: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  word-wrap: break-word;
+}

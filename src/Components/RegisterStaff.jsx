@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import "../Styles/Register.css";
 import axios from "axios";
 
@@ -9,12 +7,50 @@ const StaffRegisterForm = () => {
   const [username, setId] = useState("");
   const [password, setPassword] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
-  const [dob, setDOB] = useState(null);
-  const [address, setAddress] = useState("");
+  const [errors, setErrors] = useState({});
   const role = "Staff";
+
+  // Validation functions
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    // At least 8 characters, one special character, one number
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+    return passwordRegex.test(password);
+  };
+
+  const validatePhoneNumber = (phone) => {
+    // South African phone number format (10 digits)
+    const phoneRegex = /^[0-9]{10}$/;
+    return phoneRegex.test(phone);
+  };
 
   const handleOnClick = (event) => {
     event.preventDefault();
+
+    // Validate inputs
+    const newErrors = {};
+
+    if (!validateEmail(username)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!validatePassword(password)) {
+      newErrors.password = 'Password must be at least 8 characters with one number and one special character (!@#$%^&*)';
+    }
+
+    if (!validatePhoneNumber(phonenumber)) {
+      newErrors.phone = 'Phone number must be exactly 10 digits';
+    }
+
+    // If there are validation errors, set them and return
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
     const data = {
       Id: username,
@@ -22,8 +58,6 @@ const StaffRegisterForm = () => {
       PhoneNumber: phonenumber,
       Password: password,
       Role: role,
-      Address: address,
-      DOB: dob ? dob.toISOString() : null,
     };
 
     const url = "http://localhost:5010/api/Users/RegisterCus";
@@ -75,10 +109,17 @@ const StaffRegisterForm = () => {
           <input
             value={username}
             type="text"
-            placeholder="Staff ID Number*"
-            onChange={(e) => setId(e.target.value)}
+            placeholder="Email Address*"
+            onChange={(e) => {
+              setId(e.target.value);
+              if (errors.email) {
+                setErrors(prev => ({ ...prev, email: '' }));
+              }
+            }}
             required
+            className={errors.email ? 'input-error' : ''}
           />
+          {errors.email && <div className="error-message">{errors.email}</div>}
         </div>
 
         <div className="Inputbox">
@@ -86,9 +127,16 @@ const StaffRegisterForm = () => {
             value={password}
             type="password"
             placeholder="Password*"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              if (errors.password) {
+                setErrors(prev => ({ ...prev, password: '' }));
+              }
+            }}
             required
+            className={errors.password ? 'input-error' : ''}
           />
+          {errors.password && <div className="error-message">{errors.password}</div>}
         </div>
 
         <div className="Inputbox">
@@ -96,34 +144,19 @@ const StaffRegisterForm = () => {
             value={phonenumber}
             type="text"
             placeholder="Mobile Number*"
-            onChange={(e) => setPhonenumber(e.target.value)}
+            onChange={(e) => {
+              setPhonenumber(e.target.value);
+              if (errors.phone) {
+                setErrors(prev => ({ ...prev, phone: '' }));
+              }
+            }}
             required
+            className={errors.phone ? 'input-error' : ''}
           />
+          {errors.phone && <div className="error-message">{errors.phone}</div>}
         </div>
 
-        <div className="Inputbox">
-          <DatePicker
-            selected={dob}
-            onChange={(date) => setDOB(date)}
-            dateFormat="yyyy-MM-dd"
-            placeholderText="Date of Birth*"
-            maxDate={new Date()}
-            showYearDropdown
-            scrollableYearDropdown
-            yearDropdownItemNumber={100}
-            required
-          />
-        </div>
 
-        <div className="Inputbox">
-          <input
-            value={address}
-            type="text"
-            placeholder="Home Address*"
-            onChange={(e) => setAddress(e.target.value)}
-            required
-          />
-        </div>
 
         <button onClick={handleOnClick}>Register</button>
       </form>

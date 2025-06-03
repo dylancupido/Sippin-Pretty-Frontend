@@ -1,7 +1,7 @@
 import React from "react";
 import {GoogleMaps} from "./Google maps/GoogleMaps.jsx";
 import '../Styles/About us.css';
-import myimage from '../assets/blank-profile-picture-973460_1280.webp';
+
 
 export function AboutUs() {
     return (
@@ -16,17 +16,18 @@ export function AboutUs() {
 
             <h1 className={"heading"}>Find us here</h1>
             <GoogleMaps/>
+            <h1 className={"heading"}>Our Team</h1>
             <br/>
             <div>
                 <div>
                     <div className={"container-wrapper"}>
                         <div className={"container"}>
                             <div className={"circle-wrapper"}>
-                                <img src={myimage}
+                                <img src={"../src/assets/Dylan.jfif"}
                                      alt={"blank-profile-picture-973460_1280.webp"}
                                      className={"circle-image"}/>
                             </div>
-                            <p className={"container-text"}>My name is Dylan</p>
+                            <p className={"container-text"}>Fullstack Developer</p>
                         </div>
                     </div>
                 </div>
@@ -35,11 +36,11 @@ export function AboutUs() {
                     <div className={"container-wrapper"}>
                         <div className={"container"}>
                             <div className={"circle-wrapper"}>
-                                <img src={myimage}
-                                     alt={"blank-profile-picture-973460_1280.webp"}
+                                <img src={"../src/assets/Farhan.jfif"}
+                                     alt={"../assets/"}
                                      className={"circle-image"}/>
                             </div>
-                            <p className={"container-text"}>My name is Farhan</p>
+                            <p className={"container-text"}>Backend Developer/Product Documentor</p>
                         </div>
                     </div>
                 </div>
@@ -48,11 +49,11 @@ export function AboutUs() {
                     <div className={"container-wrapper"}>
                         <div className={"container"}>
                             <div className={"circle-wrapper"}>
-                                <img src={myimage}
+                                <img src={"../src/assets/Mulanga.jfif"}
                                      alt={"blank-profile-picture-973460_1280.webp"}
                                      className={"circle-image"}/>
                             </div>
-                            <p className={"container-text"}>My name is Mulanga</p>
+                            <p className={"container-text"}>backend developer/Database Specialist</p>
                         </div>
                     </div>
                 </div>
@@ -61,11 +62,11 @@ export function AboutUs() {
                     <div className={"container-wrapper"}>
                         <div className={"container"}>
                             <div className={"circle-wrapper"}>
-                                <img src={myimage}
+                                <img src={"../src/assets/Sintu.jfif"}
                                      alt={"blank-profile-picture-973460_1280.webp"}
                                      className={"circle-image"}/>
                             </div>
-                            <p className={"container-text"}>My name is Sintu</p>
+                            <p className={"container-text"}>UI Designer/Automation Tester</p>
                         </div>
                     </div>
                 </div>

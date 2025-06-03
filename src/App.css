@@ -6,22 +6,24 @@ body, html, #root {
   padding: 0;
   height: 100%;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, rgba(202, 153, 160, 0.75), rgba(231, 187, 195, 0.65));
+  background: linear-gradient(to right, rgba(202, 153, 160, 0.75), rgba(231, 187, 195, 0.65)), url('https://www.transparenttextures.com/patterns/vintage-concrete.png') !important;
   background-attachment: fixed;
   background-size: cover;
   overflow-x: hidden;
   width: 100%;
   max-width: 100%;
+  position: relative;
 }
 
-/* Optional texture overlay */
+/* Enhanced vintage overlay */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: url('https://www.transparenttextures.com/patterns/cream-dust.png');
-  opacity: 0.2;
+  background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+  opacity: 0.4;
   z-index: -1;
+  pointer-events: none;
 }
 
 /* Layout Container */
