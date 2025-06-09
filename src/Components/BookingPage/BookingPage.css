@@ -3,33 +3,35 @@
 .booking-container {
   max-width: 700px;
   margin: 2rem auto;
-  padding: 1.5rem;
-  background: #f5cece2a;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.696);
-  border-radius: 8px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 2rem;
+  background: rgba(245, 206, 206, 0.15);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
   color: #333;
 }
 
 .booking-header h1 {
-  margin-bottom: 0.2rem;
-  color:   #83598b;
+  margin-bottom: 0.5rem;
+  color: #83598b;
   font-weight: 700;
   font-size: 2.4rem;
+  letter-spacing: -0.5px;
 }
 
 .booking-header p {
   margin-top: 0;
-  color:  #7e3b3ba9;
+  color: rgba(126, 59, 59, 0.75);
   font-size: 1.1rem;
   font-weight: 500;
+  line-height: 1.4;
 }
 
 .booking-form {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.8rem;
 }
 
 .form-group {
@@ -39,20 +41,23 @@
 
 .form-group label {
   font-weight: 600;
-  margin-bottom: 0.4rem;
-  color:#3f1b36d2;
+  margin-bottom: 0.6rem;
+  color: rgba(63, 27, 54, 0.85);
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-  padding: 0.5rem 0.8rem;
+  padding: 0.8rem 1rem;
   font-size: 1rem;
-  border: 1.8px solid #030101;
-  border-radius: 5px;
-  transition: border-color 0.3s ease;
+  border: 1.5px solid rgba(3, 1, 1, 0.6);
+  border-radius: 8px;
+  transition: all 0.3s ease;
   font-family: inherit;
   resize: vertical;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .form-group input:focus,
@@ -60,8 +65,8 @@
 .form-group textarea:focus {
   outline: none;
   border-color: #ca72b6;
-  box-shadow: 0 0 6px rgba(202, 114, 182, 0.4);
-  background-color: rgba(202, 114, 182, 0.05);
+  box-shadow: 0 0 0 3px rgba(202, 114, 182, 0.2);
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
 .form-row {
@@ -175,21 +180,23 @@
 }
 
 button[type="submit"] {
-  background-color: hwb(283 45% 31% / 0.447);
+  background-color: rgba(142, 91, 179, 0.8);
   color: white;
-  font-weight: 700;
-  font-size: 1.2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
   border: none;
-  border-radius: 7px;
-  padding: 0.8rem;
+  border-radius: 8px;
+  padding: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-top: 1rem;
+  letter-spacing: 0.5px;
 }
 
 button[type="submit"]:hover:not(:disabled) {
   background-color: #9c27b0;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 15px rgba(156, 39, 176, 0.3);
 }
 
 button[type="submit"]:disabled {
