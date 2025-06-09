@@ -17,12 +17,20 @@ const AdminPromotionsSlider = () => {
   });
 
   const BASE_URL = "http://localhost:5010/api/Promotions";
+  const NOTIFY_URL = "http://localhost:5010/api/Notifications";
+
+  const fetchPromotions = async () => {
+    try {
+      const res = await fetch(BASE_URL);
+      const data = await res.json();
+      setPromotions(data);
+    } catch (err) {
+      console.error("Failed to load promotions", err);
+    }
+  };
 
   useEffect(() => {
-    fetch(BASE_URL)
-      .then((res) => res.json())
-      .then((data) => setPromotions(data))
-      .catch((err) => console.error("Failed to load promotions", err));
+    fetchPromotions();
   }, []);
 
   useEffect(() => {
@@ -68,6 +76,14 @@ const AdminPromotionsSlider = () => {
     setShowModal(true);
   };
 
+  const sendNotification = async (message) => {
+    await fetch(NOTIFY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message }),
+    });
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -76,7 +92,6 @@ const AdminPromotionsSlider = () => {
   const handleSubmit = async () => {
     try {
       if (isEditMode) {
-        // Edit mode: PUT
         const res = await fetch(`${BASE_URL}/${selectedPromoId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -90,9 +105,9 @@ const AdminPromotionsSlider = () => {
                 : promo
             )
           );
+          await sendNotification(`${formData.title} has been edited!`);
         }
       } else {
-        // Add mode: POST
         const res = await fetch(BASE_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -101,6 +116,9 @@ const AdminPromotionsSlider = () => {
         if (res.ok) {
           const created = await res.json();
           setPromotions([...promotions, created]);
+          await sendNotification(
+            `New ${created.title} Promotion has been added!`
+          );
         }
       }
       setShowModal(false);
@@ -111,11 +129,13 @@ const AdminPromotionsSlider = () => {
 
   const handleDelete = async (id) => {
     try {
+      const toDelete = promotions.find((p) => p.promotionID === id);
       const res = await fetch(`${BASE_URL}/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {
         setPromotions(promotions.filter((promo) => promo.promotionID !== id));
+        await sendNotification(`${toDelete.title} has been removed!`);
       }
     } catch (err) {
       console.error("Error deleting promotion", err);
@@ -200,7 +220,7 @@ const AdminPromotionsSlider = () => {
             <input
               type="text"
               name="imagePath"
-              placeholder="Image Path (e.g., /images/Promo5.png)"
+              placeholder="Image Path"
               value={formData.imagePath}
               onChange={handleInputChange}
             />

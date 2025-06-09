@@ -32,6 +32,7 @@ import DeliveriesPage from "./Components/DeliveriesPage";
 import AdminBookingPage from "./Components/navbarAdmin/AdminBookingPage";
 
 import "./App.css";
+import AdminPromotionsSlider from "./Components/Promos/AdminPromotionSlider";
 
 function App() {
   const navigate = useNavigate();
@@ -173,6 +174,7 @@ function App() {
         <Route path="/cartpayment" element={<PaymentPageCart />} />
         <Route path="/deliveries" element={<DeliveriesPage />} />
         <Route path="/admin/bookings" element={<AdminBookingPage />} />
+        <Route path="/admin/promotions" element={<AdminPromotionsSlider />} />
 
         {/* Admin-only routes */}
         <Route

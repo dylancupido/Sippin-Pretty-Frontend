@@ -20,6 +20,9 @@ function AdminNavBar({ onLogout }) {
       {/* Center: Navigation Links */}
       <ul className="nav-links">
         <li>
+          <Link to="/admin/promotions">Manage Promotions</Link>
+        </li>
+        <li>
           <Link to="/menuadmin">Manage Menu</Link>
         </li>
         <li>

@@ -5,11 +5,11 @@
   background: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .user-admin-container h2 {
-  font-family: 'Pacifico', cursive;
+  font-family: "Pacifico", cursive;
   font-size: 2.2rem;
   color: #5e412f;
   margin-bottom: 1.5rem;
@@ -112,17 +112,16 @@
   background-color: #c9302c;
 }
 
-
 @media (max-width: 768px) {
   .user-admin-container {
     padding: 1.5rem;
     margin: 1.5rem;
   }
-  
+
   .user-admin-container h2 {
     font-size: 1.8rem;
   }
-  
+
   .add-user-form {
     padding: 1rem;
   }
@@ -133,29 +132,29 @@
     padding: 1rem;
     margin: 1rem;
   }
-  
+
   .user-admin-container h2 {
     font-size: 1.5rem;
   }
-  
+
   .add-user-form {
     flex-direction: column;
     padding: 0.8rem;
   }
-  
+
   .add-user-form input,
   .add-user-form select,
   .add-user-form button {
     width: 100%;
     min-width: 0;
   }
-  
+
   .user-table {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
   }
-  
+
   .user-table th,
   .user-table td {
     padding: 8px 12px;
@@ -167,23 +166,23 @@
     padding: 0.8rem;
     margin: 0.5rem;
   }
-  
+
   .user-admin-container h2 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
   }
-  
+
   .add-user-form {
     padding: 0.6rem;
     gap: 8px;
   }
-  
+
   .add-user-form input,
   .add-user-form select {
     padding: 8px 12px;
     font-size: 0.9rem;
   }
-  
+
   .add-user-form button {
     padding: 8px 16px;
     font-size: 0.9rem;
@@ -191,7 +190,7 @@
 }
 .add-staff-button {
   padding: 10px 20px;
-  background-color: #4caf50;
+  background-color: #d4a59a;
   color: white;
   border: none;
   border-radius: 6px;
@@ -203,5 +202,5 @@
 }
 
 .add-staff-button:hover {
-  background-color: #388e3c;
+  background-color: #d4a59a;
 }

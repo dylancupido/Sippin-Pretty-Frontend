@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import logo from "../../assets/logo.png";
@@ -6,18 +6,43 @@ import accountIcon from "../../assets/account.png";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from "react-router-dom";
 
-// Main navigation bar component
+const NOTIFY_URL = "http://localhost:5010/api/Notifications";
+
 const Navbar = ({ loggedIn = false, onLogout }) => {
+  const [notifications, setNotifications] = useState([]);
+  const [showNotifications, setShowNotifications] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Toggle mobile menu
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+  const fetchNotifications = async () => {
+    try {
+      const res = await fetch(NOTIFY_URL);
+      const data = await res.json();
+      setNotifications(data);
+    } catch (err) {
+      console.error("Failed to fetch notifications", err);
+    }
   };
+
+  const deleteNotification = async (id) => {
+    try {
+      await fetch(`${NOTIFY_URL}/${id}`, { method: "DELETE" });
+      fetchNotifications();
+    } catch (err) {
+      console.error("Failed to delete notification", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchNotifications();
+    const interval = setInterval(fetchNotifications, 3000); // Poll every 3 seconds
+    return () => clearInterval(interval);
+  }, []);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleNotifications = () => setShowNotifications(!showNotifications);
 
   return (
     <nav className="navbar" role="navigation" aria-label="Main Navigation">
-      {/* Left Section: Logo linking to homepage */}
       <div className="navbar-left">
         <Link to="/" className="logo-container" aria-label="Homepage">
           <div className="logo-stack">
@@ -27,7 +52,6 @@ const Navbar = ({ loggedIn = false, onLogout }) => {
         </Link>
       </div>
 
-      {/* Mobile Toggle Button */}
       <button
         className="menu-toggle"
         onClick={toggleMenu}
@@ -37,7 +61,6 @@ const Navbar = ({ loggedIn = false, onLogout }) => {
         <i className={`fas ${menuOpen ? "fa-times" : "fa-bars"}`}></i>
       </button>
 
-      {/* Center Navigation Links */}
       <ul className={`nav-links ${menuOpen ? "active" : ""}`} role="menubar">
         <li role="none">
           <a role="menuitem" href="/" onClick={() => setMenuOpen(false)}>
@@ -56,14 +79,43 @@ const Navbar = ({ loggedIn = false, onLogout }) => {
         </li>
       </ul>
 
-      {/* Right Section: Cart and Account Controls */}
       <div className="nav-actions">
-        {/* Cart Icon */}
+        <div className="nav-notification">
+          <button
+            className="notification-button"
+            onClick={toggleNotifications}
+            aria-label="View Notifications"
+          >
+            <i className="fas fa-bell"></i>
+            {notifications.length > 0 && (
+              <span className="notification-count">{notifications.length}</span>
+            )}
+          </button>
+          {showNotifications && (
+            <div className="notification-dropdown">
+              {notifications.length === 0 ? (
+                <p className="notification-empty">No notifications</p>
+              ) : (
+                notifications.map((notif) => (
+                  <div key={notif.notificationID} className="notification-item">
+                    <span>{notif.message}</span>
+                    <button
+                      className="view-button"
+                      onClick={() => deleteNotification(notif.notificationID)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+        </div>
+
         <Link to="/cart" className="nav-cart" aria-label="Shopping Cart">
           <i className="fas fa-shopping-cart"></i>
         </Link>
 
-        {/* Account Dropdown */}
         <div className="nav-account">
           <Dropdown align="end">
             <Dropdown.Toggle
@@ -79,9 +131,7 @@ const Navbar = ({ loggedIn = false, onLogout }) => {
                 className="account-icon"
               />
             </Dropdown.Toggle>
-
             <Dropdown.Menu>
-              {/* Conditional account options based on login state */}
               {loggedIn ? (
                 <Dropdown.Item onClick={onLogout}>Logout</Dropdown.Item>
               ) : (

@@ -4,6 +4,7 @@ import "./HomePage.css";
 
 import { useNavigate } from "react-router-dom";
 import PromotionSlider from "./Promos/PromotionSlider";
+import AdminPromotionsSlider from "./Promos/AdminPromotionSlider";
 
 const HomePage = () => {
   const navigate = useNavigate();
