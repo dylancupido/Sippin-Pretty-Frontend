@@ -49,6 +49,12 @@ body::after {
   box-sizing: border-box;
 }
 
+/* Add this to ensure the footer stays at the bottom */
+.app-container > footer,
+.app-container > .footer {
+  margin-top: auto;
+}
+
 @media (min-width: 768px) {
   .app-container {
     padding: 2rem;

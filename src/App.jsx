@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 // Navigation components for different user roles
@@ -30,12 +30,13 @@ import StaffRegisterForm from "./Components/RegisterStaff";
 import PaymentPageCart from "./Components/PaymentPage/PaymentPageCart";
 import DeliveriesPage from "./Components/DeliveriesPage";
 import AdminBookingPage from "./Components/navbarAdmin/AdminBookingPage";
-
+import Footer from "./Components/Footer/Footer";
 import "./App.css";
 import AdminPromotionsSlider from "./Components/Promos/AdminPromotionSlider";
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [loggedIn, setLoggedIn] = useState(
     () => !!localStorage.getItem("token")
@@ -229,6 +230,13 @@ function App() {
         />
         <Route path="/cusRegister" element={<CusRegisterForm />} />
       </Routes>
+      
+      {/* Footer - appears on all pages except auth pages */}
+      {!location.pathname.includes('/login') &&
+       !location.pathname.includes('/cusRegister') &&
+       !location.pathname.includes('/admin/registerstaff') && (
+        <Footer />
+      )}
     </div>
   );
 }
