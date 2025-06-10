@@ -81,6 +81,17 @@ const Navbar = ({ loggedIn = false, onLogout }) => {
             About Us
           </Link>
         </li>
+        {menuOpen && (
+          <li role="none">
+            <Link role="menuitem" to="/cart" onClick={() => setMenuOpen(false)}>
+              <i
+                className="fas fa-shopping-cart"
+                style={{ marginRight: "8px" }}
+              ></i>
+              Cart
+            </Link>
+          </li>
+        )}
       </ul>
 
       <div className="nav-actions">
@@ -116,9 +127,11 @@ const Navbar = ({ loggedIn = false, onLogout }) => {
           )}
         </div>
 
-        <Link to="/cart" className="nav-cart" aria-label="Shopping Cart">
-          <i className="fas fa-shopping-cart"></i>
-        </Link>
+        {!menuOpen && (
+          <Link to="/cart" className="nav-cart" aria-label="Shopping Cart">
+            <i className="fas fa-shopping-cart"></i>
+          </Link>
+        )}
 
         <div className="nav-account">
           <Dropdown align="end">
