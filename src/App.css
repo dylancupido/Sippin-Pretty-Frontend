@@ -41,22 +41,32 @@ body::after {
   min-height: 100vh;
   position: relative;
   z-index: 1;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Add this to ensure the footer stays at the bottom */
+/* Main content wrapper that grows to fill available space */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure the footer stays at the bottom */
 .app-container > footer,
 .app-container > .footer {
   margin-top: auto;
+  flex-shrink: 0;
 }
 
 @media (min-width: 768px) {
-  .app-container {
+  .main-content {
     padding: 2rem;
   }
 }
@@ -140,13 +150,13 @@ body::after {
 }
 
 @media (max-width: 380px) {
-  .app-container {
+  .main-content {
     padding: 0.5rem;
   }
 }
 
 @media (max-width: 320px) {
-  .app-container {
+  .main-content {
     padding: 0.3rem;
   }
 

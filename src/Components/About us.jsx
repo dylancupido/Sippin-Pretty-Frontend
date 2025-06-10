@@ -19,11 +19,14 @@ export function AboutUs() {
       </p>
 
       {/* Section: Google Map Location */}
-      <h1 className="heading">Find us here</h1>
-      <GoogleMaps />
+      <section className="map-section">
+        <h1 className="heading">Find us here</h1>
+        <GoogleMaps />
+      </section>
 
       {/* Section: Team Members */}
-      <h1 className="heading">Our Team</h1>
+      <section className="team-section">
+        <h1 className="heading">Our Team</h1>
       <br />
 
       {/* Team Member 1 */}
@@ -97,6 +100,7 @@ export function AboutUs() {
           </p>
         </div>
       </div>
+      </section>
     </div>
   );
 }

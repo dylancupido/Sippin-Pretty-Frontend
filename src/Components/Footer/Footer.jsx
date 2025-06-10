@@ -53,7 +53,6 @@ const Footer = () => {
               <li><a href="#" className="footer-link">Dine In</a></li>
               <li><a href="#" className="footer-link">Takeaway</a></li>
               <li><a href="#" className="footer-link">Delivery</a></li>
-              <li><a href="#" className="footer-link">Catering</a></li>
             </ul>
           </div>
 
@@ -63,7 +62,7 @@ const Footer = () => {
             <div className="contact-info">
               <div className="contact-item">
                 <i className="fas fa-map-marker-alt contact-icon"></i>
-                <span>123 Pretty Street<br />Beverage City, BC 12345</span>
+                <span>123 Pretty Street<br />Mowbray, Cape Town, 7700</span>
               </div>
               <div className="contact-item">
                 <i className="fas fa-phone contact-icon"></i>

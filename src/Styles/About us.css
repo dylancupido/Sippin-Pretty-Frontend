@@ -18,6 +18,27 @@
     padding-top: 50px;
 }
 
+/* Map section styling */
+.map-section {
+  margin: 60px 0;
+  padding: 0 20px;
+}
+
+.map-section .heading {
+  margin-bottom: 2rem;
+  padding-top: 20px;
+}
+
+/* Team section styling */
+.team-section {
+  margin: 60px 0 40px 0;
+  padding: 0 20px;
+}
+
+.team-section .heading {
+  margin-bottom: 2rem;
+}
+
 
 .paragraph {
   position: relative;
@@ -64,7 +85,7 @@
     width: 320px;
     min-height: 380px;
     background:
-        linear-gradient(145deg, #ee9c9c 0%, #bcaec5 50%, #e4c0e6 100%);
+        linear-gradient( rgba(231, 192, 199, 0.6));
     border-radius: 24px;
     box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.08),
@@ -238,6 +259,27 @@
 
 /* Responsive design for containers */
 @media (max-width: 768px) {
+    .map-section {
+        margin: 40px 0;
+        padding: 0 12px;
+    }
+
+    .map-section .heading {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        padding-top: 15px;
+    }
+
+    .team-section {
+        margin: 40px 0 30px 0;
+        padding: 0 12px;
+    }
+
+    .team-section .heading {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+    }
+
     .container-wrapper {
         gap: 16px;
     }
@@ -263,6 +305,27 @@
 }
 
 @media (max-width: 480px) {
+    .map-section {
+        margin: 30px 0;
+        padding: 0 8px;
+    }
+
+    .map-section .heading {
+        font-size: 1.8rem;
+        margin-bottom: 1.2rem;
+        padding-top: 10px;
+    }
+
+    .team-section {
+        margin: 30px 0 20px 0;
+        padding: 0 8px;
+    }
+
+    .team-section .heading {
+        font-size: 1.8rem;
+        margin-bottom: 1.2rem;
+    }
+
     .container-wrapper {
         gap: 12px;
     }

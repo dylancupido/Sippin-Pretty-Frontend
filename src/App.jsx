@@ -155,8 +155,10 @@ function App() {
         <Navbar loggedIn={loggedIn} onLogout={handleLogout} />
       )}
 
-      {/* Define application routes */}
-      <Routes>
+      {/* Main content wrapper */}
+      <main className="main-content">
+        {/* Define application routes */}
+        <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/menu" element={<Menu onAddToCart={handleAddToCart} />} />
         <Route
@@ -230,7 +232,8 @@ function App() {
         />
         <Route path="/cusRegister" element={<CusRegisterForm />} />
       </Routes>
-      
+      </main>
+
       {/* Footer - appears on all pages except auth pages */}
       {!location.pathname.includes('/login') &&
        !location.pathname.includes('/cusRegister') &&
