@@ -32,6 +32,7 @@ const DeliveriesPage = () => {
   };
 
   // Mark delivery as complete by updating the order status
+  // Mark delivery as complete by updating order status and removing delivery
   const handleComplete = async (orderID) => {
     try {
       const order = orders.find((o) => o.orderID === orderID);
@@ -39,6 +40,7 @@ const DeliveriesPage = () => {
 
       const updatedOrder = { ...order, status: "complete" };
 
+      // Step 1: Update order status
       const response = await fetch(
         `http://localhost:5010/api/Orders/${orderID}`,
         {
@@ -48,12 +50,29 @@ const DeliveriesPage = () => {
         }
       );
 
-      if (response.ok) {
-        alert(`Order ${orderID} marked as complete.`);
-        fetchData(); // Refresh data after update
-      } else {
+      if (!response.ok) {
         console.error("Failed to update order status.");
+        return;
       }
+
+      // Step 2: Delete corresponding delivery
+      const deliveryToDelete = deliveries.find((d) => d.orderID === orderID);
+      if (deliveryToDelete) {
+        const deleteResponse = await fetch(
+          `http://localhost:5010/api/Deliveries/${deliveryToDelete.deliveryID}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (!deleteResponse.ok) {
+          console.error("Failed to delete delivery.");
+          return;
+        }
+      }
+
+      alert(`Order ${orderID} marked as complete and delivery removed.`);
+      fetchData(); // Refresh data
     } catch (error) {
       console.error("Error completing delivery:", error);
     }
