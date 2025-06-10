@@ -42,7 +42,13 @@ const CartConfirmationPage = () => {
           <strong>Order ID:</strong> {orderID}
         </p>
         <p>
-          <strong>Total Amount:</strong> R{total}
+          <strong>Order Amount:</strong> R{total}
+        </p>
+        <p>
+          <strong>Vat:</strong> R{total * 0.15}
+        </p>
+        <p>
+          <strong>Grand Total:</strong> R{total + (total * 0.15)}
         </p>
         <p>
           <strong>Order Type:</strong>{" "}

@@ -103,7 +103,7 @@ const Navbar = ({ loggedIn = false, onLogout }) => {
                       className="view-button"
                       onClick={() => deleteNotification(notif.notificationID)}
                     >
-                      Remove
+                      X
                     </button>
                   </div>
                 ))
