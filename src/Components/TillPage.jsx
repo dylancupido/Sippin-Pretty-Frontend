@@ -6,6 +6,7 @@ export default function TillPage() {
   const [menuItems, setMenuItems] = useState([]);
   const [receiptItems, setReceiptItems] = useState([]);
   const [paymentType, setPaymentType] = useState("");
+  
 
   // Load menu items from the API
   useEffect(() => {
@@ -42,8 +43,16 @@ export default function TillPage() {
   };
 
   // Calculate total cost of items in the receipt
-  const total = receiptItems.reduce((sum, item) => sum + item.price, 0);
+const total = receiptItems.reduce((sum, item) => sum + item.price, 0);
+const exclusive = parseFloat(total.toFixed(2));  // Ensure 2 decimal places for monetary value
+const vat = parseFloat((exclusive * 0.15).toFixed(2));  // Calculate 15% VAT
+const inclusive = parseFloat((exclusive + vat).toFixed(2));  // Sum and round to 2 decimal places
 
+console.log({
+  exclusive,
+  vat,
+  inclusive
+});
   // Submit order and order items to the backend
   const handleCheckout = async () => {
     if (receiptItems.length === 0) {
@@ -122,7 +131,8 @@ export default function TillPage() {
               ))}
             </ul>
           )}
-          <div className="total">Total: R{total.toFixed(2)}</div>
+          <div className="vat">VAT(15%):R{vat}</div>
+          <div className="total">Total: R{inclusive}</div>
 
           {/* Checkout and clear buttons */}
           <div className="checkout-controls">

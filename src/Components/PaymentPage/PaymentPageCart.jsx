@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./PaymentPageCart.css";
 import axios from "axios";
 
+
 const PaymentPageCart = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -15,7 +16,9 @@ const PaymentPageCart = () => {
     expiry: "",
     cvc: "",
   });
-
+  const OrderAM=parseInt(order.totalAmount.toFixed(2));
+  const vat=OrderAM*0.15;
+  const Total=(vat+OrderAM).toFixed(2);
   const [errors, setErrors] = useState({});
   const [cardType, setCardType] = useState("");
   const [orderType, setOrderType] = useState("collection"); // Default to collection
@@ -35,6 +38,7 @@ const PaymentPageCart = () => {
 
     if (name === "cardNumber") detectCardType(value); // Detect card brand
   };
+  
 
   // Handle delivery address changes
   const handleAddressChange = (e) => {
@@ -143,7 +147,7 @@ const PaymentPageCart = () => {
       navigate("/cart-confirmation", {
         state: {
           orderID: order.orderID,
-          total: order.totalAmount,
+          total: order.totalAmount.toFixed(2),
           orderType,
           cart,
           deliveryAddress: orderType === "delivery" ? deliveryAddress : null,
@@ -284,8 +288,8 @@ const PaymentPageCart = () => {
         <div className="payment-summary">
           <h3>Order Summary</h3>
           <div className="summary-row total">
-            <span>Total:</span>
-            <span>R{order.totalAmount}</span>
+            <span>Total:</span>            
+            <span>R{Total}</span>
           </div>
         </div>
 

@@ -9,7 +9,9 @@ const CartPage = ({ cart, setCart }) => {
   // Calculate total amount for all cart items
   const calculateTotal = () =>
     cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
-
+  const orderA=parseInt(calculateTotal());
+  const VAT=(orderA*0.15);
+  const Total =orderA+VAT;
   // Handle checkout button click
   const handleCheckout = () => {
     // Require user to be logged in
@@ -76,7 +78,9 @@ const CartPage = ({ cart, setCart }) => {
 
           {/* Show total and checkout button */}
           <div className="cart-total">
-            <h2>Total: R{calculateTotal()}</h2>
+            <h5>Amount: R{calculateTotal()}</h5>
+            <h5>VAT(15%):R {(VAT.toFixed(2))}</h5>
+            <h3>Total:{Total.toFixed(2)}</h3>
             <button className="checkout-button" onClick={handleCheckout}>
               Checkout
             </button>
