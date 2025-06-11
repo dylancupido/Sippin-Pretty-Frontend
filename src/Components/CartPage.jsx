@@ -77,7 +77,7 @@ const CartPage = ({ cart, setCart }) => {
           {/* Show total and checkout button */}
           <div className="cart-total">
             <h2>Total: R{calculateTotal()}</h2>
-            <button className="checkout-button" onClick={handleCheckout}>
+            <button className="checkout-btn" onClick={handleCheckout}>
               Checkout
             </button>
           </div>

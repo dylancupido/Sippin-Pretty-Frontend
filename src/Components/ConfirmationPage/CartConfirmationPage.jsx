@@ -99,13 +99,13 @@ const CartConfirmationPage = () => {
 
       {/* Action buttons */}
       <div className="confirmation-actions">
-        <button onClick={() => navigate("/")}>
+        <button className="checkout-btn" onClick={() => navigate("/")}>
           <span>Return to Home</span>
         </button>
-        <button onClick={() => navigate("/menu")}>
+        <button className="checkout-btn" onClick={() => navigate("/menu")}>
           <span>Continue Shopping</span>
         </button>
-        <button onClick={() => window.print()}>
+        <button className="checkout-btn" onClick={() => window.print()}>
           <span>Print Receipt</span>
         </button>
       </div>

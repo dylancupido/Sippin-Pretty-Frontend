@@ -76,11 +76,12 @@ const ConfirmationPage = () => {
 
       {/* Action Buttons */}
       <div className="confirmation-actions">
-        <button onClick={() => navigate("/")}>Return to Home</button>
-        <button onClick={() => window.print()}>Print Confirmation</button>
+        <button className="checkout-btn" onClick={() => navigate("/")}>Return to Home</button>
+        <button className="checkout-btn" onClick={() => window.print()}>Print Confirmation</button>
       </div>
     </div>
   );
 };
 
 export default ConfirmationPage;
+
