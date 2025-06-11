@@ -34,8 +34,8 @@ const PaymentPage = () => {
     const cleanNumber = cardNumber.replace(/\s+/g, "");
     if (/^4/.test(cleanNumber)) setCardType("Visa");
     else if (
-      /^5[1-5]/.test(cleanNumber) ||
-      /^(222[1-9]|22[3-9]\d|2[3-6]\d{2}|27[0-1]\d|2720)/.test(cleanNumber)
+        /^5[1-5]/.test(cleanNumber) ||
+        /^(222[1-9]|22[3-9]\d|2[3-6]\d{2}|27[0-1]\d|2720)/.test(cleanNumber)
     )
       setCardType("Mastercard");
     else if (/^5/.test(cleanNumber)) setCardType("Debit");
@@ -73,7 +73,7 @@ const PaymentPage = () => {
       newErrors.cardNumber = "Card number must be 16 digits";
     else if (!cardType)
       newErrors.cardNumber =
-        "Only Visa, Mastercard, or Debit cards are accepted";
+          "Only Visa, Mastercard, or Debit cards are accepted";
 
     if (!cardData.expiry) newErrors.expiry = "Expiry date is required";
     else if (!/^\d{2}\/\d{2}$/.test(cardData.expiry))
@@ -103,127 +103,134 @@ const PaymentPage = () => {
       paymentStatus: "Completed",
       paymentDate: new Date().toISOString(),
       cancellationFeeNotice:
-        "Cancellations within 24 hours of booking time will incur a 50% fee.",
+          "Cancellations within 24 hours of booking time will incur a 50% fee.",
     };
 
     navigate("/confirmation", { state: paymentInfo });
   };
 
   return (
-    <div className="payment-container">
-      <div className="payment-header">
-        <h2>Complete Your Payment</h2>
-        <p>Secure your table now!</p>
-      </div>
-
-      <form className="payment-form" onSubmit={handleSubmit}>
-        {/* Cardholder Name */}
-        <label htmlFor="cardName">Cardholder Name</label>
-        <input
-          id="cardName"
-          type="text"
-          name="cardName"
-          placeholder="e.g. Jane Doe"
-          value={cardData.cardName}
-          onChange={handleChange}
-          className={errors.cardName ? "input-error" : ""}
-          required
-        />
-        {errors.cardName && (
-          <div className="error-message">{errors.cardName}</div>
-        )}
-
-        {/* Card Number + Card Type */}
-        <div className="card-input-container">
-          <label htmlFor="cardNumber">Card Number</label>
-          <input
-            id="cardNumber"
-            type="text"
-            name="cardNumber"
-            placeholder="1234 5678 9012 3456"
-            value={cardData.cardNumber}
-            onChange={handleChange}
-            onInput={formatCardNumber}
-            maxLength="19"
-            className={errors.cardNumber ? "input-error" : ""}
-            required
-          />
-          {cardType && <div className="card-type">{cardType}</div>}
-          {errors.cardNumber && (
-            <div className="error-message">{errors.cardNumber}</div>
-          )}
+      <div className="payment-container">
+        <div className="payment-header">
+          <h2>Complete Your Payment</h2>
+          <p>Secure your table now!</p>
         </div>
 
-        {/* Expiry and CVC Fields */}
-        <div className="card-row">
-          <div>
-            <label htmlFor="expiry">Expiry</label>
-            <input
-              id="expiry"
+        <form className="payment-form" onSubmit={handleSubmit}>
+
+          {/* Honeypot field */}
+          <div style={{ display: 'none' }}>
+            <label htmlFor="phone_number">Phone Number</label>
+            <input type="text" name="phone_number" id="phone_number" autoComplete="off" />
+          </div>
+
+          {/* Cardholder Name */}
+          <label htmlFor="cardName">Cardholder Name</label>
+          <input
+              id="cardName"
               type="text"
-              name="expiry"
-              placeholder="MM/YY"
-              value={cardData.expiry}
+              name="cardName"
+              placeholder="e.g. Jane Doe"
+              value={cardData.cardName}
               onChange={handleChange}
-              onInput={formatExpiry}
-              maxLength="5"
-              className={errors.expiry ? "input-error" : ""}
+              className={errors.cardName ? "input-error" : ""}
               required
+          />
+          {errors.cardName && (
+              <div className="error-message">{errors.cardName}</div>
+          )}
+
+          {/* Card Number + Card Type */}
+          <div className="card-input-container">
+            <label htmlFor="cardNumber">Card Number</label>
+            <input
+                id="cardNumber"
+                type="text"
+                name="cardNumber"
+                placeholder="1234 5678 9012 3456"
+                value={cardData.cardNumber}
+                onChange={handleChange}
+                onInput={formatCardNumber}
+                maxLength="19"
+                className={errors.cardNumber ? "input-error" : ""}
+                required
             />
-            {errors.expiry && (
-              <div className="error-message">{errors.expiry}</div>
+            {cardType && <div className="card-type">{cardType}</div>}
+            {errors.cardNumber && (
+                <div className="error-message">{errors.cardNumber}</div>
             )}
           </div>
-          <div>
-            <label htmlFor="cvc">CVC</label>
-            <input
-              id="cvc"
-              type="text"
-              name="cvc"
-              placeholder="123"
-              value={cardData.cvc}
-              onChange={handleChange}
-              maxLength="4"
-              className={errors.cvc ? "input-error" : ""}
-              required
+
+          {/* Expiry and CVC Fields */}
+          <div className="card-row">
+            <div>
+              <label htmlFor="expiry">Expiry</label>
+              <input
+                  id="expiry"
+                  type="text"
+                  name="expiry"
+                  placeholder="MM/YY"
+                  value={cardData.expiry}
+                  onChange={handleChange}
+                  onInput={formatExpiry}
+                  maxLength="5"
+                  className={errors.expiry ? "input-error" : ""}
+                  required
+              />
+              {errors.expiry && (
+                  <div className="error-message">{errors.expiry}</div>
+              )}
+            </div>
+            <div>
+              <label htmlFor="cvc">CVC</label>
+              <input
+                  id="cvc"
+                  type="text"
+                  name="cvc"
+                  placeholder="123"
+                  value={cardData.cvc}
+                  onChange={handleChange}
+                  maxLength="4"
+                  className={errors.cvc ? "input-error" : ""}
+                  required
+              />
+              {errors.cvc && <div className="error-message">{errors.cvc}</div>}
+            </div>
+          </div>
+
+          {/* Summary Section */}
+          <div className="payment-summary">
+            <h3>Payment Summary</h3>
+            <div className="summary-row">
+              <span>Table Reservation:</span>
+              <span>R{bookingData.totalPrice || 0}</span>
+            </div>
+            <div className="summary-row total">
+              <span>Total:</span>
+              <span>R{bookingData.totalPrice || 0}</span>
+            </div>
+          </div>
+
+          {/* Optional QR Code */}
+          <div className="qr-section">
+            <p>Or scan this QR to pay:</p>
+            <img
+                src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://your-payment-url.com"
+                alt="QR Code"
             />
-            {errors.cvc && <div className="error-message">{errors.cvc}</div>}
           </div>
+
+          {/* Confirm Button */}
+          <button type="submit" className="pay-btn">
+            Confirm & Pay
+          </button>
+        </form>
+
+        {/* Back Navigation */}
+        <div className="back-btn" onClick={() => navigate("/booking")}>
+          ← Go Back to Booking
         </div>
-
-        {/* Summary Section */}
-        <div className="payment-summary">
-          <h3>Payment Summary</h3>
-          <div className="summary-row">
-            <span>Table Reservation:</span>
-            <span>R{bookingData.totalPrice || 0}</span>
-          </div>
-          <div className="summary-row total">
-            <span>Total:</span>
-            <span>R{bookingData.totalPrice || 0}</span>
-          </div>
-        </div>
-
-        {/* Optional QR Code */}
-        <div className="qr-section">
-          <p>Or scan this QR to pay:</p>
-          <img
-            src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://your-payment-url.com"
-            alt="QR Code"
-          />
-        </div>
-
-        {/* Confirm Button */}
-        <button type="submit" className="pay-btn">
-          Confirm & Pay
-        </button>
-      </form>
-
-      {/* Back Navigation */}
-      <div className="back-btn" onClick={() => navigate("/booking")}>
-        ← Go Back to Booking
       </div>
-    </div>
   );
 };
 

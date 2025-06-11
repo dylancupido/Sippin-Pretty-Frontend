@@ -66,57 +66,64 @@ const LoginForm = ({ setLoggedIn, handleLogin }) => {
   };
 
   return (
-    <div className="Wrapper">
-      <form onSubmit={handleSubmit}>
-        <h1>Login</h1>
+      <div className="Wrapper">
+        <form onSubmit={handleSubmit}>
 
-        {/* Username or email input */}
-        <div className="inputbox">
-          <input
-            type="text"
-            placeholder="Email or Username"
-            value={username}
-            onChange={(e) => setId(e.target.value)}
-            required
-          />
-          <FaUser className="icon" />
-        </div>
+          {/* Honeypot field */}
+          <div style={{ display: 'none' }}>
+            <label htmlFor="phone_number">Phone Number</label>
+            <input type="text" name="phone_number" id="phone_number" autoComplete="off" />
+          </div>
 
-        {/* Password input */}
-        <div className="inputbox">
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <FaLock className="icon" />
-        </div>
+          <h1>Login</h1>
 
-        {/* Remember me and forgot password links */}
-        <div className="RemembermeBox-forget">
-          <label>
-            <input type="checkbox" /> Remember me
-          </label>
-          <a href="#" id="ForgetPassword">
-            Forgot Password?
-          </a>
-        </div>
+          {/* Username or email input */}
+          <div className="inputbox">
+            <input
+                type="text"
+                placeholder="Email or Username"
+                value={username}
+                onChange={(e) => setId(e.target.value)}
+                required
+            />
+            <FaUser className="icon" />
+          </div>
 
-        {/* Submit button */}
-        <button id="BtnLogin" type="submit">
-          Log In
-        </button>
+          {/* Password input */}
+          <div className="inputbox">
+            <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+            />
+            <FaLock className="icon" />
+          </div>
 
-        {/* Registration link */}
-        <div className="registerLink">
-          <p>
-            Don't have an account? <Link to="/cusRegister">Register</Link>
-          </p>
-        </div>
-      </form>
-    </div>
+          {/* Remember me and forgot password links */}
+          <div className="RemembermeBox-forget">
+            <label>
+              <input type="checkbox" /> Remember me
+            </label>
+            <a href="#" id="ForgetPassword">
+              Forgot Password?
+            </a>
+          </div>
+
+          {/* Submit button */}
+          <button id="BtnLogin" type="submit">
+            Log In
+          </button>
+
+          {/* Registration link */}
+          <div className="registerLink">
+            <p>
+              Don't have an account? <Link to="/cusRegister">Register</Link>
+            </p>
+          </div>
+        </form>
+      </div>
   );
 };
 

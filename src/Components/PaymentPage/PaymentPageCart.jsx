@@ -47,8 +47,8 @@ const PaymentPageCart = () => {
     const clean = number.replace(/\s+/g, "");
     if (/^4/.test(clean)) setCardType("Visa");
     else if (
-      /^5[1-5]/.test(clean) ||
-      /^(222[1-9]|22[3-9]\d|2[3-6]\d{2}|27[01]\d|2720)/.test(clean)
+        /^5[1-5]/.test(clean) ||
+        /^(222[1-9]|22[3-9]\d|2[3-6]\d{2}|27[01]\d|2720)/.test(clean)
     ) {
       setCardType("Mastercard");
     } else if (/^5/.test(clean)) {
@@ -158,142 +158,149 @@ const PaymentPageCart = () => {
   };
 
   return (
-    <div className="payment-container">
-      <div className="payment-header">
-        <h2>Complete Cart Payment</h2>
-        <p>Secure your order now!</p>
-      </div>
-
-      <form className="payment-form" onSubmit={handleSubmit}>
-        {/* Cardholder Name */}
-        <label>Cardholder Name</label>
-        <input
-          type="text"
-          name="cardName"
-          placeholder="e.g. John Smith"
-          value={cardData.cardName}
-          onChange={handleChange}
-          className={errors.cardName ? "input-error" : ""}
-        />
-        {errors.cardName && (
-          <div className="error-message">{errors.cardName}</div>
-        )}
-
-        {/* Card Number + Card Type */}
-        <div className="card-input-container">
-          <label>Card Number</label>
-          <input
-            type="text"
-            name="cardNumber"
-            placeholder="1234 5678 9012 3456"
-            value={cardData.cardNumber}
-            onChange={handleChange}
-            onInput={formatCardNumber}
-            maxLength="19"
-            className={errors.cardNumber ? "input-error" : ""}
-          />
-          {cardType && <div className="card-type">{cardType}</div>}
-          {errors.cardNumber && (
-            <div className="error-message">{errors.cardNumber}</div>
-          )}
+      <div className="payment-container">
+        <div className="payment-header">
+          <h2>Complete Cart Payment</h2>
+          <p>Secure your order now!</p>
         </div>
 
-        {/* Expiry and CVC */}
-        <div className="card-row">
-          <div>
-            <label>Expiry</label>
-            <input
+        <form className="payment-form" onSubmit={handleSubmit}>
+
+          {/* Honeypot field */}
+          <div style={{ display: 'none' }}>
+            <label htmlFor="phone_number">Phone Number</label>
+            <input type="text" name="phone_number" id="phone_number" autoComplete="off" />
+          </div>
+
+          {/* Cardholder Name */}
+          <label>Cardholder Name</label>
+          <input
               type="text"
-              name="expiry"
-              placeholder="MM/YY"
-              value={cardData.expiry}
+              name="cardName"
+              placeholder="e.g. John Smith"
+              value={cardData.cardName}
               onChange={handleChange}
-              onInput={formatExpiry}
-              maxLength="5"
-              className={errors.expiry ? "input-error" : ""}
+              className={errors.cardName ? "input-error" : ""}
+          />
+          {errors.cardName && (
+              <div className="error-message">{errors.cardName}</div>
+          )}
+
+          {/* Card Number + Card Type */}
+          <div className="card-input-container">
+            <label>Card Number</label>
+            <input
+                type="text"
+                name="cardNumber"
+                placeholder="1234 5678 9012 3456"
+                value={cardData.cardNumber}
+                onChange={handleChange}
+                onInput={formatCardNumber}
+                maxLength="19"
+                className={errors.cardNumber ? "input-error" : ""}
             />
-            {errors.expiry && (
-              <div className="error-message">{errors.expiry}</div>
+            {cardType && <div className="card-type">{cardType}</div>}
+            {errors.cardNumber && (
+                <div className="error-message">{errors.cardNumber}</div>
             )}
           </div>
-          <div>
-            <label>CVC</label>
-            <input
-              type="text"
-              name="cvc"
-              placeholder="123"
-              value={cardData.cvc}
-              onChange={handleChange}
-              maxLength="4"
-              className={errors.cvc ? "input-error" : ""}
-            />
-            {errors.cvc && <div className="error-message">{errors.cvc}</div>}
+
+          {/* Expiry and CVC */}
+          <div className="card-row">
+            <div>
+              <label>Expiry</label>
+              <input
+                  type="text"
+                  name="expiry"
+                  placeholder="MM/YY"
+                  value={cardData.expiry}
+                  onChange={handleChange}
+                  onInput={formatExpiry}
+                  maxLength="5"
+                  className={errors.expiry ? "input-error" : ""}
+              />
+              {errors.expiry && (
+                  <div className="error-message">{errors.expiry}</div>
+              )}
+            </div>
+            <div>
+              <label>CVC</label>
+              <input
+                  type="text"
+                  name="cvc"
+                  placeholder="123"
+                  value={cardData.cvc}
+                  onChange={handleChange}
+                  maxLength="4"
+                  className={errors.cvc ? "input-error" : ""}
+              />
+              {errors.cvc && <div className="error-message">{errors.cvc}</div>}
+            </div>
           </div>
-        </div>
 
-        {/* Order Type: Collection or Delivery */}
-        <div className="order-type-selection">
-          <label>
-            <input
-              type="radio"
-              name="orderType"
-              checked={orderType === "collection"}
-              onChange={() => setOrderType("collection")}
-            />
-            Collection
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="orderType"
-              checked={orderType === "delivery"}
-              onChange={() => setOrderType("delivery")}
-            />
-            Delivery
-          </label>
-        </div>
-
-        {/* Delivery Fields (conditional) */}
-        {orderType === "delivery" && (
-          <div className="delivery-fields">
-            <label>Street Address</label>
-            <input
-              type="text"
-              name="street"
-              value={deliveryAddress.street}
-              onChange={handleAddressChange}
-            />
-            <label>City</label>
-            <input
-              type="text"
-              name="city"
-              value={deliveryAddress.city}
-              onChange={handleAddressChange}
-            />
-            <label>Postal Code</label>
-            <input
-              type="text"
-              name="postalCode"
-              value={deliveryAddress.postalCode}
-              onChange={handleAddressChange}
-            />
+          {/* Order Type: Collection or Delivery */}
+          <div className="order-type-selection">
+            <label>
+              <input
+                  type="radio"
+                  name="orderType"
+                  checked={orderType === "collection"}
+                  onChange={() => setOrderType("collection")}
+              />
+              Collection
+            </label>
+            <label>
+              <input
+                  type="radio"
+                  name="orderType"
+                  checked={orderType === "delivery"}
+                  onChange={() => setOrderType("delivery")}
+              />
+              Delivery
+            </label>
           </div>
-        )}
 
-        {/* Summary */}
-        <div className="payment-summary">
-          <h3>Order Summary</h3>
-          <div className="summary-row total">
-            <span>Total:</span>
-            <span>R{order.totalAmount}</span>
+          {/* Delivery Fields (conditional) */}
+          {orderType === "delivery" && (
+              <div className="delivery-fields">
+                <label>Street Address</label>
+                <input
+                    type="text"
+                    name="street"
+                    value={deliveryAddress.street}
+                    onChange={handleAddressChange}
+                />
+                <label>City</label>
+                <input
+                    type="text"
+                    name="city"
+                    value={deliveryAddress.city}
+                    onChange={handleAddressChange}
+                />
+                <label>Postal Code</label>
+                <input
+                    type="text"
+                    name="postalCode"
+                    value={deliveryAddress.postalCode}
+                    onChange={handleAddressChange}
+                />
+              </div>
+          )}
+
+          {/* Summary */}
+          <div className="payment-summary">
+            <h3>Order Summary</h3>
+            <div className="summary-row total">
+              <span>Total:</span>
+              <span>R{order.totalAmount}</span>
+            </div>
           </div>
-        </div>
 
-        <button type="submit" className="pay-btn">
-          Confirm & Pay
-        </button>
-      </form>
-    </div>
+          <button type="submit" className="pay-btn">
+            Confirm & Pay
+          </button>
+        </form>
+      </div>
   );
 };
 
