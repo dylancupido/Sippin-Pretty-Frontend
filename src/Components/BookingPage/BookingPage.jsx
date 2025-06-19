@@ -12,7 +12,7 @@ const BookingPage = () => {
     fullName: "",
     email: "",
     phoneNumber: "",
-    guests: 5,
+    guests: "",
     date: "",
     time: "",
     tableId: null,
