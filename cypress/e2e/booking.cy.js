@@ -1,4 +1,4 @@
-
+/// <reference types="cypress" />
 describe('Customer login', () => {
   it('Validates login page load', () => {
     cy.visit('http://localhost:53460/login');

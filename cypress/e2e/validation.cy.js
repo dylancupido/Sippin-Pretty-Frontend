@@ -13,7 +13,7 @@ cy.get('#BtnLogin').click();
 
 //promotion edit,add function
 cy.get('.navbar').contains('Manage Promotions').click()
-cy.get('.slider-container > :nth-child(5)').contains('Add New').click()
+cy.get('.slider-container > :nth-child(4)').contains('Add New').click()
 cy.get('.custom-modal').contains('Add Promotion').should('be.visible')
 cy.get('[placeholder="Title"]').type('Test Promotion')
 cy.get('textarea').type('Test Description')
@@ -21,7 +21,7 @@ cy.get('[placeholder="Image Path"]').type('Test Image Path')
 cy.get('[placeholder="Catch Phrase"]').type('Test Catch Phrase')
 cy.get('.custom-modal').contains('Save').click();
 
-cy.get(':nth-child(8) > .slide-content > .button-group > :nth-child(2)').contains('Edit').click()
+cy.get(':nth-child(4) > .slide-content > .button-group > :nth-child(2)').contains('Edit').click()
 cy.get('.custom-modal').contains('Edit Promotion').should('be.visible')
 cy.get('[placeholder="Title"]').clear().type('Updated Promotion')
 cy.get('.custom-modal').contains('Update').click();
