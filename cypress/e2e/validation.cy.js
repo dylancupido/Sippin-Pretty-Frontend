@@ -45,7 +45,6 @@ cy.get('form > button').contains('Register').click()
 cy.get('.nav-links > :nth-child(4) > a').click()
 
 
-
 cy.get(':nth-child(5) > a').contains('Bookings').click()
 cy.get('.logout-button').click()
 
