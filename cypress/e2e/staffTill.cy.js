@@ -2,7 +2,7 @@
 
 describe('Staff login and order item page navigation', () => {
   it('Logs in successfully and navigates to order items page', () => {
-    cy.visit('http://localhost:53460/login');
+    cy.visit('https://localhost:5175/login');
 
 
     cy.get(':nth-child(2) > input').type('othandiwayoluntu@gmail.com')

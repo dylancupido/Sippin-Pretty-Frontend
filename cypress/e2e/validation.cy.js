@@ -1,12 +1,16 @@
 /// <reference types="cypress" />
 
+
+
+
+//admin
 describe('Validating login Functionality', () => {
   it('Validates login page load', () => {
-    cy.visit('http://localhost:53460/login');
+    cy.visit('https://localhost:5175/login');
   });
 
   it('Validates login functionality', () => {
-    cy.visit('http://localhost:53460/login');
+    cy.visit('https://localhost:5175/login');
 cy.get(':nth-child(2) > input').type('dylancupido@gmail.com')
 cy.get(':nth-child(3) > input').type('Nomntu07!')
 cy.get('#BtnLogin').click();

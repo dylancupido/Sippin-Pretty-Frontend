@@ -1,10 +1,10 @@
 describe('Collecting Functionality', () => {
   it('Validates Collecting Page load', () => {
-    cy.visit('http://localhost:53460/Collecting');
+    cy.visit('https://localhost:5175/Collecting');
   });
 
   it('Customer login functionality', () => {
-    cy.visit('http://localhost:53460/login');
+    cy.visit('https://localhost:5175/login');
       cy.get(':nth-child(2) > input').type('sintu.tabata@redacademy.co.za')
       cy.get(':nth-child(3) > input').type('Nomntu07!')
       cy.get('#BtnLogin').click();

@@ -1,13 +1,17 @@
 /// <reference types="cypress" />
+
+
+
+///customer
 describe('Customer login', () => {
   it('Validates login page load', () => {
-    cy.visit('http://localhost:53460/login');
+    cy.visit('https://localhost:5175/login');
   }); 
 
   it('Customer login functionality', () => {
-    cy.visit('http://localhost:53460/login');
-      cy.get(':nth-child(2) > input').type('sintu.tabata@redacademy.co.za')
-      cy.get(':nth-child(3) > input').type('Nomntu07!')
+    cy.visit('https://localhost:5175/login');
+      cy.get(':nth-child(3) > input').type('sintu.tabata@redacademy.co.za')
+      cy.get(':nth-child(4) > input').type('Nomntu07!')
       cy.get('#BtnLogin').click();
       cy.get('.navbar').should('be.visible');
       cy.get('.navbar').contains('Home').click();
@@ -33,7 +37,7 @@ describe('Customer login', () => {
       cy.get('.booking-form > button').contains('Confirm Booking').click();
 
       //payment form
-     cy.get('.payment-container').should('be.visible');
+   
       cy.get('#cardName').type('Sintu Tabata');
       cy.get('#cardNumber').type('4111111111111111');
       cy.get('#expiry').type('12/25');

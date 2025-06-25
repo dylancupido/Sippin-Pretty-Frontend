@@ -58,7 +58,7 @@ export function AboutUs() {
           </div>
           <h1>Farhan Waggie</h1>
           <p className="container-text">
-            Backend Developer / Product Documentor
+            Backend Developer / Product Documentor / Security Specialist
           </p>
         </div>
       </div>
