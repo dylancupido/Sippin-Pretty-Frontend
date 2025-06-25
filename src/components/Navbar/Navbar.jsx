@@ -34,7 +34,7 @@ const Navbar = ({ loggedIn = false, onLogout }) => {
 
   useEffect(() => {
     fetchNotifications();
-    const interval = setInterval(fetchNotifications, 3000); // Poll every 3 seconds
+    const interval = setInterval(fetchNotifications, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -63,20 +63,35 @@ const Navbar = ({ loggedIn = false, onLogout }) => {
 
       <ul className={`nav-links ${menuOpen ? "active" : ""}`} role="menubar">
         <li role="none">
-          <a role="menuitem" href="/" onClick={() => setMenuOpen(false)}>
+          <Link role="menuitem" to="/" onClick={() => setMenuOpen(false)}>
             Home
-          </a>
+          </Link>
         </li>
         <li role="none">
-          <a role="menuitem" href="/menu" onClick={() => setMenuOpen(false)}>
+          <Link role="menuitem" to="/menu" onClick={() => setMenuOpen(false)}>
             Menu
-          </a>
+          </Link>
         </li>
         <li role="none">
-          <a role="menuitem" href="/aboutus" onClick={() => setMenuOpen(false)}>
+          <Link
+            role="menuitem"
+            to="/aboutus"
+            onClick={() => setMenuOpen(false)}
+          >
             About Us
-          </a>
+          </Link>
         </li>
+        {menuOpen && (
+          <li role="none">
+            <Link role="menuitem" to="/cart" onClick={() => setMenuOpen(false)}>
+              <i
+                className="fas fa-shopping-cart"
+                style={{ marginRight: "8px" }}
+              ></i>
+              Cart
+            </Link>
+          </li>
+        )}
       </ul>
 
       <div className="nav-actions">
@@ -112,9 +127,11 @@ const Navbar = ({ loggedIn = false, onLogout }) => {
           )}
         </div>
 
-        <Link to="/cart" className="nav-cart" aria-label="Shopping Cart">
-          <i className="fas fa-shopping-cart"></i>
-        </Link>
+        {!menuOpen && (
+          <Link to="/cart" className="nav-cart" aria-label="Shopping Cart">
+            <i className="fas fa-shopping-cart"></i>
+          </Link>
+        )}
 
         <div className="nav-account">
           <Dropdown align="end">

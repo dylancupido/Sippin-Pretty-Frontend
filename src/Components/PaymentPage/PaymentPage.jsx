@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./PaymentPage.css";
-
+ 
 const PaymentPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
+ 
   // Booking details passed from previous screen
   const bookingData = location.state || {};
-
+ 
   // Card input form state
   const [cardData, setCardData] = useState({
     cardName: "",
@@ -16,19 +16,19 @@ const PaymentPage = () => {
     expiry: "",
     cvc: "",
   });
-
+ 
   const [errors, setErrors] = useState({});
   const [cardType, setCardType] = useState(""); // Visa / Mastercard / Debit
-
+ 
   // Handle input field changes (name, number, expiry, cvc)
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCardData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: null }));
-
+ 
     if (name === "cardNumber") detectCardType(value);
   };
-
+ 
   // Identify card type from the card number pattern
   const detectCardType = (cardNumber) => {
     const cleanNumber = cardNumber.replace(/\s+/g, "");
@@ -41,7 +41,7 @@ const PaymentPage = () => {
     else if (/^5/.test(cleanNumber)) setCardType("Debit");
     else setCardType("");
   };
-
+ 
   // Format card number (adds spaces every 4 digits)
   const formatCardNumber = (e) => {
     let value = e.target.value.replace(/\D/g, "");
@@ -50,7 +50,7 @@ const PaymentPage = () => {
     setCardData((prev) => ({ ...prev, cardNumber: value }));
     detectCardType(value);
   };
-
+ 
   // Format expiry to MM/YY
   const formatExpiry = (e) => {
     let value = e.target.value.replace(/\D/g, "");
@@ -59,22 +59,22 @@ const PaymentPage = () => {
     e.target.value = value;
     setCardData((prev) => ({ ...prev, expiry: value }));
   };
-
+ 
   // Validate all card fields before submission
   const validateForm = () => {
     const newErrors = {};
     const cleanCardNumber = cardData.cardNumber.replace(/\s+/g, "");
-
+ 
     if (!cardData.cardName.trim())
       newErrors.cardName = "Cardholder name is required";
-
+ 
     if (!cleanCardNumber) newErrors.cardNumber = "Card number is required";
     else if (!/^\d{16}$/.test(cleanCardNumber))
       newErrors.cardNumber = "Card number must be 16 digits";
     else if (!cardType)
       newErrors.cardNumber =
         "Only Visa, Mastercard, or Debit cards are accepted";
-
+ 
     if (!cardData.expiry) newErrors.expiry = "Expiry date is required";
     else if (!/^\d{2}\/\d{2}$/.test(cardData.expiry))
       newErrors.expiry = "Expiry must be in MM/YY format";
@@ -83,20 +83,20 @@ const PaymentPage = () => {
       const expiryDate = new Date(2000 + parseInt(year), parseInt(month) - 1);
       if (expiryDate < new Date()) newErrors.expiry = "Card has expired";
     }
-
+ 
     if (!cardData.cvc) newErrors.cvc = "CVC is required";
     else if (!/^\d{3,4}$/.test(cardData.cvc))
       newErrors.cvc = "CVC must be 3 or 4 digits";
-
+ 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
+ 
   // On form submit, validate & redirect to confirmation
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-
+ 
     const paymentInfo = {
       ...bookingData,
       paymentMethod: cardType,
@@ -105,17 +105,17 @@ const PaymentPage = () => {
       cancellationFeeNotice:
         "Cancellations within 24 hours of booking time will incur a 50% fee.",
     };
-
+ 
     navigate("/confirmation", { state: paymentInfo });
   };
-
+ 
   return (
     <div className="payment-container">
       <div className="payment-header">
         <h2>Complete Your Payment</h2>
         <p>Secure your table now!</p>
       </div>
-
+ 
       <form className="payment-form" onSubmit={handleSubmit}>
         {/* Cardholder Name */}
         <label htmlFor="cardName">Cardholder Name</label>
@@ -132,7 +132,7 @@ const PaymentPage = () => {
         {errors.cardName && (
           <div className="error-message">{errors.cardName}</div>
         )}
-
+ 
         {/* Card Number + Card Type */}
         <div className="card-input-container">
           <label htmlFor="cardNumber">Card Number</label>
@@ -153,7 +153,7 @@ const PaymentPage = () => {
             <div className="error-message">{errors.cardNumber}</div>
           )}
         </div>
-
+ 
         {/* Expiry and CVC Fields */}
         <div className="card-row">
           <div>
@@ -190,7 +190,7 @@ const PaymentPage = () => {
             {errors.cvc && <div className="error-message">{errors.cvc}</div>}
           </div>
         </div>
-
+ 
         {/* Summary Section */}
         <div className="payment-summary">
           <h3>Payment Summary</h3>
@@ -203,7 +203,7 @@ const PaymentPage = () => {
             <span>R{bookingData.totalPrice || 0}</span>
           </div>
         </div>
-
+ 
         {/* Optional QR Code */}
         <div className="qr-section">
           <p>Or scan this QR to pay:</p>
@@ -212,13 +212,13 @@ const PaymentPage = () => {
             alt="QR Code"
           />
         </div>
-
+ 
         {/* Confirm Button */}
         <button type="submit" className="pay-btn">
           Confirm & Pay
         </button>
       </form>
-
+ 
       {/* Back Navigation */}
       <div className="back-btn" onClick={() => navigate("/booking")}>
         ← Go Back to Booking
@@ -226,5 +226,7 @@ const PaymentPage = () => {
     </div>
   );
 };
-
+ 
 export default PaymentPage;
+ 
+ 

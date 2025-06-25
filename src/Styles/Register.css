@@ -67,7 +67,7 @@ code {
   display: flex;
   cursor: pointer;
   text-decoration: solid;
-  background-color: rgb(178, 40, 233);
+  background-color: rgb(189, 183, 192);
   transition: background-color 0.3s ease;
 }
 .Wrapper button:hover {

@@ -41,8 +41,17 @@ export default function TillPage() {
     setPaymentType(type);
   };
 
-  // Calculate total cost of items in the receipt
+
   const total = receiptItems.reduce((sum, item) => sum + item.price, 0);
+const exclusive = parseFloat(total.toFixed(2));  
+const vat = parseFloat((exclusive * 0.15).toFixed(2));
+const inclusive = parseFloat((exclusive + vat).toFixed(2));  
+ 
+console.log({
+  exclusive,
+  vat,
+  inclusive
+});
 
   // Submit order and order items to the backend
   const handleCheckout = async () => {
@@ -122,7 +131,8 @@ export default function TillPage() {
               ))}
             </ul>
           )}
-          <div className="total">Total: R{total.toFixed(2)}</div>
+        <div className="vat">VAT(15%):R{vat}</div>
+          <div className="total">Total: R{inclusive}</div>
 
           {/* Checkout and clear buttons */}
           <div className="checkout-controls">
