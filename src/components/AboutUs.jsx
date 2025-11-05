@@ -27,79 +27,79 @@ export function AboutUs() {
       {/* Section: Team Members */}
       <section className="team-section">
         <h1 className="heading">Our Team</h1>
-      <br />
+        <br />
 
-      {/* Team Member 1 */}
-      <div className="container-wrapper">
-        <div className="container">
-          <div className="circle-wrapper">
-            <img
-              src={"../src/assets/Dylan.jfif"}
-              alt={"blank-profile-picture"}
-              className="circle-image"
-            />
+        {/* Team Member 1 */}
+        <div className="container-wrapper">
+          <div className="container">
+            <div className="circle-wrapper">
+              <img
+                src={"https://i.ibb.co/zT0BsKxH/Dylan.jpg"}
+                alt={"blank-profile-picture"}
+                className="circle-image"
+              />
+            </div>
+            <h1>Dylan Cupido</h1>
+            <p className="container-text">Fullstack Developer</p>
           </div>
-          <h1>Dylan Cupido</h1>
-          <p className="container-text">Fullstack Developer</p>
         </div>
-      </div>
 
-      <br />
+        <br />
 
-      {/* Team Member 2 */}
-      <div className="container-wrapper">
-        <div className="container">
-          <div className="circle-wrapper">
-            <img
-              src={"../src/assets/Farhan.jfif"}
-              alt={"team-member-photo"}
-              className="circle-image"
-            />
+        {/* Team Member 2 */}
+        <div className="container-wrapper">
+          <div className="container">
+            <div className="circle-wrapper">
+              <img
+                src={"https://i.ibb.co/4L8pLSj/Farhan.jpg"}
+                alt={"team-member-photo"}
+                className="circle-image"
+              />
+            </div>
+            <h1>Farhan Waggie</h1>
+            <p className="container-text">
+              Backend Developer / Product Documentor / Security Specialist
+            </p>
           </div>
-          <h1>Farhan Waggie</h1>
-          <p className="container-text">
-            Backend Developer / Product Documentor / Security Specialist
-          </p>
         </div>
-      </div>
 
-      <br />
+        <br />
 
-      {/* Team Member 3 */}
-      <div className="container-wrapper">
-        <div className="container">
-          <div className="circle-wrapper">
-            <img
-              src={"../src/assets/Mulanga.jfif"}
-              alt={"blank-profile-picture"}
-              className="circle-image"
-            />
+        {/* Team Member 3 */}
+        <div className="container-wrapper">
+          <div className="container">
+            <div className="circle-wrapper">
+              <img
+                src={"https://i.ibb.co/p5D58bF/Mulanga.jpg"}
+                alt={"blank-profile-picture"}
+                className="circle-image"
+              />
+            </div>
+            <h1>Mulanga Radzilani</h1>
+            <p className="container-text">
+              Backend Developer / Database Specialist
+            </p>
           </div>
-          <h1>Mulanga Radzilani</h1>
-          <p className="container-text">
-            Backend Developer / Database Specialist
-          </p>
         </div>
-      </div>
 
-      <br />
+        <br />
 
-      {/* Team Member 4 */}
-      <div className="container-wrapper">
-        <div className="container">
-          <div className="circle-wrapper">
-            <img
-              src={"../src/assets/Sintu.jfif"}
-              alt={"blank-profile-picture"}
-              className="circle-image"
-            />
+        {/* Team Member 4 */}
+        <div className="container-wrapper">
+          <div className="container">
+            <div className="circle-wrapper">
+              <img
+                src={"https://i.ibb.co/xqBzS25Q/Sintu.jpg"}
+                alt={"blank-profile-picture"}
+                className="circle-image"
+              />
+            </div>
+            <h1>Sintu Tabata</h1>
+            <p className="container-text">
+              UI Designer / Automation Tester / Front-End Developer
+            </p>
           </div>
-          <h1>Sintu Tabata</h1>
-          <p className="container-text">
-            UI Designer / Automation Tester / Front-End Developer
-          </p>
         </div>
-      </div>
       </section>
     </div>
   );
