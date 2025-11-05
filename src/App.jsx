@@ -9,35 +9,35 @@ import {
 import { jwtDecode } from "jwt-decode";
 
 // Navigation Components for different user roles
-import Navbar from "./Components/Navbar/Navbar.jsx";
-import AdminNavbar from "./Components/navbarAdmin/AdminNavBar.jsx";
-import StaffNavbar from "./Components/navbarAdmin/StaffNavBar.jsx";
+import Navbar from "./ccomponents/Navbar/Navbar.js";
+import AdminNavbar from "./ccomponents/navbarAdmin/AdminNavBar.js";
+import StaffNavbar from "./ccomponents/navbarAdmin/StaffNavBar.js";
 
 // Pagesb
-import CartConfirmationPage from "./Components/ConfirmationPage/CartConfirmationPage.jsx";
-import HomePage from "./Components/HomePage.jsx";
-import Menu from "./Components/MenuPage.jsx";
-import CartPage from "./Components/CartPage.jsx";
-import BookingPage from "./Components/BookingPage/BookingPage.jsx";
-import PaymentPage from "./Components/PaymentPage/PaymentPage.jsx";
-import ConfirmationPage from "./Components/ConfirmationPage/ConfirmationPage.jsx";
-import MenuAdmin from "./Components/MenuPageAdmin.jsx";
-import UserAdminPage from "./Components/navbarAdmin/UserAdminPage.jsx";
-import AdminDashboard from "./Components/navbarAdmin/AdminDashboard.jsx";
-import DeliveryManagement from "./Components/navbarAdmin/DeliveryManagement.jsx";
-import OrdersPage from "./Components/OrdersPage.jsx";
-import LoginForm from "./Components/LoginPage.jsx";
-import CusRegisterForm from "./Components/RegisterPage.jsx";
-import { AboutUs } from "./components/AboutUs.jsx";
-import TillPage from "./Components/TillPage.jsx";
-import OrderItemsAdminPage from "./Components/StaffOrders.jsx";
-import StaffRegisterForm from "./Components/RegisterStaff.jsx";
-import PaymentPageCart from "./Components/PaymentPage/PaymentPageCart.jsx";
-import DeliveriesPage from "./Components/DeliveriesPage.jsx";
-import AdminBookingPage from "./Components/navbarAdmin/AdminBookingPage.jsx";
-import Footer from "./Components/Footer/Footer.jsx";
+import CartConfirmationPage from "./ccomponents/ConfirmationPage/CartConfirmationPage.js";
+import HomePage from "./ccomponents/HomePage.js";
+import Menu from "./ccomponents/MenuPage.js";
+import CartPage from "./ccomponents/CartPage.js";
+import BookingPage from "./ccomponents/BookingPage/BookingPage.js";
+import PaymentPage from "./ccomponents/PaymentPage/PaymentPage.js";
+import ConfirmationPage from "./ccomponents/ConfirmationPage/ConfirmationPage.js";
+import MenuAdmin from "./ccomponents/MenuPageAdmin.js";
+import UserAdminPage from "./ccomponents/navbarAdmin/UserAdminPage.js";
+import AdminDashboard from "./ccomponents/navbarAdmin/AdminDashboard.js";
+import DeliveryManagement from "./ccomponents/navbarAdmin/DeliveryManagement.js";
+import OrdersPage from "./ccomponents/OrdersPage.js";
+import LoginForm from "./ccomponents/LoginPage.js";
+import CusRegisterForm from "./ccomponents/RegisterPage.js";
+import { AboutUs } from "./ccomponents/AboutUs.js";
+import TillPage from "./ccomponents/TillPage.jsx";
+import OrderItemsAdminPage from "./ccomponents/StaffOrders.js";
+import StaffRegisterForm from "./ccomponents/RegisterStaff.js";
+import PaymentPageCart from "./ccomponents/PaymentPage/PaymentPageCart.js";
+import DeliveriesPage from "./ccomponents/DeliveriesPage.js";
+import AdminBookingPage from "./ccomponents/navbarAdmin/AdminBookingPage.js";
+import Footer from "./ccomponents/Footer/Footer.js";
 import "./App.css";
-import AdminPromotionsSlider from "./Components/Promos/AdminPromotionSlider.jsx";
+import AdminPromotionsSlider from "./ccomponents/Promos/AdminPromotionSlider.js";
 
 function App() {
   const navigate = useNavigate();
