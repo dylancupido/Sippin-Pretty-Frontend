@@ -143,7 +143,7 @@ const Navbar = ({ loggedIn = false, onLogout }) => {
               aria-expanded="false"
             >
               <img
-                src="https://ibb.co/BHjWDrDt"
+                src="https://i.ibb.co/BV8VZrRd/accounsst.png"
                 alt="Account Icon"
                 className="account-icon"
               />
