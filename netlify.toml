@@ -1,0 +1,7 @@
+[build]
+command = "npm run build"
+publish = "dist"
+# Do NOT set a base here unless your app is in a subfolder.
+
+[build.environment]
+NODE_VERSION = "18"
