@@ -6,9 +6,7 @@ const AdminLayout = ({ children, onLogout }) => {
   return (
     <>
       <AdminNavBar onLogout={onLogout} />
-      <main className="admin-content">
-        {children}
-      </main>
+      <main className="admin-content">{children}</main>
     </>
   );
 };
