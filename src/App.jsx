@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 // Navigation components for different user roles
-import Navbar from "./Components/Navbar/Navbar";
+import Navbar from "./Components/Navbar/Navbar.jsx";
 import AdminNavbar from "./Components/navbarAdmin/AdminNavBar";
 import StaffNavbar from "./Components/navbarAdmin/StaffNavBar";
 
@@ -159,87 +165,92 @@ function App() {
       <main className="main-content">
         {/* Define application routes */}
         <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/menu" element={<Menu onAddToCart={handleAddToCart} />} />
-        <Route
-          path="/cart"
-          element={<CartPage cart={cart} setCart={setCart} />}
-        />
-        <Route path="/cart" element={<CartPage cart={cart} />} />
-        <Route path="/cart-confirmation" element={<CartConfirmationPage />} />
-        <Route path="/booking" element={<BookingPage />} />
-        <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/confirmation" element={<ConfirmationPage />} />
-        <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/till" element={<TillPage />} />
-        <Route path="/staff/orders" element={<OrderItemsAdminPage />} />
-        <Route path="/admin/registerstaff" element={<StaffRegisterForm />} />
-        <Route path="/cartpayment" element={<PaymentPageCart />} />
-        <Route path="/deliveries" element={<DeliveriesPage />} />
-        <Route path="/admin/bookings" element={<AdminBookingPage />} />
-        <Route path="/admin/promotions" element={<AdminPromotionsSlider />} />
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/menu"
+            element={<Menu onAddToCart={handleAddToCart} />}
+          />
+          <Route
+            path="/cart"
+            element={<CartPage cart={cart} setCart={setCart} />}
+          />
+          <Route path="/cart" element={<CartPage cart={cart} />} />
+          <Route path="/cart-confirmation" element={<CartConfirmationPage />} />
+          <Route path="/booking" element={<BookingPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/confirmation" element={<ConfirmationPage />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/till" element={<TillPage />} />
+          <Route path="/staff/orders" element={<OrderItemsAdminPage />} />
+          <Route path="/admin/registerstaff" element={<StaffRegisterForm />} />
+          <Route path="/cartpayment" element={<PaymentPageCart />} />
+          <Route path="/deliveries" element={<DeliveriesPage />} />
+          <Route path="/admin/bookings" element={<AdminBookingPage />} />
+          <Route path="/admin/promotions" element={<AdminPromotionsSlider />} />
 
-        {/* Admin-only routes */}
-        <Route
-          path="/menuadmin"
-          element={
-            userRole === "admin" ? <MenuAdmin /> : <Navigate to="/" replace />
-          }
-        />
-        <Route
-          path="/admin/users"
-          element={
-            userRole === "admin" ? (
-              <UserAdminPage />
-            ) : (
-              <Navigate to="/" replace />
-            )
-          }
-        />
-        <Route
-          path="/admin/orders"
-          element={
-            userRole === "admin" ? <OrdersPage /> : <Navigate to="/" replace />
-          }
-        />
-        <Route
-          path="/admin/dashboard"
-          element={
-            userRole === "admin" ? (
-              <AdminDashboard />
-            ) : (
-              <Navigate to="/" replace />
-            )
-          }
-        />
-        <Route
-          path="/admin/delivery"
-          element={
-            userRole === "admin" ? (
-              <DeliveryManagement />
-            ) : (
-              <Navigate to="/" replace />
-            )
-          }
-        />
+          {/* Admin-only routes */}
+          <Route
+            path="/menuadmin"
+            element={
+              userRole === "admin" ? <MenuAdmin /> : <Navigate to="/" replace />
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              userRole === "admin" ? (
+                <UserAdminPage />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+          <Route
+            path="/admin/orders"
+            element={
+              userRole === "admin" ? (
+                <OrdersPage />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+          <Route
+            path="/admin/dashboard"
+            element={
+              userRole === "admin" ? (
+                <AdminDashboard />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+          <Route
+            path="/admin/delivery"
+            element={
+              userRole === "admin" ? (
+                <DeliveryManagement />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
 
-        {/* Auth routes */}
-        <Route
-          path="/login"
-          element={
-            <LoginForm setLoggedIn={setLoggedIn} handleLogin={handleLogin} />
-          }
-        />
-        <Route path="/cusRegister" element={<CusRegisterForm />} />
-      </Routes>
+          {/* Auth routes */}
+          <Route
+            path="/login"
+            element={
+              <LoginForm setLoggedIn={setLoggedIn} handleLogin={handleLogin} />
+            }
+          />
+          <Route path="/cusRegister" element={<CusRegisterForm />} />
+        </Routes>
       </main>
 
       {/* Footer - appears on all pages except auth pages */}
-      {!location.pathname.includes('/login') &&
-       !location.pathname.includes('/cusRegister') &&
-       !location.pathname.includes('/admin/registerstaff') && (
-        <Footer />
-      )}
+      {!location.pathname.includes("/login") &&
+        !location.pathname.includes("/cusRegister") &&
+        !location.pathname.includes("/admin/registerstaff") && <Footer />}
     </div>
   );
 }
