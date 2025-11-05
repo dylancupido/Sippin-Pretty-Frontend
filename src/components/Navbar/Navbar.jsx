@@ -6,7 +6,7 @@ import accountIcon from "../../assets/account.png";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from "react-router-dom";
 
-const NOTIFY_URL = "http://localhost:5010/api/Notifications";
+const NOTIFY_URL = "https://sippinpretty.fly.dev/api/Notifications";
 
 const Navbar = ({ loggedIn = false, onLogout }) => {
   const [notifications, setNotifications] = useState([]);

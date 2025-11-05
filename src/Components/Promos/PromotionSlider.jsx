@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./PromotionSlider.css";
 
-const BASE_URL = "http://localhost:5010/api/Promotions"; // adjust to match your backend
+const BASE_URL = "https://sippinpretty.fly.dev/api/Promotions"; // adjust to match your backend
 
 const PromotionSlider = () => {
   const [promotions, setPromotions] = useState([]);

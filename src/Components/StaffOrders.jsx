@@ -14,7 +14,9 @@ const OrderItemsAdminPage = () => {
   // Fetch all order items from the backend
   const fetchOrderItems = async () => {
     try {
-      const response = await fetch("http://localhost:5010/api/OrderItems");
+      const response = await fetch(
+        "https://sippinpretty.fly.dev/api/OrderItems"
+      );
       const data = await response.json();
       setOrderItems(data);
     } catch (error) {
@@ -46,7 +48,7 @@ const OrderItemsAdminPage = () => {
       if (remaining.length === 0) {
         // Fetch the full order to determine its type
         const orderResponse = await fetch(
-          `http://localhost:5010/api/Orders/${orderID}`
+          `https://sippinpretty.fly.dev/api/Orders/${orderID}`
         );
         const order = await orderResponse.json();
 
@@ -58,7 +60,7 @@ const OrderItemsAdminPage = () => {
         }
 
         // Save updated order to backend
-        await fetch(`http://localhost:5010/api/Orders/${orderID}`, {
+        await fetch(`https://sippinpretty.fly.dev/api/Orders/${orderID}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(order),
@@ -67,7 +69,7 @@ const OrderItemsAdminPage = () => {
         // Delete all order items related to this order
         for (const item of relatedItems) {
           await fetch(
-            `http://localhost:5010/api/OrderItems/${item.order_Item_ID}`,
+            `https://sippinpretty.fly.dev/api/OrderItems/${item.order_Item_ID}`,
             {
               method: "DELETE",
             }

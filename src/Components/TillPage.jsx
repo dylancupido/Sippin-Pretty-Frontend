@@ -9,7 +9,7 @@ export default function TillPage() {
 
   // Load menu items from the API
   useEffect(() => {
-    fetch("http://localhost:5010/api/MenuItemsAPI")
+    fetch("https://sippinpretty.fly.dev/api/MenuItemsAPI")
       .then((res) => res.json())
       .then((data) => {
         const formatted = data.map((item) => ({
@@ -41,17 +41,16 @@ export default function TillPage() {
     setPaymentType(type);
   };
 
-
   const total = receiptItems.reduce((sum, item) => sum + item.price, 0);
-const exclusive = parseFloat(total.toFixed(2));  
-const vat = parseFloat((exclusive * 0.15).toFixed(2));
-const inclusive = parseFloat((exclusive + vat).toFixed(2));  
- 
-console.log({
-  exclusive,
-  vat,
-  inclusive
-});
+  const exclusive = parseFloat(total.toFixed(2));
+  const vat = parseFloat((exclusive * 0.15).toFixed(2));
+  const inclusive = parseFloat((exclusive + vat).toFixed(2));
+
+  console.log({
+    exclusive,
+    vat,
+    inclusive,
+  });
 
   // Submit order and order items to the backend
   const handleCheckout = async () => {
@@ -93,7 +92,7 @@ console.log({
     try {
       console.log("Sending payload:", payload);
       const response = await axios.post(
-        "http://localhost:5010/api/Orders/WithItems",
+        "https://sippinpretty.fly.dev/api/Orders/WithItems",
         payload
       );
       console.log("Checkout success:", response.data);
@@ -131,7 +130,7 @@ console.log({
               ))}
             </ul>
           )}
-        <div className="vat">VAT(15%):R{vat}</div>
+          <div className="vat">VAT(15%):R{vat}</div>
           <div className="total">Total: R{inclusive}</div>
 
           {/* Checkout and clear buttons */}

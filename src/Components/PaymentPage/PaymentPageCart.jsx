@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./PaymentPageCart.css";
 import axios from "axios";
- 
- 
+
 const PaymentPageCart = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { cart, order } = location.state || {}; // Get order & cart from previous page
- 
+
   // Payment form data state
   const [cardData, setCardData] = useState({
     cardName: "",
@@ -16,36 +15,35 @@ const PaymentPageCart = () => {
     expiry: "",
     cvc: "",
   });
-  const OrderAM=parseInt(order.totalAmount.toFixed(2));
-  const vat=OrderAM*0.15;
-  const Total=(vat+OrderAM).toFixed(2);
+  const OrderAM = parseInt(order.totalAmount.toFixed(2));
+  const vat = OrderAM * 0.15;
+  const Total = (vat + OrderAM).toFixed(2);
   const [errors, setErrors] = useState({});
   const [cardType, setCardType] = useState("");
   const [orderType, setOrderType] = useState("collection"); // Default to collection
- 
+
   // Delivery address state (shown only for delivery orders)
   const [deliveryAddress, setDeliveryAddress] = useState({
     street: "",
     city: "",
     postalCode: "",
   });
- 
+
   // Handle changes for card input fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCardData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: null }));
- 
+
     if (name === "cardNumber") detectCardType(value); // Detect card brand
   };
- 
- 
+
   // Handle delivery address changes
   const handleAddressChange = (e) => {
     const { name, value } = e.target;
     setDeliveryAddress((prev) => ({ ...prev, [name]: value }));
   };
- 
+
   // Determine card type from card number
   const detectCardType = (number) => {
     const clean = number.replace(/\s+/g, "");
@@ -61,7 +59,7 @@ const PaymentPageCart = () => {
       setCardType("");
     }
   };
- 
+
   // Format card number with spacing
   const formatCardNumber = (e) => {
     let value = e.target.value.replace(/\D/g, "");
@@ -70,7 +68,7 @@ const PaymentPageCart = () => {
     setCardData((prev) => ({ ...prev, cardNumber: value }));
     detectCardType(value);
   };
- 
+
   // Format expiry as MM/YY
   const formatExpiry = (e) => {
     let value = e.target.value.replace(/\D/g, "");
@@ -79,20 +77,20 @@ const PaymentPageCart = () => {
     e.target.value = value;
     setCardData((prev) => ({ ...prev, expiry: value }));
   };
- 
+
   // Validate form input fields before submission
   const validateForm = () => {
     const newErrors = {};
     if (!cardData.cardName.trim())
       newErrors.cardName = "Cardholder name is required";
- 
+
     const cleanCardNumber = cardData.cardNumber.replace(/\s+/g, "");
     if (!/^\d{16}$/.test(cleanCardNumber))
       newErrors.cardNumber = "Card number must be 16 digits";
- 
+
     if (!cardType)
       newErrors.cardNumber = "Only Visa, Mastercard, or Debit accepted";
- 
+
     if (!/^\d{2}\/\d{2}$/.test(cardData.expiry)) {
       newErrors.expiry = "Use MM/YY format";
     } else {
@@ -100,19 +98,19 @@ const PaymentPageCart = () => {
       const exp = new Date(2000 + parseInt(yy), parseInt(mm) - 1);
       if (exp < new Date()) newErrors.expiry = "Card expired";
     }
- 
+
     if (!/^\d{3,4}$/.test(cardData.cvc))
       newErrors.cvc = "CVC must be 3 or 4 digits";
- 
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
- 
+
   // Handle payment form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
- 
+
     // Prepare order items
     const orderItems = cart.map((item) => ({
       orderID: order.orderID,
@@ -120,16 +118,19 @@ const PaymentPageCart = () => {
       quantity: item.quantity,
       item_price: item.price,
     }));
- 
+
     const payload = {
       order: { ...order, orderType },
       orderItems,
     };
- 
+
     try {
       // Submit order and order items
-      await axios.post("http://localhost:5010/api/Orders/WithItems", payload);
- 
+      await axios.post(
+        "https://sippinpretty.fly.dev/api/Orders/WithItems",
+        payload
+      );
+
       // If delivery is selected, submit delivery details
       if (orderType === "delivery") {
         const delivery = {
@@ -139,9 +140,12 @@ const PaymentPageCart = () => {
           city: deliveryAddress.city,
           postalCode: deliveryAddress.postalCode,
         };
-        await axios.post("http://localhost:5010/api/Deliveries", delivery);
+        await axios.post(
+          "https://sippinpretty.fly.dev/api/Deliveries",
+          delivery
+        );
       }
- 
+
       // Clear cart and redirect
       localStorage.removeItem(`cart_${order.userID}`);
       navigate("/cart-confirmation", {
@@ -153,21 +157,21 @@ const PaymentPageCart = () => {
           deliveryAddress: orderType === "delivery" ? deliveryAddress : null,
         },
       });
- 
+
       alert("Payment successful and order placed!");
     } catch (error) {
       console.error("Order failed:", error);
       alert("Something went wrong while placing your order.");
     }
   };
- 
+
   return (
     <div className="payment-container">
       <div className="payment-header">
         <h2>Complete Cart Payment</h2>
         <p>Secure your order now!</p>
       </div>
- 
+
       <form className="payment-form" onSubmit={handleSubmit}>
         {/* Cardholder Name */}
         <label>Cardholder Name</label>
@@ -182,7 +186,7 @@ const PaymentPageCart = () => {
         {errors.cardName && (
           <div className="error-message">{errors.cardName}</div>
         )}
- 
+
         {/* Card Number + Card Type */}
         <div className="card-input-container">
           <label>Card Number</label>
@@ -201,7 +205,7 @@ const PaymentPageCart = () => {
             <div className="error-message">{errors.cardNumber}</div>
           )}
         </div>
- 
+
         {/* Expiry and CVC */}
         <div className="card-row">
           <div>
@@ -234,7 +238,7 @@ const PaymentPageCart = () => {
             {errors.cvc && <div className="error-message">{errors.cvc}</div>}
           </div>
         </div>
- 
+
         {/* Order Type: Collection or Delivery */}
         <div className="order-type-selection">
           <label>
@@ -256,7 +260,7 @@ const PaymentPageCart = () => {
             Delivery
           </label>
         </div>
- 
+
         {/* Delivery Fields (conditional) */}
         {orderType === "delivery" && (
           <div className="delivery-fields">
@@ -283,16 +287,16 @@ const PaymentPageCart = () => {
             />
           </div>
         )}
- 
+
         {/* Summary */}
         <div className="payment-summary">
           <h3>Order Summary</h3>
           <div className="summary-row total">
-            <span>Total:</span>            
+            <span>Total:</span>
             <span>R{Total}</span>
           </div>
         </div>
- 
+
         <button type="submit" className="pay-btn">
           Confirm & Pay
         </button>
@@ -300,7 +304,5 @@ const PaymentPageCart = () => {
     </div>
   );
 };
- 
+
 export default PaymentPageCart;
- 
- 

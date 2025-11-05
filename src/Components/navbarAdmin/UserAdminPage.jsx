@@ -11,7 +11,7 @@ const UserAdminPage = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:5010/api/Users");
+        const response = await fetch("https://sippinpretty.fly.dev/api/Users");
         const data = await response.json();
         setUsers(data); // Set retrieved user data
       } catch (error) {
@@ -27,9 +27,12 @@ const UserAdminPage = () => {
   // Handle deleting a user by ID
   const handleDeleteUser = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5010/api/Users/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://sippinpretty.fly.dev/api/Users/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (response.ok) {
         // Remove user from UI after successful deletion

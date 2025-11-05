@@ -7,7 +7,7 @@ const Menu = ({ onAddToCart }) => {
 
   // Fetch menu items from API
   useEffect(() => {
-    fetch("http://localhost:5010/api/MenuItemsAPI")
+    fetch("https://sippinpretty.fly.dev/api/MenuItemsAPI")
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched menu items:", data);

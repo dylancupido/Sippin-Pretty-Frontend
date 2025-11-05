@@ -10,7 +10,9 @@ const AdminBookingPage = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await fetch("http://localhost:5010/api/Bookings");
+        const response = await fetch(
+          "https://sippinpretty.fly.dev/api/Bookings"
+        );
         const data = await response.json();
         setBookings(data);
       } catch (error) {
@@ -26,9 +28,12 @@ const AdminBookingPage = () => {
   // Delete a booking by ID
   const handleDeleteBooking = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5010/api/Bookings/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://sippinpretty.fly.dev/api/Bookings/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (response.ok) {
         setBookings(bookings.filter((booking) => booking.id !== id));

@@ -16,8 +16,8 @@ const AdminPromotionsSlider = () => {
     catchPhrase: "",
   });
 
-  const BASE_URL = "http://localhost:5010/api/Promotions";
-  const NOTIFY_URL = "http://localhost:5010/api/Notifications";
+  const BASE_URL = "https://sippinpretty.fly.dev/api/Promotions";
+  const NOTIFY_URL = "https://sippinpretty.fly.dev/api/Notifications";
 
   const fetchPromotions = async () => {
     try {

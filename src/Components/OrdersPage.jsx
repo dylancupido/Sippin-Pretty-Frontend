@@ -7,7 +7,7 @@ const OrdersPage = () => {
 
   // Fetch all orders
   useEffect(() => {
-    fetch("http://localhost:5010/api/Orders")
+    fetch("https://sippinpretty.fly.dev/api/Orders")
       .then((res) => res.json())
       .then((data) => setOrders(data))
       .catch((err) => console.error("Error fetching orders:", err))
@@ -18,7 +18,7 @@ const OrdersPage = () => {
   const handleDelete = async (orderID) => {
     try {
       const response = await fetch(
-        `http://localhost:5010/api/Orders/${orderID}`,
+        `https://sippinpretty.fly.dev/api/Orders/${orderID}`,
         {
           method: "DELETE",
         }

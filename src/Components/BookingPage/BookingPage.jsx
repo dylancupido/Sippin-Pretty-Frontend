@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./BookingPage.css";
 
-const BASE_URL = "http://localhost:5010";
+const BASE_URL = "https://sippinpretty.fly.dev";
 
 const BookingPage = () => {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const BookingPage = () => {
   const checkAvailability = async (guests, date, time) => {
     try {
       const res = await fetch(
-          `${BASE_URL}/api/tables/available?guests=${guests}&date=${date}&time=${time}`
+        `${BASE_URL}/api/tables/available?guests=${guests}&date=${date}&time=${time}`
       );
       const data = await res.json();
       setAvailableTables(data.sort((a, b) => a.capacity - b.capacity));
@@ -159,169 +159,173 @@ const BookingPage = () => {
   };
 
   return (
-      <div className="booking-container">
-        <div className="booking-header">
-          <h1>Reserve Your Table</h1>
-          <p>Book your table now and enjoy your coffee break with us!</p>
+    <div className="booking-container">
+      <div className="booking-header">
+        <h1>Reserve Your Table</h1>
+        <p>Book your table now and enjoy your coffee break with us!</p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="booking-form" noValidate>
+        {/* Honeypot field */}
+        <div style={{ display: "none" }}>
+          <label htmlFor="phone_number">Phone Number</label>
+          <input
+            type="text"
+            name="phone_number"
+            id="phone_number"
+            autoComplete="off"
+          />
         </div>
 
-        <form onSubmit={handleSubmit} className="booking-form" noValidate>
+        {/* Name */}
+        <div className="form-group">
+          <label htmlFor="fullName">Full Name</label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
+            className={errors.fullName ? "input-error" : ""}
+            required
+          />
+          {errors.fullName && (
+            <div className="error-message">{errors.fullName}</div>
+          )}
+        </div>
 
-          {/* Honeypot field */}
-          <div style={{ display: 'none' }}>
-            <label htmlFor="phone_number">Phone Number</label>
-            <input type="text" name="phone_number" id="phone_number" autoComplete="off" />
-          </div>
+        {/* Email */}
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className={errors.email ? "input-error" : ""}
+            required
+          />
+          {errors.email && <div className="error-message">{errors.email}</div>}
+        </div>
 
-          {/* Name */}
+        {/* Phone Number */}
+        <div className="form-group">
+          <label htmlFor="phoneNumber">Phone Number</label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleChange}
+            className={errors.phoneNumber ? "input-error" : ""}
+            required
+          />
+          {errors.phoneNumber && (
+            <div className="error-message">{errors.phoneNumber}</div>
+          )}
+        </div>
+
+        {/* Date & Time */}
+        <div className="form-row">
           <div className="form-group">
-            <label htmlFor="fullName">Full Name</label>
+            <label htmlFor="date">Date</label>
             <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                className={errors.fullName ? "input-error" : ""}
-                required
+              type="date"
+              id="date"
+              name="date"
+              min={today}
+              value={formData.date}
+              onChange={handleChange}
+              className={errors.date ? "input-error" : ""}
+              required
             />
-            {errors.fullName && (
-                <div className="error-message">{errors.fullName}</div>
-            )}
+            {errors.date && <div className="error-message">{errors.date}</div>}
           </div>
 
-          {/* Email */}
           <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className={errors.email ? "input-error" : ""}
-                required
-            />
-            {errors.email && <div className="error-message">{errors.email}</div>}
+            <label htmlFor="time">Time</label>
+            <select
+              id="time"
+              name="time"
+              value={formData.time}
+              onChange={handleChange}
+              className={errors.time ? "input-error" : ""}
+              required
+            >
+              <option value="">Select a time</option>
+              {generateTimeSlots().map((slot) => (
+                <option key={slot} value={slot}>
+                  {slot}
+                </option>
+              ))}
+            </select>
+            {errors.time && <div className="error-message">{errors.time}</div>}
           </div>
+        </div>
 
-          {/* Phone Number */}
-          <div className="form-group">
-            <label htmlFor="phoneNumber">Phone Number</label>
-            <input
-                type="tel"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                className={errors.phoneNumber ? "input-error" : ""}
-                required
-            />
-            {errors.phoneNumber && (
-                <div className="error-message">{errors.phoneNumber}</div>
-            )}
-          </div>
+        {/* Guest Count */}
+        <div className="form-group">
+          <label htmlFor="guests">Number of Guests</label>
+          <input
+            type="number"
+            id="guests"
+            name="guests"
+            min="5"
+            max="10"
+            value={formData.guests}
+            onChange={handleChange}
+            className={errors.guests ? "input-error" : ""}
+            required
+          />
+          {errors.guests && (
+            <div className="error-message">{errors.guests}</div>
+          )}
+        </div>
 
-          {/* Date & Time */}
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="date">Date</label>
-              <input
-                  type="date"
-                  id="date"
-                  name="date"
-                  min={today}
-                  value={formData.date}
-                  onChange={handleChange}
-                  className={errors.date ? "input-error" : ""}
-                  required
-              />
-              {errors.date && <div className="error-message">{errors.date}</div>}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="time">Time</label>
-              <select
-                  id="time"
-                  name="time"
-                  value={formData.time}
-                  onChange={handleChange}
-                  className={errors.time ? "input-error" : ""}
-                  required
-              >
-                <option value="">Select a time</option>
-                {generateTimeSlots().map((slot) => (
-                    <option key={slot} value={slot}>
-                      {slot}
-                    </option>
+        {/* Available Tables */}
+        <div className="available-tables">
+          <h2>Available Tables</h2>
+          {availableTables.length === 0 ? (
+            <p>Please select a date and time to see available tables.</p>
+          ) : (
+            <>
+              <p>Select a table:</p>
+              <ul>
+                {availableTables.map((table) => (
+                  <li key={table.id}>
+                    <label
+                      className={
+                        selectedTable === table.id ? "selected-table" : ""
+                      }
+                    >
+                      <input
+                        type="radio"
+                        name="table"
+                        value={table.id}
+                        checked={selectedTable === table.id}
+                        onChange={() => setSelectedTable(table.id)}
+                      />
+                      {table.name} - Capacity: {table.capacity}
+                    </label>
+                  </li>
                 ))}
-              </select>
-              {errors.time && <div className="error-message">{errors.time}</div>}
-            </div>
-          </div>
+              </ul>
+            </>
+          )}
+          {errors.table && <div className="error-message">{errors.table}</div>}
+        </div>
 
-          {/* Guest Count */}
-          <div className="form-group">
-            <label htmlFor="guests">Number of Guests</label>
-            <input
-                type="number"
-                id="guests"
-                name="guests"
-                min="5"
-                max="10"
-                value={formData.guests}
-                onChange={handleChange}
-                className={errors.guests ? "input-error" : ""}
-                required
-            />
-            {errors.guests && (
-                <div className="error-message">{errors.guests}</div>
-            )}
-          </div>
+        {/* Price Summary */}
+        <div className="total-price">
+          Total Price: R{totalPrice} <small>(R25 per guest)</small>
+        </div>
 
-          {/* Available Tables */}
-          <div className="available-tables">
-            <h2>Available Tables</h2>
-            {availableTables.length === 0 ? (
-                <p>Please select a date and time to see available tables.</p>
-            ) : (
-                <>
-                  <p>Select a table:</p>
-                  <ul>
-                    {availableTables.map((table) => (
-                        <li key={table.id}>
-                          <label
-                              className={
-                                selectedTable === table.id ? "selected-table" : ""
-                              }
-                          >
-                            <input
-                                type="radio"
-                                name="table"
-                                value={table.id}
-                                checked={selectedTable === table.id}
-                                onChange={() => setSelectedTable(table.id)}
-                            />
-                            {table.name} - Capacity: {table.capacity}
-                          </label>
-                        </li>
-                    ))}
-                  </ul>
-                </>
-            )}
-            {errors.table && <div className="error-message">{errors.table}</div>}
-          </div>
-
-          {/* Price Summary */}
-          <div className="total-price">
-            Total Price: R{totalPrice} <small>(R25 per guest)</small>
-          </div>
-
-          <button type="submit" disabled={!selectedTable}>
-            Confirm Booking
-          </button>
-        </form>
-      </div>
+        <button type="submit" disabled={!selectedTable}>
+          Confirm Booking
+        </button>
+      </form>
+    </div>
   );
 };
 

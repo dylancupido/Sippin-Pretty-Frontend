@@ -15,8 +15,8 @@ const DeliveriesPage = () => {
   const fetchData = async () => {
     try {
       const [deliveriesRes, ordersRes] = await Promise.all([
-        fetch("http://localhost:5010/api/Deliveries"),
-        fetch("http://localhost:5010/api/Orders"),
+        fetch("https://sippinpretty.fly.dev/api/Deliveries"),
+        fetch("https://sippinpretty.fly.dev/api/Orders"),
       ]);
       const [deliveriesData, ordersData] = await Promise.all([
         deliveriesRes.json(),
@@ -42,7 +42,7 @@ const DeliveriesPage = () => {
 
       // Step 1: Update order status
       const response = await fetch(
-        `http://localhost:5010/api/Orders/${orderID}`,
+        `https://sippinpretty.fly.dev/api/Orders/${orderID}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -59,7 +59,7 @@ const DeliveriesPage = () => {
       const deliveryToDelete = deliveries.find((d) => d.orderID === orderID);
       if (deliveryToDelete) {
         const deleteResponse = await fetch(
-          `http://localhost:5010/api/Deliveries/${deliveryToDelete.deliveryID}`,
+          `https://sippinpretty.fly.dev/api/Deliveries/${deliveryToDelete.deliveryID}`,
           {
             method: "DELETE",
           }

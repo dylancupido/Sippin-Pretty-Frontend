@@ -18,7 +18,7 @@ const LoginForm = ({ setLoggedIn, handleLogin }) => {
       Password: password,
     };
 
-    const url = "http://localhost:5010/api/Login/LoginCus";
+    const url = "https://sippinpretty.fly.dev/api/Login/LoginCus";
 
     try {
       // Send login request to backend
@@ -66,64 +66,68 @@ const LoginForm = ({ setLoggedIn, handleLogin }) => {
   };
 
   return (
-      <div className="Wrapper">
-        <form onSubmit={handleSubmit}>
+    <div className="Wrapper">
+      <form onSubmit={handleSubmit}>
+        {/* Honeypot field */}
+        <div style={{ display: "none" }}>
+          <label htmlFor="phone_number">Phone Number</label>
+          <input
+            type="text"
+            name="phone_number"
+            id="phone_number"
+            autoComplete="off"
+          />
+        </div>
 
-          {/* Honeypot field */}
-          <div style={{ display: 'none' }}>
-            <label htmlFor="phone_number">Phone Number</label>
-            <input type="text" name="phone_number" id="phone_number" autoComplete="off" />
-          </div>
+        <h1>Login</h1>
 
-          <h1>Login</h1>
+        {/* Username or email input */}
+        <div className="inputbox">
+          <input
+            type="text"
+            placeholder="Email or Username"
+            value={username}
+            onChange={(e) => setId(e.target.value)}
+            required
+          />
+          <FaUser className="icon" />
+        </div>
 
-          {/* Username or email input */}
-          <div className="inputbox">
-            <input
-                type="text"
-                placeholder="Email or Username"
-                value={username}
-                onChange={(e) => setId(e.target.value)}
-                required
-            />
-            <FaUser className="icon" />
-          </div>
+        {/* Password input */}
+        <div className="inputbox">
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <FaLock className="icon" />
+        </div>
 
-          {/* Password input */}
-          <div className="inputbox">
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-            />
-            <FaLock className="icon" />
-          </div>
+        {/* Remember me and forgot password links */}
+        <div className="RemembermeBox-forget">
+          <label>
+            <input type="checkbox" /> Remember me
+          </label>
+          <a href="#" id="ForgetPassword">
+            Forgot Password?
+          </a>
+        </div>
 
-          {/* Remember me and forgot password links */}
-          <div className="RemembermeBox-forget">
-            <label>
-              <input type="checkbox" /> Remember me
-            </label>
-            <a href="#" id="ForgetPassword">
-              Forgot Password?
-            </a>
-          </div>
+        {/* Submit button */}
+        <button id="BtnLogin" type="submit">
+          Log In
+        </button>
 
-          {/* Submit button */}
-          <button id="BtnLogin" type="submit">
-            Log In
-          </button>
-
-          {/* Registration link */}
-          <div className="registerLink">
-            <p>
-              Don't have an account? <Link to="/cusRegister">Register</Link>
-            </p>
-          </div>
-        </form>
-      </div>
+        {/* Registration link */}
+        <div className="registerLink">
+          <p>
+            Don't have an account? <Link to="/cusRegister">Register</Link>
+          </p>
+        </div>
+      </form>
+    </div>
   );
 };
 

@@ -17,7 +17,7 @@ const MenuAdmin = ({ onAddToCart }) => {
 
   // Fetch menu items from API on component mount
   useEffect(() => {
-    fetch("http://localhost:5010/api/MenuItemsAPI")
+    fetch("https://sippinpretty.fly.dev/api/MenuItemsAPI")
       .then((res) => res.json())
       .then((data) => setMenuItems(data))
       .catch((err) => console.error("Failed to fetch menu:", err));
@@ -58,8 +58,8 @@ const MenuAdmin = ({ onAddToCart }) => {
   const handleSave = async () => {
     try {
       const url = editMode
-        ? `http://localhost:5010/api/MenuItemsAPI/${formData.productID}`
-        : "http://localhost:5010/api/MenuItemsAPI";
+        ? `https://sippinpretty.fly.dev/api/MenuItemsAPI/${formData.productID}`
+        : "https://sippinpretty.fly.dev/api/MenuItemsAPI";
 
       const method = editMode ? "PUT" : "POST";
 
@@ -76,7 +76,9 @@ const MenuAdmin = ({ onAddToCart }) => {
       }
 
       // Refresh menu items after save
-      const updatedMenu = await fetch("http://localhost:5010/api/MenuItemsAPI");
+      const updatedMenu = await fetch(
+        "https://sippinpretty.fly.dev/api/MenuItemsAPI"
+      );
       const data = await updatedMenu.json();
       setMenuItems(data);
       setShowAddModal(false);
@@ -91,7 +93,7 @@ const MenuAdmin = ({ onAddToCart }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:5010/api/MenuItemsAPI/${id}`,
+        `https://sippinpretty.fly.dev/api/MenuItemsAPI/${id}`,
         {
           method: "DELETE",
         }
@@ -102,7 +104,9 @@ const MenuAdmin = ({ onAddToCart }) => {
       }
 
       // Refresh menu list after deletion
-      const updatedMenu = await fetch("http://localhost:5010/api/MenuItemsAPI");
+      const updatedMenu = await fetch(
+        "https://sippinpretty.fly.dev/api/MenuItemsAPI"
+      );
       const data = await updatedMenu.json();
       setMenuItems(data);
 
