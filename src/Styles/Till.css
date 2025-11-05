@@ -1,0 +1,430 @@
+.calculator-app-container {
+
+  font-family: "Poppins", sans-serif;
+
+  padding: 40px 20px;
+
+  background-color: transparent;
+
+  min-height: 100vh;
+
+}
+ 
+.calculator-app-container .heading {
+
+  text-align: center;
+
+  color: #5e412f;
+
+  margin-bottom: 40px;
+
+  font-family: "Pacifico", cursive;
+
+  font-size: 2.5rem;
+
+}
+ 
+.calculator-app-container .till-container {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 40px;
+
+  flex-wrap: wrap;
+
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+}
+ 
+.calculator-app-container .receipt,
+
+.calculator-app-container .menu {
+
+  background-color: white;
+
+  border-radius: 15px;
+
+  padding: 30px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+
+  flex: 1;
+
+  min-width: 320px;
+
+  max-width: 550px;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  border: 1px solid rgba(248, 187, 208, 0.1);
+
+}
+ 
+.calculator-app-container .receipt:hover,
+
+.calculator-app-container .menu:hover {
+
+  transform: translateY(-5px);
+
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+
+}
+ 
+.calculator-app-container .receipt h3,
+
+.calculator-app-container .menu h3 {
+
+  text-align: center;
+
+  color: #5e412f;
+
+  margin-bottom: 25px;
+
+  font-weight: 600;
+
+  font-size: 1.5rem;
+
+  position: relative;
+
+  padding-bottom: 15px;
+
+}
+ 
+.calculator-app-container .receipt h3::after,
+
+.calculator-app-container .menu h3::after {
+
+  content: "";
+
+  position: absolute;
+
+  bottom: 0;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 60px;
+
+  height: 3px;
+
+  background: linear-gradient(to right, #f8bbd0, #f9c9d4);
+
+  border-radius: 3px;
+
+}
+ 
+.calculator-app-container .no-items {
+
+  color: #999;
+
+  text-align: center;
+
+  font-style: italic;
+
+  padding: 20px 0;
+
+}
+ 
+.calculator-app-container ul {
+
+  list-style: none;
+
+  padding: 0;
+
+  margin-bottom: 20px;
+
+  max-height: 300px;
+
+  overflow-y: auto;
+
+  scrollbar-width: thin;
+
+  scrollbar-color: #f8bbd0 #f9f9f9;
+
+}
+ 
+.calculator-app-container ul::-webkit-scrollbar {
+
+  width: 6px;
+
+}
+ 
+.calculator-app-container ul::-webkit-scrollbar-track {
+
+  background: #f9f9f9;
+
+  border-radius: 10px;
+
+}
+ 
+.calculator-app-container ul::-webkit-scrollbar-thumb {
+
+  background-color: #f8bbd0;
+
+  border-radius: 10px;
+
+}
+ 
+.calculator-app-container li {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid #f5f5f5;
+
+  color: #444;
+
+  font-size: 1rem;
+
+}
+ 
+.calculator-app-container .total {
+
+  font-weight: 700;
+
+  font-size: 1.2rem;
+
+  text-align: right;
+
+  margin-top: 20px;
+
+  padding-top: 15px;
+
+  border-top: 2px dashed #f5f5f5;
+
+  color: #5e412f;
+
+}
+ 
+.calculator-app-container .checkout-controls {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 25px;
+
+}
+ 
+.calculator-app-container .checkout,
+
+.calculator-app-container .clear {
+
+  padding: 12px 24px;
+
+  font-size: 1rem;
+
+  border: none;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  transition: all 0.3s ease;
+
+}
+ 
+.calculator-app-container .checkout {
+
+  background: linear-gradient(to right, #d671b8, #bb6697);
+
+  color: white;
+
+  flex-grow: 1;
+
+  margin-right: 10px;
+
+}
+ 
+.calculator-app-container .checkout:hover:not(:disabled) {
+
+  background: linear-gradient(to right,#d671b8, #85466a);
+
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+
+}
+ 
+.calculator-app-container .checkout:disabled {
+
+  background: linear-gradient(to right, #BDBDBD, #E0E0E0);
+
+  cursor: not-allowed;
+
+}
+ 
+.calculator-app-container .clear {
+
+  background: linear-gradient(to right, #F44336, #EF5350);
+
+  color: white;
+
+}
+ 
+.calculator-app-container .clear:hover {
+
+  background: linear-gradient(to right, #E53935, #E57373);
+
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+
+}
+ 
+.calculator-app-container .payment-options {
+
+  margin-top: 25px;
+
+  text-align: center;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #f5f5f5;
+
+}
+ 
+.calculator-app-container .payment-options p {
+
+  margin-bottom: 15px;
+
+  font-weight: 600;
+
+  color: #311402cc;
+
+}
+ 
+.calculator-app-container .payment {
+
+  margin: 5px;
+
+  padding: 10px 18px;
+
+  font-size: 0.95rem;
+
+  background: linear-gradient(to right, #f8bbd0, #f9c9d4);
+
+  color: #6d3513;
+
+  border: none;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  transition: all 0.3s ease;
+
+}
+ 
+.calculator-app-container .payment:hover {
+
+  background: linear-gradient(to right, #e60650, #a5033c);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 4px 12px rgba(155, 3, 56, 0.842);
+
+}
+ 
+.calculator-app-container .menu-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+
+  gap: 15px;
+
+  padding-top: 10px;
+
+  max-height: 450px;
+
+  overflow-y: auto;
+
+  scrollbar-width: thin;
+
+  scrollbar-color: #f8bbd0 #f9f9f9;
+
+}
+ 
+.calculator-app-container .menu-grid::-webkit-scrollbar {
+
+  width: 6px;
+
+}
+ 
+.calculator-app-container .menu-grid::-webkit-scrollbar-track {
+
+  background: #f9f9f9;
+
+  border-radius: 10px;
+
+}
+ 
+.calculator-app-container .menu-grid::-webkit-scrollbar-thumb {
+
+  background-color: #f8bbd0;
+
+  border-radius: 10px;
+
+}
+ 
+.calculator-app-container .menu-button {
+
+  background: linear-gradient(135deg, #fff9f9, #fff5f7);
+
+  border: 1px solid rgba(248, 187, 208, 0.3);
+
+  border-radius: 10px;
+
+  padding: 15px 10px;
+
+  font-weight: 500;
+
+  font-size: 0.95rem;
+
+  text-align: center;
+
+  color: #5e412f;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+
+  white-space: normal;
+
+  word-wrap: break-word;
+
+  line-height: 1.4;
+
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+}
+ 
+.calculator-app-container .menu-button:hover {
+
+  background: linear-gradient(135deg, #fff5f7, #ffeef3);
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 6px 15px rgb(248, 187, 208);
+
+  border-color: rgb(248, 187, 208);
+
+}
+ 
