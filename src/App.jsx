@@ -24,7 +24,6 @@ import ConfirmationPage from "./components/ConfirmationPage/ConfirmationPage.jsx
 import MenuAdmin from "./components/MenuPageAdmin.jsx";
 import UserAdminPage from "./components/navbarAdmin/UserAdminPage.jsx";
 import AdminDashboard from "./components/navbarAdmin/AdminDashboard.jsx";
-import ManageHomePage from "./components/navbarAdmin/ManageHomePage.jsx";
 import DeliveryManagement from "./components/navbarAdmin/DeliveryManagement.jsx";
 import OrdersPage from "./components/OrdersPage.jsx";
 import LoginForm from "./components/LoginPage.jsx";
