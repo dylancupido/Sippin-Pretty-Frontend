@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./ConfirmationPage.css";
+import "./confirmationPage.css";
 
 // Component to display order confirmation after cart checkout
 const CartConfirmationPage = () => {
