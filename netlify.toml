@@ -1,5 +1,5 @@
 [build]
-command = "npm run build"
+command = "npm run build:ci"
 publish = "dist"
 # Do NOT set a base here unless your app is in a subfolder.
 
