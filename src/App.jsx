@@ -13,7 +13,7 @@ import Navbar from "./Components/Navbar/Navbar.jsx";
 import AdminNavbar from "./Components/navbarAdmin/AdminNavBar";
 import StaffNavbar from "./Components/navbarAdmin/StaffNavBar";
 
-// Pages
+// Pagesb
 import CartConfirmationPage from "./Components/ConfirmationPage/CartConfirmationPage";
 import HomePage from "./Components/HomePage";
 import Menu from "./Components/MenuPage";
