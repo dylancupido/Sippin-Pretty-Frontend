@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:ci": "node -v && npm -v && echo --- PWD --- && pwd && echo --- ROOT LIST --- && ls -la && echo --- PACKAGE.JSON --- && cat package.json && echo --- GIT LIST (src case conflicts?) --- && git ls-files | grep -E '^src/(components|Components)/' || true && echo --- SRC TREE (top 3 levels) --- && find src -maxdepth 3 -print || true && echo --- RUN VITE BUILD --- && vite build",
+    "build:ci": "node -v && npm -v && echo '--- PWD ---' && pwd && echo '--- ROOT LIST ---' && ls -la && echo '--- GIT LIST (src case conflicts?) ---' && git ls-files | grep -Ei '^src/(components|Components)/' || true && echo '--- RUN VITE BUILD ---' && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
